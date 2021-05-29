@@ -15,6 +15,12 @@
 		6BA625465C53F56B1028B379 /* libPods-CoinSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2787BD36666B73D31F439DAA /* libPods-CoinSheet.a */; };
 		7D6EBBB426624F3C00706A67 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D6EBBB326624F3C00706A67 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B8165469500C4374B954417C /* Avenir-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB00C9FAFEE4DB6AF592603 /* Avenir-Book.ttf */; };
+		BD60077F14344216A9C64F77 /* Avenir-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 205E9C09D82A4E3D9A87D9B9 /* Avenir-Heavy.ttf */; };
+		FFA16EADDEA44A839BC1D038 /* Avenir-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AE90B70FDF2463A87477383 /* Avenir-Light.ttf */; };
+		34BA190D57014795B1995A5C /* Avenir-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9417ED21FB6F445B9BD09A86 /* Avenir-Medium.ttf */; };
+		458AA6B877674737BBCFA8C7 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CCDF1C7241D24B2FB79A305A /* Quicksand-Bold.ttf */; };
+		5E69408CE3E9426A884A0AB9 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4111059B3EE64727AE3B9589 /* Quicksand-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,12 @@
 		BD8242712329F30A466046A4 /* Pods-CoinSheet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinSheet.debug.xcconfig"; path = "Target Support Files/Pods-CoinSheet/Pods-CoinSheet.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EE99ECE90FB3A0AD72AF4228 /* libPods-CoinSheet-CoinSheetTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoinSheet-CoinSheetTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB00C9FAFEE4DB6AF592603 /* Avenir-Book.ttf */ = {isa = PBXFileReference; name = "Avenir-Book.ttf"; path = "../src/assets/fonts/Avenir-Book.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		205E9C09D82A4E3D9A87D9B9 /* Avenir-Heavy.ttf */ = {isa = PBXFileReference; name = "Avenir-Heavy.ttf"; path = "../src/assets/fonts/Avenir-Heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8AE90B70FDF2463A87477383 /* Avenir-Light.ttf */ = {isa = PBXFileReference; name = "Avenir-Light.ttf"; path = "../src/assets/fonts/Avenir-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9417ED21FB6F445B9BD09A86 /* Avenir-Medium.ttf */ = {isa = PBXFileReference; name = "Avenir-Medium.ttf"; path = "../src/assets/fonts/Avenir-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CCDF1C7241D24B2FB79A305A /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4111059B3EE64727AE3B9589 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +148,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				637E94E7B757166250AE1D79 /* Pods */,
+				402B48C267FC4933AD739DB4 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -150,6 +163,20 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		402B48C267FC4933AD739DB4 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				3FB00C9FAFEE4DB6AF592603 /* Avenir-Book.ttf */,
+				205E9C09D82A4E3D9A87D9B9 /* Avenir-Heavy.ttf */,
+				8AE90B70FDF2463A87477383 /* Avenir-Light.ttf */,
+				9417ED21FB6F445B9BD09A86 /* Avenir-Medium.ttf */,
+				CCDF1C7241D24B2FB79A305A /* Quicksand-Bold.ttf */,
+				4111059B3EE64727AE3B9589 /* Quicksand-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -250,6 +277,12 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				7D6EBBB426624F3C00706A67 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				B8165469500C4374B954417C /* Avenir-Book.ttf in Resources */,
+				BD60077F14344216A9C64F77 /* Avenir-Heavy.ttf in Resources */,
+				FFA16EADDEA44A839BC1D038 /* Avenir-Light.ttf in Resources */,
+				34BA190D57014795B1995A5C /* Avenir-Medium.ttf in Resources */,
+				458AA6B877674737BBCFA8C7 /* Quicksand-Bold.ttf in Resources */,
+				5E69408CE3E9426A884A0AB9 /* Quicksand-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
