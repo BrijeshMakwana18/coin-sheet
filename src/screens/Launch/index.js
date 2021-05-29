@@ -16,7 +16,7 @@ import {
 import {
     Button
 } from '../../components'
-export default function LaunchScreen() {
+export default function Launch({ navigation }) {
     return (
         <View 
             style={styles.container}
@@ -47,10 +47,10 @@ export default function LaunchScreen() {
 
                 <Button 
                     buttonTitle={strings.launchScreen.signupTitle}
-                    onPress={()=>alert('Signup')} />
+                    onPress={()=>navigation.navigate('Signup')} />
 
                 <Text 
-                    onPress={()=>alert('Login')} 
+                    onPress={()=>navigation.navigate('Login')} 
                     style={styles.loginButton}
                 >
                     {strings.launchScreen.loginTitle}
