@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     bottomView: {
         position: 'absolute',
         bottom: '5%',
-        alignSelf: 'center',
+        alignSelf: 'center'
     },
     loginButton: {
         color: colors.textColor,
@@ -105,6 +105,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: fonts.quicksandBold,
         opacity: 0.5,
-        bottom: '3%'
+        marginTop: '5%'
     }
 })

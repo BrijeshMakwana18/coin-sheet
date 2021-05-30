@@ -10,7 +10,6 @@ export default function Button(props){
                 borderRadius: perfectSize(30),
                 alignItems: 'center',
                 justifyContent: 'center',
-                bottom: perfectSize(40),
                 alignSelf: 'center',
                 backgroundColor: colors.buttonBackgroundColor
             }} 
