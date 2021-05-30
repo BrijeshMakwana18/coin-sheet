@@ -5,8 +5,8 @@ import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
 
 export default function Routes() {
-  const [ user, setUser ] = useState(auth().currentUser)
   const [initializing, setInitializing] = useState(true)
+  const [ user, setUser ] = useState()
 
   function onAuthStateChanged(user) {
     setUser(user);
