@@ -1,3 +1,4 @@
 export default images = {
-    launchScreenLogo: require('../assets/images/LaunchScreenLogo.png')
+    launchScreenLogo: require('../assets/images/launchScreenLogo.png'),
+    goal: require('../assets/images/goal.png')
 }

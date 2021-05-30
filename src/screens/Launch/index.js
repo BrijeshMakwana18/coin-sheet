@@ -42,6 +42,12 @@ export default function Launch({ navigation }) {
             >
                 {strings.launchScreen.subTitle}
             </Text>
+
+            <Image 
+                source={images.goal}
+                style={{height: '10%',width: '20%'}}
+                resizeMode='contain'
+            />
             
             <View style={styles.bottomView}>
 
