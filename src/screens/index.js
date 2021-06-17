@@ -8,7 +8,7 @@ import Signup from './Signup'
 
 //Reducers
 import signupReducer from './Signup/reducer'
-
+import loginReducer from './Login/reducer'
 export{
     Home,
     Launch,
@@ -17,5 +17,6 @@ export{
 }
 
 export const rootReducer = combineReducers({
-    signupReducer
+    signupReducer,
+    loginReducer
 })

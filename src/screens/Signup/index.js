@@ -1,11 +1,31 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback, TextInput } from 'react-native'
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Image, 
+    TouchableOpacity, 
+    Platform, 
+    KeyboardAvoidingView, 
+    Keyboard, 
+    TouchableWithoutFeedback, 
+    TextInput 
+} from 'react-native'
 import { Button } from '../../components'
-import auth from '@react-native-firebase/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { images, colors, fonts, perfectSize, strings } from '../../theme'
-import { updateEmail, updatePassword, signup } from './actions'
+import { 
+    images, 
+    colors, 
+    fonts, 
+    perfectSize, 
+    strings 
+} from '../../theme'
+import { 
+    updateEmail, 
+    updatePassword, 
+    signup 
+} from './actions'
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)

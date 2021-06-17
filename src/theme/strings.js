@@ -6,6 +6,11 @@ export default strings = {
         signupTitle: "HI, COINSHEET!"
     },
     signupScreen: {
-        title: "Account\nSignup"
-    }
+        title: "Join\nCoinSheet",
+        buttonTitle: "SIGNUP"
+    },
+    loginScreen: {
+        title: "Welcome\nBack",
+        buttonTitle: "LOGIN"
+    },
 }
