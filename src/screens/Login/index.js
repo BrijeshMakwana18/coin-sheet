@@ -9,11 +9,13 @@ import {
     KeyboardAvoidingView, 
     Keyboard, 
     TouchableWithoutFeedback, 
-    TextInput 
+    TextInput,
+    Modal 
 } from 'react-native'
-import { Button } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import auth from '@react-native-firebase/auth'
+import { Button } from '../../components'
 import { 
     images, 
     colors, 
@@ -21,13 +23,12 @@ import {
     perfectSize, 
     strings 
 } from '../../theme'
-import { updateEmail, 
-    updatePassword, 
+import { 
     login 
 } from './actions'
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ updateEmail, updatePassword, login }, dispatch)
+    return bindActionCreators({ login }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -36,7 +37,27 @@ const mapStateToProps = state => {
     }
 }
 class Login extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            isVisible: false,
+            email: '',
+            password: ''
+        }
+    }
+
+    handleLoginPress = async(email,password) => {
+        await auth()
+        .signInWithEmailAndPassword(email,password)
+        .then(async(res)=>{
+            this.props.login(res.user)
+        })
+        .catch(async(err)=> {
+           console.log(err)
+        })
+    }
     render() {
+        let { isVisible, email, password } = this.state
         return (
             <>
                 <View style={styles.container}>
@@ -61,8 +82,8 @@ class Login extends Component {
                                     selectionColor='#8389E9'
                                     autoCapitalize='none' 
                                     placeholder='Email'
-                                    onChangeText={(email)=>this.props.updateEmail(email)}
-                                    value={this.props.state.loginEmail}
+                                    onChangeText={(email)=>this.setState({ email: email })}
+                                    value={email}
                                     returnKeyType="next"
                                     onSubmitEditing={() => this.secondTextInput.focus()}
                                     blurOnSubmit={false}
@@ -73,9 +94,9 @@ class Login extends Component {
                                     selectionColor='#8389E9'
                                     autoCapitalize='none'
                                     placeholder='Password'
-                                    onChangeText={(password)=>this.props.updatePassword(password)}
+                                    onChangeText={(password)=>this.setState({ password: password })}
                                     secureTextEntry
-                                    value={this.props.state.loginPassword}
+                                    value={password}
                                     ref={(input) => { this.secondTextInput = input }}
                                 />
 
@@ -86,10 +107,32 @@ class Login extends Component {
                 <View style={styles.bottomView}>
                     <Button 
                         buttonTitle={strings.loginScreen.buttonTitle}
-                        onPress={()=>this.props.login()}
+                        onPress={()=>
+                            this.handleLoginPress(email,password)
+                        }
                     />
                     <Text style={styles.bottomText}>By logging in, you are agreeing to our{'\n'}<Text style={{fontFamily: fonts.quicksandBold}}>Terms and Conditions</Text> and <Text style={{fontFamily: fonts.quicksandBold}}>Privacy Policy</Text> </Text>
-                </View> 
+                </View>
+                <Modal
+                    visible={this.state.isVisible}
+                    transparent
+                    
+                >
+                    <View style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(0,0,0,0.5)'
+                    }}>
+                        <View style={{
+                            height: 100,
+                            width: 200,
+                            backgroundColor: 'white'
+                        }}>
+                            <Text onPress={()=>this.setState({isVisible: false})}>Okay</Text>
+                        </View>
+                    </View>
+                </Modal>
             </>
         )
     }

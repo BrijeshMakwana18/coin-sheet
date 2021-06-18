@@ -11,9 +11,11 @@ import {
     TouchableWithoutFeedback, 
     TextInput 
 } from 'react-native'
-import { Button } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore';
+import { Button } from '../../components'
 import { 
     images, 
     colors, 
@@ -21,14 +23,12 @@ import {
     perfectSize, 
     strings 
 } from '../../theme'
-import { 
-    updateEmail, 
-    updatePassword, 
+import {
     signup 
 } from './actions'
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)
+    return bindActionCreators({ signup }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -37,7 +37,44 @@ const mapStateToProps = state => {
     }
 }
 class Signup extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            isVisible: false,
+            email: '',
+            password: ''
+        }
+    }
+
+    handleSignupPress = async(email,password) => {
+        await auth()
+        .createUserWithEmailAndPassword(email,password)
+        .then(async(res)=>{
+            let { user } = res
+            await firestore()
+            .collection('users')
+            .doc(user.uid)
+            .set({
+                "displayName": '',
+                "email": user.email,
+                "emailVerified": user.emailVerified,
+                "metadata": user.metadata,
+                "phoneNumber": '',
+                "photoURL": '',
+                "uid": user.uid
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            this.props.signup(user)
+        })
+        .catch(async(err)=> {
+           await console.log(err)
+        })
+    }
+
     render() {
+        let { email, password, isVisible } = this.state
         return (
             <>
                 <View style={styles.container}>
@@ -62,11 +99,12 @@ class Signup extends Component {
                                     selectionColor='#8389E9'
                                     autoCapitalize='none' 
                                     placeholder='Email'
-                                    onChangeText={(email)=>this.props.updateEmail(email)}
-                                    value={this.props.state.signupEmail}
+                                    onChangeText={(email)=>this.setState({ email: email })}
+                                    value={email}
                                     returnKeyType="next"
                                     onSubmitEditing={() => this.secondTextInput.focus()}
                                     blurOnSubmit={false}
+                                    keyboardType='email-address'
                                 />
                                 <TextInput
                                     style={[styles.textInput,{marginTop: perfectSize(18)}]}
@@ -74,9 +112,9 @@ class Signup extends Component {
                                     selectionColor='#8389E9'
                                     autoCapitalize='none'
                                     placeholder='Password'
-                                    onChangeText={(password)=>this.props.updatePassword(password)}
+                                    onChangeText={(password)=>this.setState({ password: password })}
                                     secureTextEntry
-                                    value={this.props.state.signupPassword}
+                                    value={password}
                                     ref={(input) => { this.secondTextInput = input }}
                                 />
 
@@ -87,7 +125,7 @@ class Signup extends Component {
                 <View style={styles.bottomView}>
                     <Button 
                         buttonTitle='SIGN UP'
-                        onPress={()=>this.props.signup()}
+                        onPress={()=>this.handleSignupPress(email,password)}
                     />
                     <Text style={styles.bottomText}>By creating an account, you are agreeing to our{'\n'}<Text style={{fontFamily: fonts.quicksandBold}}>Terms and Conditions</Text> and <Text style={{fontFamily: fonts.quicksandBold}}>Privacy Policy</Text> </Text>
                 </View> 
