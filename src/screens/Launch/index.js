@@ -19,10 +19,11 @@ import {
     strings 
 } from '../../theme'
 import {
-    Button
+    Button,
+    BouncingComponent
 } from '../../components'
 export default function Launch({ navigation }) {
-    const slideAnimation = useRef(new Animated.Value(perfectSize(200))).current
+    const slideAnimation = useRef(new Animated.Value(perfectSize(150))).current
     const height = useRef(new Animated.Value(perfectSize(400))).current
     const width = useRef(new Animated.Value(perfectSize(400))).current
     const opacity = useRef(new Animated.Value(0)).current
@@ -53,7 +54,7 @@ export default function Launch({ navigation }) {
         setTimeout(()=> {
             Animated.timing(opacity, {
                 toValue: 1,
-                duration: 2000,
+                duration: 1000,
                 useNativeDriver: false
             }).start()
         },2000)
@@ -81,7 +82,6 @@ export default function Launch({ navigation }) {
                     resizeMode='contain' />
 
             </Animated.View>
-                
             <Animated.View style={{flex: 1, opacity: opacity}} >
                 <Text 
                     style={styles.title}

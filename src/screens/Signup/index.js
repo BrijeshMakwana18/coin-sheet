@@ -1,15 +1,24 @@
-import React, { Component } from 'react'
+import 
+    React,{
+    useRef,
+    useState,
+    useEffect 
+} from 'react'
 import { 
     View, 
     Text, 
     StyleSheet, 
-    Image, 
+    Image,
+    ImageBackground, 
     TouchableOpacity, 
     Platform, 
     KeyboardAvoidingView, 
     Keyboard, 
     TouchableWithoutFeedback, 
-    TextInput 
+    TextInput,
+    Modal,
+    Animated,
+    Easing 
 } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -36,17 +45,91 @@ const mapStateToProps = state => {
         state: state.signupReducer
     }
 }
-class Signup extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-            isVisible: false,
-            email: '',
-            password: ''
-        }
+function Signup(props) {
+
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [error,setError] = useState('')
+
+    const backArrowMarginLeft = useRef(new Animated.Value(perfectSize(0))).current
+    const titleMarginTop = useRef(new Animated.Value(perfectSize(0))).current
+    const titleOpacity = useRef(new Animated.Value(perfectSize(1))).current
+    const errorModalTop = useRef(new Animated.Value(perfectSize(-500))).current
+
+
+    useEffect(() => {
+        Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
+        Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
+    
+        // cleanup function
+        return () => {
+          Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
+          Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
+        };
+      }, []);
+    
+    const _keyboardDidShow = () => {
+        Animated.timing(backArrowMarginLeft, {
+            toValue: perfectSize(-500),
+            duration: 300,
+            useNativeDriver: false
+        }).start()
+        Animated.parallel([
+            Animated.timing(titleMarginTop, {
+                toValue: perfectSize(-200),
+                duration: 300,
+                useNativeDriver: false
+            }),
+            Animated.timing(titleOpacity, {
+                toValue: perfectSize(0),
+                duration: 1,
+                useNativeDriver: false
+            })
+        ]).start()
     }
 
-    handleSignupPress = async(email,password) => {
+    const _keyboardDidHide = () => {
+        Animated.timing(backArrowMarginLeft, {
+            toValue: perfectSize(0),
+            duration: 300,
+            useNativeDriver: false
+        }).start()
+        Animated.parallel([
+            Animated.timing(titleMarginTop, {
+                toValue: perfectSize(0),
+                duration: 300,
+                useNativeDriver: false
+            }),
+            Animated.timing(titleOpacity, {
+                toValue: perfectSize(1),
+                duration: 1,
+                useNativeDriver: false
+            })
+        ]).start()
+    }
+
+    const showError = () => {
+        Animated.timing(errorModalTop,{
+          toValue: Platform.OS == 'ios' ? perfectSize(50) : perfectSize(40),
+          duration: 1000,
+          useNativeDriver: false,
+          easing: Easing.elastic(Platform.OS == 'android' ? 1 : 1)  
+        }).start()
+        setTimeout(()=>{
+            Animated.timing(errorModalTop,{
+                toValue: -perfectSize(500),
+                duration: 1000,
+                useNativeDriver: false, 
+            }).start()
+        },2000)
+    }
+
+    const handleSignupPress = async(email,password) => {
+        if(email.length == 0 || password.length == 0){
+            setError('Invalid credentials. Please enter email and password')
+            showError()
+            return
+        }
         await auth()
         .createUserWithEmailAndPassword(email,password)
         .then(async(res)=>{
@@ -63,75 +146,112 @@ class Signup extends Component {
                 "photoURL": '',
                 "uid": user.uid
             })
-            .catch((err)=>{
-                console.log(err)
+            .catch((error)=>{
+                console.log(error)
             })
-            this.props.signup(user)
+            props.signup(user)
         })
-        .catch(async(err)=> {
-           await console.log(err)
+        .catch(async(error)=> {
+            setError(error.message)
+            showError()
         })
     }
-
-    render() {
-        let { email, password, isVisible } = this.state
-        return (
-            <>
-                <View style={styles.container}>
-                    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
-                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <View>
+    return (
+        <>
+            <View style={styles.container}>
+                {/* <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}> */}
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View>
+                            <Animated.View
+                                style={{
+                                    marginLeft: backArrowMarginLeft
+                                }}
+                            >
                                 <TouchableOpacity 
-                                    onPress={()=>this.props.navigation.goBack()} 
+                                    onPress={()=>props.navigation.goBack()} 
                                     style={styles.header}>
-                                    
+                                        
                                     <Image 
                                         source={images.backArrow}
                                         style={styles.backArrow} />
-                                        
+                                            
                                 </TouchableOpacity>
-
+                            </Animated.View>
+                            <Animated.View
+                                style={{
+                                    marginTop: titleMarginTop,
+                                    opacity: titleOpacity
+                                }}
+                            >
                                 <Text style={styles.title}>{strings.signupScreen.title}</Text>
+                            </Animated.View>
                                 
-                                <TextInput
-                                    style={[styles.textInput,{marginTop: '40%'}]}
-                                    placeholderTextColor='rgba(66,76,89,0.5)'
-                                    selectionColor='#8389E9'
-                                    autoCapitalize='none' 
-                                    placeholder='Email'
-                                    onChangeText={(email)=>this.setState({ email: email })}
-                                    value={email}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => this.secondTextInput.focus()}
-                                    blurOnSubmit={false}
-                                    keyboardType='email-address'
-                                />
-                                <TextInput
-                                    style={[styles.textInput,{marginTop: perfectSize(18)}]}
-                                    placeholderTextColor='rgba(66,76,89,0.5)'
-                                    selectionColor='#8389E9'
-                                    autoCapitalize='none'
-                                    placeholder='Password'
-                                    onChangeText={(password)=>this.setState({ password: password })}
-                                    secureTextEntry
-                                    value={password}
-                                    ref={(input) => { this.secondTextInput = input }}
-                                />
+                            <TextInput
+                                style={[styles.textInput,{marginTop: '40%'}]}
+                                placeholderTextColor='rgba(66,76,89,0.5)'
+                                selectionColor='#8389E9'
+                                autoCapitalize='none' 
+                                placeholder='Email'
+                                onChangeText={(email)=>setEmail(email)}
+                                value={email}
+                                returnKeyType="next"
+                                onSubmitEditing={() => this.secondTextInput.focus()}
+                                blurOnSubmit={false}
+                            />
+                            <TextInput
+                                style={[styles.textInput,{marginTop: perfectSize(18)}]}
+                                placeholderTextColor='rgba(66,76,89,0.5)'
+                                selectionColor='#8389E9'
+                                autoCapitalize='none'
+                                placeholder='Password'
+                                onChangeText={(password)=>setPassword(password)}
+                                secureTextEntry
+                                value={password}
+                                ref={(input) => { this.secondTextInput = input }}
+                            />
 
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </KeyboardAvoidingView>
-                </View>
-                <View style={styles.bottomView}>
-                    <Button 
-                        buttonTitle='SIGN UP'
-                        onPress={()=>this.handleSignupPress(email,password)}
-                    />
-                    <Text style={styles.bottomText}>By creating an account, you are agreeing to our{'\n'}<Text style={{fontFamily: fonts.quicksandBold}}>Terms and Conditions</Text> and <Text style={{fontFamily: fonts.quicksandBold}}>Privacy Policy</Text> </Text>
-                </View> 
-            </>
-        )
-    }
+                        </View>
+                    </TouchableWithoutFeedback>
+                {/* </KeyboardAvoidingView> */}
+            </View>
+            <View style={styles.bottomView}>
+                <Button 
+                    buttonTitle={strings.signupScreen.buttonTitle}
+                    onPress={()=>
+                        handleSignupPress(email,password)
+                    }
+                />
+                <Text style={styles.bottomText}>By logging in, you are agreeing to our{'\n'}<Text style={{fontFamily: fonts.quicksandBold}}>Terms and Conditions</Text> and <Text style={{fontFamily: fonts.quicksandBold}}>Privacy Policy</Text> </Text>
+            </View>
+            <Animated.View style={{
+                width: '90%',
+                backgroundColor: '#C45156',
+                borderRadius: perfectSize(10),
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 12,
+                },
+                shadowOpacity: 0.2,
+                shadowRadius: 16.00,
+                elevation: 24,
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                position: 'absolute',
+                top: errorModalTop
+            }}>
+                <Text style={{
+                    fontFamily: fonts.avenirMedium,
+                    fontSize: perfectSize(21),
+                    color: 'white',
+                    textAlign: 'center',
+                    padding: perfectSize(10),
+                    fontWeight: 'bold'
+                }}>{error}</Text>
+            </Animated.View>
+        </>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -181,7 +301,14 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontFamily: fonts.avenirLight,
         marginTop: '5%'
-    }
+    },
+    errorImage: {
+        alignItems: 'center',
+        tintColor: 'rgba(226,54,54,0.1)',
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+    },
 })
 
 export default connect(
