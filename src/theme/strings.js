@@ -13,4 +13,8 @@ export default strings = {
         title: "Welcome\nBack",
         buttonTitle: "LOGIN"
     },
+    tabBarLabels: {
+        home: 'Dashboard',
+        stat: 'Statistics'
+    }
 }

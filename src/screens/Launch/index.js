@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         fontSize: perfectSize(23),
         textAlign: 'center',
         fontFamily: fonts.quicksandBold,
-        opacity: 0.5
+        opacity: 0.6
     },
     bottomView: {
         position: 'absolute',

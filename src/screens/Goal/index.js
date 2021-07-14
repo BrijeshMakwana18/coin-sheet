@@ -43,7 +43,7 @@ const mapStateToProps = state => {
         state: state.signupReducer
     }
 }
-function Home(props) {
+function Goal(props) {
 
     return (
         <>
@@ -53,10 +53,8 @@ function Home(props) {
                 barStyle='light-content'
             />
             <View style={styles.container}>
-                <Text
-                    onPress={()=>auth().signOut()}
-                >
-                    Home
+                <Text>
+                    Goal
                 </Text>
             </View>
         </>
@@ -77,4 +75,4 @@ const styles = StyleSheet.create({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home)
+)(Goal)
