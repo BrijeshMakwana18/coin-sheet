@@ -49,6 +49,7 @@ function Login(props) {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [error,setError] = useState('')
+    const [isPressable,setIsPressable] = useState(true)
 
     const backArrowMarginLeft = useRef(new Animated.Value(perfectSize(0))).current
     const titleMarginTop = useRef(new Animated.Value(perfectSize(0))).current
@@ -56,14 +57,19 @@ function Login(props) {
     const errorModalTop = useRef(new Animated.Value(perfectSize(-500))).current
 
     useEffect(() => {
-        Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
-        Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
-    
-        // cleanup function
-        return () => {
-          Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
-          Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
-        };
+        let isMounted = true
+        if(isMounted){
+            Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
+            Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
+        
+            // cleanup function
+            return () => {
+              Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
+              Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
+            }
+        }
+
+        return () => { isMounted = false }
       }, []);
     
       const _keyboardDidShow = () => {
@@ -123,6 +129,7 @@ function Login(props) {
     }
 
     const showError = () => {
+        setIsPressable(false)
         Animated.timing(errorModalTop,{
           toValue: Platform.OS == 'ios' ? perfectSize(50) : perfectSize(40),
           duration: 1000,
@@ -135,6 +142,7 @@ function Login(props) {
                 duration: 1000,
                 useNativeDriver: false, 
             }).start()
+            setIsPressable(true)
         },2000)
     }
     return (
@@ -210,7 +218,7 @@ function Login(props) {
                 <Button 
                     buttonTitle={strings.loginScreen.buttonTitle}
                     onPress={()=>
-                        handleLoginPress(email,password)
+                        isPressable && handleLoginPress(email,password)
                     }
                 />
                 <Text style={styles.bottomText}>By logging in, you are agreeing to our{'\n'}<Text style={{fontFamily: fonts.quicksandBold}}>Terms and Conditions</Text> and <Text style={{fontFamily: fonts.quicksandBold}}>Privacy Policy</Text> </Text>
