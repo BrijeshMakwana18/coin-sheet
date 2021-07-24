@@ -15,6 +15,8 @@ export default strings = {
     },
     tabBarLabels: {
         home: 'Dashboard',
-        stat: 'Statistics'
+        stat: 'Statistics',
+        goal: 'Goal',
+        account: 'Account'
     }
 }

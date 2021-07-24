@@ -20,7 +20,7 @@ export{
     Login,
     Signup,
     Goal,
-    Account
+    Account,
 }
 
 export const rootReducer = combineReducers({

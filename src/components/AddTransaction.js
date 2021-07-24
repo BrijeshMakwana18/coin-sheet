@@ -9,27 +9,31 @@ import {
     Image,
     Animated, 
     TouchableWithoutFeedback,
-    Text
+    Text,
+    DeviceEventEmitter
 } from 'react-native'
 import { 
     colors, 
     perfectSize, 
-    images 
+    images, 
+    fonts
 } from '../theme'
-
+import {
+    widthPercentageToDP as wp, 
+    heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 export default class Add extends Component{  
 
     animation = new Animated.Value(0)
 
     toggleMenu = () => {
+        // DeviceEventEmitter.emit('OpenTransactionModal', true)
         const toValue = this.open ? 0 : 1
-
         Animated.spring(this.animation, {
             toValue,
             friction: 5,
             useNativeDriver: false
         }).start()
-        
         this.open = !this.open
     }
 
@@ -42,9 +46,9 @@ export default class Add extends Component{
                         alignItems: "center",
                         justifyContent: "center",
                         width: '200%',
-                        height: perfectSize(40),
+                        height: perfectSize(50),
                         borderRadius: perfectSize(5),
-                        backgroundColor: colors.textColor,
+                        backgroundColor: '#6096FD',
                         alignSelf: 'center',
                         transform: [
                             { 
@@ -59,7 +63,12 @@ export default class Add extends Component{
                         ]
                     }}
                 >
-                    <Text>{title}</Text>
+                    <Text
+                        style={{
+                            color: 'white',
+                            fontWeight: 'bold'
+                        }}
+                    >{title}</Text>
                 </Animated.View>
             </TouchableWithoutFeedback>
         )
@@ -107,11 +116,13 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        width: '13%',
+        width: perfectSize(70),
         borderRadius: perfectSize(15),
         backgroundColor: '#F00B51',
-        marginTop: '2.5%',
-        marginBottom: '2.5%',
+        height: perfectSize(70),
+        top: -hp('3%'),
+        // marginTop: '2.5%',
+        // marginBottom: '2.5%',
         shadowColor: '#F00B51',
         shadowOpacity: 0.3,
         shadowRadius: 10,

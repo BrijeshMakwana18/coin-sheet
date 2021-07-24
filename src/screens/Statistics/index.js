@@ -2,7 +2,8 @@ import
     React,{
     useRef,
     useState,
-    useEffect 
+    useEffect,
+    Component 
 } from 'react'
 import { 
     View, 
@@ -19,7 +20,9 @@ import {
     Modal,
     Animated,
     Easing,
-    StatusBar
+    StatusBar,
+    DeviceEventEmitter,
+    TouchableHighlight,
 } from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -33,6 +36,10 @@ import {
     perfectSize, 
     strings 
 } from '../../theme'
+import {
+    widthPercentageToDP as wp, 
+    heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({  }, dispatch)
@@ -43,22 +50,35 @@ const mapStateToProps = state => {
         state: state.signupReducer
     }
 }
-function Statistics(props) {
+class Statistics extends Component {
 
-    return (
-        <>
+    constructor(props){
+        super(props)
+        this.state = {
+        }
+    }
+
+    componentDidMount() {
+    }
+
+    render() {
+        return (
+            <>
             <StatusBar 
                 translucent
                 backgroundColor={colors.backgroundColor}
-                barStyle='light-content'
+                barStyle='dark-content'
             />
             <View style={styles.container}>
-                <Text>
-                    Stats
+                <Text
+                    onPress={()=>console.log(this.props)}
+                >
+                    Statistics
                 </Text>
             </View>
         </>
-    )
+        )
+    }
 }
 
 const styles = StyleSheet.create({

@@ -1,7 +1,14 @@
 
 import React from 'react'
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack'
-import { Launch, Login, Signup } from '../screens'
+import { 
+  CardStyleInterpolators, 
+  createStackNavigator 
+} from '@react-navigation/stack'
+import { 
+  Launch, 
+  Login, 
+  Signup 
+} from '../screens'
 
 const Stack = createStackNavigator();
 
