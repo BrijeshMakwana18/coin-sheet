@@ -11,7 +11,16 @@ export default function Button(props){
                 alignItems: 'center',
                 justifyContent: 'center',
                 alignSelf: 'center',
-                backgroundColor: colors.buttonBackgroundColor
+                backgroundColor: colors.buttonBackgroundColor,
+                shadowColor: colors.buttonBackgroundColor,
+                shadowOffset: {
+                    width: 0,
+                    height: 12,
+                },
+                shadowOpacity: props.shadow ? 0.58 : 0,
+                shadowRadius: 16.00,
+
+                elevation: props.shadow ? 24 : 0,
             }} 
             onPress={props.onPress}>
 
@@ -19,7 +28,7 @@ export default function Button(props){
                 style={{
                     fontSize: perfectSize(18),
                     fontFamily: fonts.quicksandBold,
-                    color: colors.buttonTextColor
+                    color: colors.white
                 }}>{props.buttonTitle}</Text>
                 
         </TouchableOpacity>

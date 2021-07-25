@@ -7,4 +7,5 @@ export default images = {
     add: require('../assets/images/plus.png'),
     goalTab: require('../assets/images/goal_tab.png'),
     accountTab: require('../assets/images/user.png'),
+    offlineImage: require('../assets/images/offline.png'),
 }
