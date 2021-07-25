@@ -50,7 +50,7 @@ const mapStateToProps = state => {
         state: state.signupReducer
     }
 }
-class Home extends Component {
+class AddTransaction extends Component {
 
     constructor(props){
         super(props)
@@ -71,9 +71,9 @@ class Home extends Component {
             />
             <View style={styles.container}>
                 <Text
-                    onPress={()=>this.props.navigation.navigate('Add')}
+                    onPress={()=>console.log(this.props)}
                 >
-                    Home
+                    Transaction
                 </Text>
             </View>
         </>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
         padding: perfectSize(23),
-        backgroundColor: colors.backgroundColor,
+        backgroundColor: colors.buttonBackgroundColor,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home)
+)(AddTransaction)

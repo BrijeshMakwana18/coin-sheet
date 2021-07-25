@@ -23,7 +23,12 @@ import {
     heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
 export default class Add extends Component{  
-
+    constructor(props){
+        super(props)
+        this.state={
+            visible: true
+        }
+    }
     animation = new Animated.Value(0)
 
     toggleMenu = () => {
@@ -74,9 +79,18 @@ export default class Add extends Component{
         )
     }
 
+    componentDidMount() {
+        DeviceEventEmitter.addListener('HideTabBar',(hide)=>{
+            hide
+            ? this.setState({ visible: false })
+            : this.setState({ visible: true })
+        })
+    }
+
 render(){
     return (
         <>
+            {this.state.visible && (
                 <TouchableOpacity 
                     onPress={()=>this.toggleMenu()} 
                     style={styles.container}
@@ -107,6 +121,7 @@ render(){
                         />
                     </Animated.View>
                 </TouchableOpacity>
+            )}
         </>
     )
 }
