@@ -67,11 +67,11 @@ class Home extends Component {
             <StatusBar 
                 translucent
                 backgroundColor={colors.backgroundColor}
-                barStyle='dark-content'
+                barStyle='light-content'
             />
             <View style={styles.container}>
                 <Text
-                    onPress={()=>this.props.navigation.navigate('Add')}
+                    onPress={()=>this.props.navigation.navigate('AddExpense')}
                 >
                     Home
                 </Text>

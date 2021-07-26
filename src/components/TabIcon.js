@@ -26,7 +26,7 @@ export default function TabBarIcon(props) {
                     width: perfectSize(25),
                     tintColor: props.focused ? colors.activeTabColor :  colors.inactiveTabColor
                 }}/>
-            <Text 
+            {/* <Text 
                 style={{
                     fontSize: perfectSize(10), 
                     marginTop: perfectSize(10), 
@@ -34,7 +34,7 @@ export default function TabBarIcon(props) {
                     fontWeight: 'bold', 
                     color: props.focused ? colors.activeTabColor :  colors.inactiveTabColor
                 }}>{props.name}
-            </Text>
+            </Text> */}
         </View>
     )
 }

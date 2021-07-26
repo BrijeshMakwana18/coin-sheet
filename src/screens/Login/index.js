@@ -216,7 +216,7 @@ function Login(props) {
             </View>
             <View style={styles.bottomView}>
                 <Button 
-                    buttonTitle={strings.loginScreen.buttonTitle}
+                    title={strings.loginScreen.buttonTitle}
                     onPress={()=>
                         isPressable && handleLoginPress(email,password)
                     }

@@ -8,7 +8,7 @@ import Signup from './Signup'
 import Statistics from './Statistics'
 import Goal from './Goal'
 import Account from './Account'
-import AddTransaction from './AddTransaction'
+import AddExpense from './AddExpense'
 
 //Reducers
 import signupReducer from './Signup/reducer'
@@ -22,7 +22,7 @@ export{
     Signup,
     Goal,
     Account,
-    AddTransaction
+    AddExpense
 }
 
 export const rootReducer = combineReducers({

@@ -1,5 +1,5 @@
 import images from './images'
-import perfectSize from './screen'
+import { perfectSize, height, width } from './screen'
 import colors from './colors'
 import fonts from './fonts'
 import strings from './strings'
@@ -8,5 +8,7 @@ export {
     perfectSize,
     colors,
     fonts,
-    strings
+    strings,
+    height,
+    width
 }

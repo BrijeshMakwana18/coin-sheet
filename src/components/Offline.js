@@ -32,7 +32,7 @@ export default function Offline({
             </Text>
             <View style={{marginTop: '5%'}} />
             <Button 
-                buttonTitle='TRY AGAIN'
+                title='TRY AGAIN'
                 onPress={onPress}
                 shadow={true}
             />

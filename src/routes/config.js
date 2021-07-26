@@ -1,5 +1,5 @@
 const hidden_bottom = [
-    'Add'
+    'AddExpense'
 ]
 
 export {hidden_bottom}

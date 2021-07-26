@@ -1,8 +1,11 @@
 import { create } from 'react-native-pixel-perfect'
+import { Dimensions } from 'react-native'
 
 const designResolution = {
-    height: 896,
-    width: 414
+    height: 900,
+    width: 400
 }
 
-export default perfectSize = create(designResolution)
+export const { height, width } = Dimensions.get('screen');
+
+export const perfectSize = create(designResolution)

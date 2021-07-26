@@ -216,7 +216,7 @@ function Signup(props) {
             </View>
             <View style={styles.bottomView}>
                 <Button 
-                    buttonTitle={strings.signupScreen.buttonTitle}
+                    title={strings.signupScreen.buttonTitle}
                     onPress={()=>
                         handleSignupPress(email,password)
                     }

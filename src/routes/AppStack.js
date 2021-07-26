@@ -12,7 +12,8 @@ import {
 import { 
   colors,
   strings,
-  images
+  images,
+  perfectSize
 } from '../theme'
 
 import HomeStack from './HomeStack'
@@ -31,10 +32,14 @@ export default function AppStack() {
         showLabel: false,
         lazyLoad: true,
         style: {
-          backgroundColor: colors.white,
-          height: '7%',
+          backgroundColor: colors.tabBarBackgroundColor,
+          height: '8%',
           alignItems: 'center',
           justifyContent: 'center',
+          // borderTopRightRadius: perfectSize(50),
+          // borderTopLeftRadius: perfectSize(50),
+          position: 'absolute',
+          borderColor: colors.tabBarBackgroundColor
         },
       }}
     >

@@ -106,7 +106,7 @@ export default function Launch({ navigation }) {
                 <Animated.View style={[styles.bottomView, { opacity: opacity }]}>
 
                     <Button 
-                        buttonTitle={strings.launchScreen.signupTitle}
+                        title={strings.launchScreen.signupTitle}
                         onPress={()=>navigation.navigate('Signup')} />
 
                     <Text 
