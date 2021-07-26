@@ -1,28 +1,16 @@
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import {
-  Statistics,
-  Goal,
-  Account
-} from '../screens'
-import {
-  TabIcon,
-  Add
-} from '../components'
-import { 
-  colors,
-  strings,
-  images,
-  perfectSize
-} from '../theme'
+import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Statistics, Goal, Account} from '../screens';
+import {TabIcon, Add} from '../components';
+import {colors, strings, images} from '../theme';
 
-import HomeStack from './HomeStack'
+import HomeStack from './HomeStack';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 const AddItem = () => {
-  return null
-}
+  return null;
+};
 
 export default function AppStack() {
   return (
@@ -36,83 +24,79 @@ export default function AppStack() {
           height: '8%',
           alignItems: 'center',
           justifyContent: 'center',
-          // borderTopRightRadius: perfectSize(50),
-          // borderTopLeftRadius: perfectSize(50),
           position: 'absolute',
-          borderColor: colors.tabBarBackgroundColor
+          borderColor: colors.tabBarBackgroundColor,
         },
-      }}
-    >
-      <Tab.Screen 
-        name='Home' 
+      }}>
+      <Tab.Screen
+        name="Home"
         component={HomeStack}
         options={{
-          tabBarIcon: (props)=> 
-          <TabIcon 
-            source={images.homeTab} 
-            name={strings.tabBarLabels.home} 
-            {...props} 
-          />
-        }} 
+          tabBarIcon: props => (
+            <TabIcon
+              source={images.homeTab}
+              name={strings.tabBarLabels.home}
+              {...props}
+            />
+          ),
+        }}
       />
-      
-      <Tab.Screen 
-        name='Stat' 
+
+      <Tab.Screen
+        name="Stat"
         component={Statistics}
         options={{
-          tabBarIcon: (props)=> 
-          <TabIcon 
-            source={images.statTab} 
-            name={strings.tabBarLabels.stat} 
-            {...props} 
-          />
-        }} 
+          tabBarIcon: props => (
+            <TabIcon
+              source={images.statTab}
+              name={strings.tabBarLabels.stat}
+              {...props}
+            />
+          ),
+        }}
       />
 
-      <Tab.Screen 
-        name='Add'
+      <Tab.Screen
+        name="Add"
         component={AddItem}
-        listeners={ (props) => ({
+        listeners={props => ({
           tabPress: e => {
             // Prevent default action
-            console.log(props)
+            console.log(props);
           },
         })}
-        options={ (props) =>  ({
-          tabBarButton: () => (
-            <Add 
-              {...props}
-            />    
-            )
+        options={props => ({
+          tabBarButton: () => <Add {...props} />,
         })}
       />
 
-      <Tab.Screen 
-        name='Goal' 
+      <Tab.Screen
+        name="Goal"
         component={Goal}
         options={{
-          tabBarIcon: (props)=> 
-          <TabIcon 
-            source={images.goalTab} 
-            name={strings.tabBarLabels.goal} 
-            {...props} 
-          />
-        }} 
+          tabBarIcon: props => (
+            <TabIcon
+              source={images.goalTab}
+              name={strings.tabBarLabels.goal}
+              {...props}
+            />
+          ),
+        }}
       />
 
-      <Tab.Screen 
-        name='Account' 
+      <Tab.Screen
+        name="Account"
         component={Account}
         options={{
-          tabBarIcon: (props)=> 
-          <TabIcon 
-            source={images.accountTab} 
-            name={strings.tabBarLabels.account} 
-            {...props} 
-          />
-        }} 
+          tabBarIcon: props => (
+            <TabIcon
+              source={images.accountTab}
+              name={strings.tabBarLabels.account}
+              {...props}
+            />
+          ),
+        }}
       />
-
     </Tab.Navigator>
   );
 }
