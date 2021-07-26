@@ -1,5 +1,3 @@
-const hidden_bottom = [
-    'AddExpense'
-]
+const hidden_bottom = ['AddExpense'];
 
-export {hidden_bottom}
+export {hidden_bottom};
