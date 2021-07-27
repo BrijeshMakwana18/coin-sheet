@@ -22,6 +22,8 @@ import {connect} from 'react-redux';
 import {images, colors, fonts, perfectSize, strings} from '../../theme';
 import CalendarPicker from 'react-native-calendar-picker';
 import styles from './styles';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 //Categories data
 const data = [
@@ -109,8 +111,6 @@ const customDatesStylesCallback = date => {
   let tempDate = new Date(date);
   let a = `${currentDate.getDate()} ${currentDate.getMonth()} ${currentDate.getFullYear()}`;
   let b = `${tempDate.getDate()} ${tempDate.getMonth()} ${tempDate.getFullYear()}`;
-
-  // eslint-disable-next-line eqeqeq
   if (a == b) {
     return {
       style: {
@@ -143,7 +143,7 @@ class AddExpense extends Component {
       selectedCat: {},
       isKeyboard: false,
       displayDate: '',
-      selectedDate: new Date(),
+      modalDisplayDate: '',
       datePicker: false,
     };
   }
@@ -175,6 +175,7 @@ class AddExpense extends Component {
 
     this.setState({
       displayDate: date,
+      modalDisplayDate: date,
     });
   }
 
@@ -276,17 +277,17 @@ class AddExpense extends Component {
       <TouchableOpacity
         onPress={() => {
           this.setState({
-            selectedCat: item,
+            selectedCat: item.title,
           });
         }}
         style={[
           styles.catContainer,
           {
             backgroundColor:
-              this.state.selectedCat == item
+              this.state.selectedCat == item.title
                 ? colors.white
                 : colors.backgroundColor,
-            marginLeft: index % 3 == 0 ? 0 : perfectSize(25),
+            marginLeft: index % 3 == 0 ? 0 : perfectSize(30),
           },
         ]}>
         <Image
@@ -295,7 +296,7 @@ class AddExpense extends Component {
             styles.catImage,
             {
               tintColor:
-                this.state.selectedCat == item ? colors.primary : colors.white,
+                this.state.selectedCat == item.title ? colors.primary : colors.white,
             },
           ]}
         />
@@ -305,7 +306,7 @@ class AddExpense extends Component {
             styles.catTitle,
             {
               color:
-                this.state.selectedCat == item
+                this.state.selectedCat == item.title
                   ? colors.primary
                   : colors.whiteTintColor,
             },
@@ -317,13 +318,36 @@ class AddExpense extends Component {
   };
 
   isActive = () => {
-    const {title, notes, selectedCat} = this.state;
-    return title == '' || notes == '' || selectedCat == {} ? false : true;
+    const {ammount, selectedCat} = this.state;
+    return ammount.trim() == '' || Object.keys(selectedCat).length == 0
+      ? false
+      : true;
   };
 
   onDateChange = date => {
+    let today = new Date(date);
+    let temp = `${today.getDate()} ${months[
+      today.getMonth()
+    ].toUpperCase()}, ${today.getFullYear()}`;
+
     this.setState({
-      selectedDate: date,
+      modalDisplayDate: temp,
+    });
+  };
+
+  handleDateSubmit = () => {
+    let date = this.state.modalDisplayDate;
+    this.setState({
+      displayDate: date,
+    });
+    this.handleDatePicker(false);
+  };
+
+  handleCancelDate = () => {
+    this.handleDatePicker(false);
+    let date = this.state.displayDate;
+    this.setState({
+      modalDisplayDate: date,
     });
   };
 
@@ -331,6 +355,27 @@ class AddExpense extends Component {
     this.setState({
       datePicker: type,
     });
+  };
+
+  handleOnSubmit = async () => {
+    const {ammount, notes, displayDate, selectedCat} = this.state;
+    const expense = {
+      ammount: ammount,
+      notes: notes,
+      displayDate: displayDate,
+      selectedCat: selectedCat,
+      createdAt: new Date(),
+    };
+    let uid = auth().currentUser.uid;
+    await firestore()
+      .collection('transactions')
+      .doc(uid)
+      .collection('expenses')
+      .doc()
+      .set(expense)
+      .then(() => {
+        console.log('Expense added');
+      });
   };
   render() {
     const {
@@ -391,7 +436,9 @@ class AddExpense extends Component {
                 selectionColor={colors.primary}
                 placeholder={ammountPlaceholder}
                 keyboardType="decimal-pad"
-                onChangeText={ammount => this.setState({ammount: ammount})}
+                onChangeText={ammount =>
+                  this.setState({ammount: ammount.trim()})
+                }
                 value={this.state.ammount}
                 returnKeyType="next"
                 onSubmitEditing={() => this.notesInput.focus()}
@@ -417,7 +464,7 @@ class AddExpense extends Component {
                   selectionColor={colors.primary}
                   placeholder={notesPlaceholder}
                   returnKeyType="next"
-                  onChangeText={notes => this.setState({notes: notes})}
+                  onChangeText={notes => this.setState({notes: notes.trim()})}
                   value={this.state.notes}
                   blurOnSubmit={false}
                   ref={input => {
@@ -456,8 +503,10 @@ class AddExpense extends Component {
             <Button
               title={buttonTitle}
               position="absolute"
-              bottom="4%"
+              bottom={perfectSize(30)}
               active={this.isActive()}
+              onPress={() => this.handleOnSubmit()}
+              disabled={!this.isActive()}
             />
             <Animated.View
               style={{
@@ -481,7 +530,7 @@ class AddExpense extends Component {
             <View style={styles.datePickerContainer}>
               <View style={styles.datePickerHeaderContainer}>
                 <Text style={styles.datePickerHeaderLabel}>
-                  {this.state.displayDate}
+                  {this.state.modalDisplayDate}
                 </Text>
               </View>
               <CalendarPicker
@@ -519,11 +568,11 @@ class AddExpense extends Component {
               />
               <View style={styles.bottomViewContainer}>
                 <ButtonWithImage
-                  onPress={() => this.handleDatePicker(false)}
+                  onPress={() => this.handleCancelDate()}
                   image={images.cross}
                 />
                 <ButtonWithImage
-                  onPress={() => Keyboard.dismiss()}
+                  onPress={() => this.handleDateSubmit()}
                   image={images.check}
                 />
               </View>

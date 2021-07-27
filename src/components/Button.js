@@ -5,6 +5,7 @@ import {perfectSize, fonts, colors} from '../theme';
 export default function Button(props) {
   return (
     <TouchableOpacity
+      disabled={props.disabled}
       style={{
         height: perfectSize(56),
         width: perfectSize(300),
