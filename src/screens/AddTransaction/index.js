@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
     padding: perfectSize(23),
-    backgroundColor: colors.buttonBackgroundColor,
+    backgroundColor: colors.backgroundColor,
     alignItems: 'center',
     justifyContent: 'center',
   },

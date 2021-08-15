@@ -14,7 +14,7 @@ export default function Input(props) {
         fontSize: perfectSize(23),
         fontFamily: fonts.quicksandBold,
         marginTop: props.marginTop,
-        color: colors.white,
+        color: colors.primaryLightColor,
       }}
       placeholder={props.placeholder}
       placeholderTextColor="rgba(66,76,89,0.5)"

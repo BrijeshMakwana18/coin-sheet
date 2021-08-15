@@ -10,7 +10,7 @@ export default function Offline({onPress}) {
       <StatusBar
         translucent
         barStyle="dark-content"
-        backgroundColor={colors.white}
+        backgroundColor={colors.primaryLightColor}
       />
       <Image
         source={images.offlineImage}
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: colors.primaryLightColor,
   },
   image: {
     height: '50%',

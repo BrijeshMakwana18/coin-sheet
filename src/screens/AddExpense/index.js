@@ -119,7 +119,7 @@ const customDatesStylesCallback = date => {
         width: perfectSize(30),
       },
       textStyle: {
-        color: colors.white,
+        color: colors.primaryLightColor,
       },
     };
   }
@@ -285,7 +285,7 @@ class AddExpense extends Component {
           {
             backgroundColor:
               this.state.selectedCat == item.title
-                ? colors.white
+                ? colors.primaryLightColor
                 : colors.backgroundColor,
             marginLeft: index % 3 == 0 ? 0 : perfectSize(30),
           },
@@ -296,7 +296,9 @@ class AddExpense extends Component {
             styles.catImage,
             {
               tintColor:
-                this.state.selectedCat == item.title ? colors.primary : colors.white,
+                this.state.selectedCat == item.title
+                  ? colors.primary
+                  : colors.primaryLightColor,
             },
           ]}
         />
@@ -308,7 +310,7 @@ class AddExpense extends Component {
               color:
                 this.state.selectedCat == item.title
                   ? colors.primary
-                  : colors.whiteTintColor,
+                  : colors.primaryLightColor,
             },
           ]}>
           {item.title}
@@ -551,7 +553,7 @@ class AddExpense extends Component {
                 width={perfectSize(320)}
                 weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
                 showDayStragglers
-                selectedDayColor={colors.white}
+                selectedDayColor={colors.primaryLightColor}
                 maxDate={new Date()}
                 previousComponent={
                   <Image

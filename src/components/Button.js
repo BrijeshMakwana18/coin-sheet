@@ -14,11 +14,11 @@ export default function Button(props) {
         justifyContent: 'center',
         alignSelf: 'center',
         backgroundColor: props.active
-          ? colors.white
+          ? colors.primaryLightColor
           : colors.inActiveButtonColor,
         shadowColor: props.shadowColor
           ? props.shadowColor
-          : colors.buttonBackgroundColor,
+          : colors.primaryLightColor,
         shadowOffset: {
           width: 0,
           height: 12,

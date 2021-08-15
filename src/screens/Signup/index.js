@@ -261,14 +261,14 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     resizeMode: 'contain',
-    tintColor: colors.textColor,
+    tintColor: colors.primaryLightColor,
     opacity: 0.5,
   },
   title: {
     textAlign: 'center',
     fontFamily: fonts.quicksandBold,
     fontSize: perfectSize(56),
-    color: colors.textColor,
+    color: colors.primaryLightColor,
     opacity: 0.5,
   },
   textInput: {
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
   bottomText: {
     textAlign: 'center',
     fontSize: perfectSize(14),
-    color: colors.white,
+    color: colors.primaryLightColor,
     fontFamily: fonts.avenirLight,
     marginTop: '5%',
   },

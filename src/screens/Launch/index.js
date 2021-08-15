@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    color: colors.textColor,
+    color: colors.primaryLightColor,
     fontSize: perfectSize(32),
     textAlign: 'center',
     fontFamily: fonts.quicksandBold,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     marginTop: '5%',
-    color: colors.textColor,
+    color: colors.primaryLightColor,
     fontSize: perfectSize(23),
     textAlign: 'center',
     fontFamily: fonts.quicksandBold,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     bottom: '5%',
   },
   loginButton: {
-    color: colors.textColor,
+    color: colors.primaryLightColor,
     fontSize: perfectSize(18),
     textAlign: 'center',
     fontFamily: fonts.quicksandBold,

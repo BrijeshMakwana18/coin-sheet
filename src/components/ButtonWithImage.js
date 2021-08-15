@@ -9,7 +9,7 @@ export default function ButtonWithImage(props) {
       style={{
         height: perfectSize(60),
         width: perfectSize(60),
-        backgroundColor: colors.white,
+        backgroundColor: colors.primaryLightColor,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: perfectSize(15),
