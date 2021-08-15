@@ -29,7 +29,7 @@ class Goal extends Component {
         <StatusBar
           translucent
           backgroundColor={colors.backgroundColor}
-          barStyle="dark-content"
+          barStyle="light-content"
         />
         <View style={styles.container}>
           <Text onPress={() => console.log(this.props)}>Goal</Text>

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, Text} from 'react-native';
 import {colors, perfectSize} from '../theme';
 
 export default function TabBarIcon(props) {
@@ -22,6 +22,16 @@ export default function TabBarIcon(props) {
             : colors.inactiveTabColor,
         }}
       />
+      <Text
+        style={{
+          color: props.focused
+            ? colors.activeTabColor
+            : colors.inactiveTabColor,
+          fontSize: perfectSize(10),
+          marginTop: '5%',
+        }}>
+        {props.name}
+      </Text>
     </View>
   );
 }

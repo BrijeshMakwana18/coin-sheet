@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Statistics, Goal, Account} from '../screens';
 import {TabIcon, Add} from '../components';
-import {colors, strings, images} from '../theme';
+import {colors, strings, images, perfectSize} from '../theme';
 
 import HomeStack from './HomeStack';
 
@@ -25,7 +25,9 @@ export default function AppStack() {
           alignItems: 'center',
           justifyContent: 'center',
           position: 'absolute',
-          borderColor: colors.tabBarBackgroundColor,
+          borderTopWidth: 0,
+          borderTopRightRadius: perfectSize(15),
+          borderTopLeftRadius: perfectSize(15),
         },
       }}>
       <Tab.Screen

@@ -14,13 +14,15 @@ const colors = {
   //Button background in inactive state
   inActiveButtonColor: 'rgba(255,255,255,0.1)',
   //Avtive tab icon color
-  activeTabColor: '#DCE7EF',
+  activeTabColor: 'white',
   //Inavtive tab icon color
   inactiveTabColor: '#607A92',
   //Tab bar background color
-  tabBarBackgroundColor: '#294260',
+  tabBarBackgroundColor: '#000000',
   //Primay tint color
   primaryTintColor: 'rgba(255,255,255,0.7)',
+  //Add button background in bottom tab
+  addTransactionButtonColor: '#235CE8',
 };
 
 export default colors;

@@ -9,7 +9,7 @@ import {
   Text,
   DeviceEventEmitter,
 } from 'react-native';
-import {perfectSize, images} from '../theme';
+import {perfectSize, images, colors} from '../theme';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 export default class Add extends Component {
   constructor(props) {
@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: perfectSize(70),
     borderRadius: perfectSize(15),
-    backgroundColor: '#7E7BD6',
+    backgroundColor: colors.addTransactionButtonColor,
     height: perfectSize(70),
     top: -hp('3%'),
-    shadowColor: '#7E7BD6',
+    shadowColor: colors.addTransactionButtonColor,
     shadowOpacity: 0.3,
     shadowRadius: 10,
     shadowOffset: {
