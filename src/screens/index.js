@@ -9,12 +9,23 @@ import Statistics from './Statistics';
 import Goal from './Goal';
 import Account from './Account';
 import AddExpense from './AddExpense';
+import AddTransaction from './AddTransaction';
 
 //Reducers
 import signupReducer from './Signup/reducer';
 import loginReducer from './Login/reducer';
 
-export {Home, Statistics, Launch, Login, Signup, Goal, Account, AddExpense};
+export {
+  Home,
+  Statistics,
+  Launch,
+  Login,
+  Signup,
+  Goal,
+  Account,
+  AddExpense,
+  AddTransaction,
+};
 
 export const rootReducer = combineReducers({
   signupReducer,

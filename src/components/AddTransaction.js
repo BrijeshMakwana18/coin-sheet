@@ -1,14 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Animated,
-  TouchableWithoutFeedback,
-  Text,
-  DeviceEventEmitter,
-} from 'react-native';
+import {StyleSheet, Image, View, DeviceEventEmitter} from 'react-native';
 import {perfectSize, images, colors} from '../theme';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 export default class Add extends Component {
@@ -18,55 +10,6 @@ export default class Add extends Component {
       visible: true,
     };
   }
-  animation = new Animated.Value(0);
-
-  toggleMenu = () => {
-    // DeviceEventEmitter.emit('OpenTransactionModal', true)
-    const toValue = this.open ? 0 : 1;
-    Animated.spring(this.animation, {
-      toValue,
-      friction: 5,
-      useNativeDriver: false,
-    }).start();
-    this.open = !this.open;
-  };
-
-  button = (title, value) => {
-    return (
-      <TouchableWithoutFeedback>
-        <Animated.View
-          style={{
-            position: 'absolute',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '200%',
-            height: perfectSize(50),
-            borderRadius: perfectSize(5),
-            backgroundColor: '#6096FD',
-            alignSelf: 'center',
-            transform: [
-              {
-                scale: this.animation,
-              },
-              {
-                translateY: this.animation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, perfectSize(-value)],
-                }),
-              },
-            ],
-          }}>
-          <Text
-            style={{
-              color: 'white',
-              fontWeight: 'bold',
-            }}>
-            {title}
-          </Text>
-        </Animated.View>
-      </TouchableWithoutFeedback>
-    );
-  };
 
   componentDidMount() {
     DeviceEventEmitter.addListener('HideTabBar', hide => {
@@ -78,34 +21,17 @@ export default class Add extends Component {
     return (
       <>
         {this.state.visible && (
-          <TouchableOpacity
-            onPress={() => this.toggleMenu()}
-            style={styles.container}>
-            {this.button('Income', 80)}
-            {this.button('Expense', 160)}
-            {this.button('Investment', 240)}
-            <Animated.View
+          <View style={styles.container}>
+            <Image
+              source={images.add}
               style={{
-                transform: [
-                  {
-                    rotate: this.animation.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: ['0deg', '45deg'],
-                    }),
-                  },
-                ],
-              }}>
-              <Image
-                source={images.add}
-                style={{
-                  height: perfectSize(25),
-                  width: perfectSize(25),
-                  resizeMode: 'contain',
-                  tintColor: 'white',
-                }}
-              />
-            </Animated.View>
-          </TouchableOpacity>
+                height: perfectSize(25),
+                width: perfectSize(25),
+                resizeMode: 'contain',
+                tintColor: 'white',
+              }}
+            />
+          </View>
         )}
       </>
     );

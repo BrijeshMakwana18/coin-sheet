@@ -1,16 +1,13 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Statistics, Goal, Account} from '../screens';
 import {TabIcon, Add} from '../components';
 import {colors, strings, images, perfectSize} from '../theme';
-
 import HomeStack from './HomeStack';
+import AddTransactionStack from './AddTransactionStack';
 
 const Tab = createBottomTabNavigator();
-
-const AddItem = () => {
-  return null;
-};
 
 export default function AppStack() {
   return (
@@ -60,15 +57,10 @@ export default function AppStack() {
 
       <Tab.Screen
         name="Add"
-        component={AddItem}
-        listeners={props => ({
-          tabPress: e => {
-            // Prevent default action
-            console.log(props);
-          },
-        })}
+        component={AddTransactionStack}
         options={props => ({
-          tabBarButton: () => <Add {...props} />,
+          tabBarIcon: props => <Add {...props} />,
+          tabBarVisible: false,
         })}
       />
 
