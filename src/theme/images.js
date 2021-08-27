@@ -26,4 +26,6 @@ export default images = {
   leftArrow: require('../assets/images/leftArrow.png'),
   rightArrow: require('../assets/images/rightArrow.png'),
   cross: require('../assets/images/cross.png'),
+  close: require('../assets/images/close.png'),
+  transactionHeader: require('../assets/images/transactionHeader.png'),
 };

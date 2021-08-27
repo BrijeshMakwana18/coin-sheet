@@ -12,6 +12,10 @@ import {
 import {bindActionCreators} from 'redux';
 import {colors, perfectSize} from '../../theme';
 import {connect} from 'react-redux';
+import {PrimaryHeader} from '../../components';
+import {strings, images} from '../../theme';
+import styles from './styles';
+import {FlatList} from 'react-native-gesture-handler';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({}, dispatch);
@@ -22,6 +26,17 @@ const mapStateToProps = state => {
     state: state.signupReducer,
   };
 };
+const data = [
+  {
+    backgroundColor: '#A440F6',
+  },
+  {
+    backgroundColor: '#FF9478',
+  },
+  {
+    backgroundColor: '#246BFE',
+  },
+];
 class AddTransaction extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +44,25 @@ class AddTransaction extends Component {
   }
 
   componentDidMount() {}
-
+  onBackButtonTapped = () => {
+    this.props.navigation.goBack();
+    DeviceEventEmitter.emit('HideTabBar', false);
+  };
+  renderItem = (item, index) => {
+    return (
+      <View
+        style={[
+          styles.cardContainer,
+          {
+            backgroundColor: item.backgroundColor,
+            shadowColor: item.backgroundColor,
+          },
+        ]}
+      />
+    );
+  };
   render() {
+    const {headerTitle} = strings.addTransaction;
     return (
       <>
         <StatusBar
@@ -39,31 +71,28 @@ class AddTransaction extends Component {
           barStyle="light-content"
         />
         <View style={styles.container}>
-          <Text onPress={() => this.props.navigation.navigate('AddExpense')}>
+          <PrimaryHeader
+            onPress={() => this.onBackButtonTapped()}
+            title={headerTitle}
+            leftImage={images.close}
+            rightImage={images.transactionHeader}
+          />
+          {/* <Text onPress={() => this.props.navigation.navigate('AddExpense')}>
             Transaction
-          </Text>
-          <Text
-            onPress={() => {
-              this.props.navigation.goBack();
-              DeviceEventEmitter.emit('HideTabBar', false);
-            }}>
-            Close
-          </Text>
+          </Text> */}
+          <View style={styles.listContentContainer}>
+            <FlatList
+              data={data}
+              showsVerticalScrollIndicator={false}
+              // contentContainerStyle={styles.listContentContainer}
+              renderItem={({item, index}) => this.renderItem(item, index)}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
         </View>
       </>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
-    padding: perfectSize(23),
-    backgroundColor: colors.backgroundColor,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTransaction);

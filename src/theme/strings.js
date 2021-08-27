@@ -19,6 +19,9 @@ const strings = {
     goal: 'Goal',
     account: 'Account',
   },
+  addTransaction: {
+    headerTitle: 'Add New\nTransaction',
+  },
   addExpense: {
     headerTitle: 'Add New \nExpense',
     ammountPlaceholder: 'Ammount',
