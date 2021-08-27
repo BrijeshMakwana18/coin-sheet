@@ -1,7 +1,14 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Platform, StatusBar,DeviceEventEmitter} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  DeviceEventEmitter,
+} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, perfectSize} from '../../theme';
 import {connect} from 'react-redux';
@@ -29,17 +36,17 @@ class AddTransaction extends Component {
         <StatusBar
           translucent
           backgroundColor={colors.backgroundColor}
-          barStyle="dark-content"
+          barStyle="light-content"
         />
         <View style={styles.container}>
           <Text onPress={() => this.props.navigation.navigate('AddExpense')}>
             Transaction
           </Text>
-          <Text onPress={() => {
-            this.props.navigation.goBack()
-            DeviceEventEmitter.emit('HideTabBar', false);
-
-          }}>
+          <Text
+            onPress={() => {
+              this.props.navigation.goBack();
+              DeviceEventEmitter.emit('HideTabBar', false);
+            }}>
             Close
           </Text>
         </View>

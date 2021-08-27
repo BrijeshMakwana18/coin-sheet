@@ -1,6 +1,6 @@
 const colors = {
   //Screen background color across the app
-  backgroundColor: '#11052C',
+  backgroundColor: '#111416',
   //Light color across the app (Label title, Button background)
   primaryLightColor: 'white',
   //Primary color accross the app (Calendar picker background, Selected label title)
@@ -22,7 +22,7 @@ const colors = {
   //Primay tint color
   primaryTintColor: 'rgba(255,255,255,0.7)',
   //Add button background in bottom tab
-  addTransactionButtonColor: '#235CE8',
+  addTransactionButtonColor: '#246BFE',
 };
 
 export default colors;

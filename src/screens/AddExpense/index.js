@@ -16,7 +16,7 @@ import {
   StatusBar,
   FlatList,
 } from 'react-native';
-import {Button, ButtonWithImage} from '../../components';
+import {Button, ButtonWithImage, PrimaryHeader} from '../../components';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {images, colors, fonts, perfectSize, strings} from '../../theme';
@@ -405,19 +405,12 @@ class AddExpense extends Component {
                 marginTop: this.headerMarginTop,
                 opacity: this.opacity,
               }}>
-              <TouchableOpacity
+              <PrimaryHeader
                 onPress={() => this.props.navigation.goBack()}
-                style={styles.backArrowContainer}>
-                <Image source={images.backArrow} style={styles.backArrow} />
-              </TouchableOpacity>
-              <View style={styles.headerContainer}>
-                <Text style={styles.headerTitle}>{headerTitle}</Text>
-                <Image
-                  source={images.expense}
-                  style={styles.headerImage}
-                  resizeMode="contain"
-                />
-              </View>
+                title={headerTitle}
+                leftImage={images.backArrow}
+                rightImage={images.expense}
+              />
               <Text
                 style={styles.dateLabel}
                 onPress={() => this.handleDatePicker(true)}>
