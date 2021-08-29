@@ -134,7 +134,7 @@ const mapStateToProps = state => {
     state: state.signupReducer,
   };
 };
-class AddExpense extends Component {
+class AddGoal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -579,4 +579,4 @@ class AddExpense extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddExpense);
+export default connect(mapStateToProps, mapDispatchToProps)(AddGoal);

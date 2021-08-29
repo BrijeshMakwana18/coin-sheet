@@ -8,8 +8,10 @@ import Signup from './Signup';
 import Statistics from './Statistics';
 import Goal from './Goal';
 import Account from './Account';
-import AddExpense from './AddTransaction/AddExpense';
 import AddTransaction from './AddTransaction';
+import AddExpense from './AddTransaction/AddExpense';
+import AddIncome from './AddTransaction/AddIncome';
+import AddGoal from './AddTransaction/AddGoal';
 
 //Reducers
 import signupReducer from './Signup/reducer';
@@ -23,8 +25,10 @@ export {
   Signup,
   Goal,
   Account,
-  AddExpense,
   AddTransaction,
+  AddExpense,
+  AddIncome,
+  AddGoal,
 };
 
 export const rootReducer = combineReducers({

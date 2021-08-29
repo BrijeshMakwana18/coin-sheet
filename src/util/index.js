@@ -1,3 +1,3 @@
 import actionTypes from './actionTypes';
-
-export {actionTypes};
+import globalMethods from './globalMethods';
+export {actionTypes, globalMethods};

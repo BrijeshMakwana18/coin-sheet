@@ -4,20 +4,33 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {AddExpense, AddTransaction} from '../screens';
-
+import {AddTransaction, AddExpense, AddIncome, AddGoal} from '../screens';
+import {removeListeners} from '../util/globalMethods';
 const Stack = createStackNavigator();
 
 export default class AddTransactionStack extends Component {
   constructor(props) {
     super(props);
+    this.listenerArray = [];
   }
   componentDidMount() {
-    this.props.navigation.setOptions({
-      tabBarVisible: false,
+    let didFocusListener = this.props.navigation.addListener('focus', () => {
+      this.props.navigation.setOptions({
+        tabBarVisible: false,
+      });
+      DeviceEventEmitter.emit('HideTabBar', true);
     });
-    DeviceEventEmitter.emit('HideTabBar', true);
+
+    this.listenerArray.push({
+      type: 'navigation',
+      ref: didFocusListener,
+    });
   }
+
+  componentWillUnmount() {
+    removeListeners(this.listnersArray);
+  }
+
   render() {
     return (
       <Stack.Navigator
@@ -33,8 +46,18 @@ export default class AddTransactionStack extends Component {
           options={{header: () => null}}
         />
         <Stack.Screen
+          name="AddIncome"
+          component={AddIncome}
+          options={{header: () => null}}
+        />
+        <Stack.Screen
           name="AddExpense"
           component={AddExpense}
+          options={{header: () => null}}
+        />
+        <Stack.Screen
+          name="AddGoal"
+          component={AddGoal}
           options={{header: () => null}}
         />
       </Stack.Navigator>

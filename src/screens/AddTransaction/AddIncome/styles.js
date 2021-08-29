@@ -50,7 +50,7 @@ export default styles = StyleSheet.create({
   },
   dateLabel: {
     textAlign: 'center',
-    marginTop: '10%',
+    marginTop: '15%',
     color: colors.primaryLightColor,
     opacity: 0.5,
     fontFamily: fonts.quicksandBold,
@@ -63,43 +63,8 @@ export default styles = StyleSheet.create({
   },
   notesInputContainer: {
     marginTop: perfectSize(20),
+    height: perfectSize(300),
     alignSelf: 'center',
-  },
-  selectCatLabel: {
-    textAlign: 'center',
-    marginTop: '5%',
-    color: 'rgba(255,255,255,0.5)',
-    fontFamily: fonts.quicksandBold,
-    fontSize: perfectSize(18),
-  },
-  catListContainer: {
-    height: perfectSize(339),
-    marginLeft: perfectSize(-23),
-    marginTop: '5%',
-    width: width,
-  },
-  catContentContainer: {
-    alignSelf: 'center',
-    width: '100%',
-    alignItems: 'center',
-  },
-  //Category list styles
-  catContainer: {
-    height: perfectSize(105),
-    width: perfectSize(110),
-    marginTop: perfectSize(8),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: perfectSize(20),
-  },
-  catImage: {
-    height: perfectSize(30),
-    width: perfectSize(30),
-  },
-  catTitle: {
-    marginTop: '15%',
-    fontSize: perfectSize(15),
-    fontFamily: fonts.quicksandBold,
   },
   //Date picker modal styles
   modal: {

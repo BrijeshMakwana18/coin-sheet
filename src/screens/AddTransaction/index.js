@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 };
 const data = [
   {
-    label: 'Income',
+    label: 'Income/Credit',
     image: images.income,
     description:
       'This transaction will be counted as your income. It could be your monthly salary or other income which you want to add or track',
@@ -37,7 +37,7 @@ const data = [
     backgroundColor: '#A440F6',
   },
   {
-    label: 'Expense',
+    label: 'Expense/Debit',
     image: images.expense,
     description:
       'This transaction will be counted as your expense. It cound be daily expenses that you should keep track of.',

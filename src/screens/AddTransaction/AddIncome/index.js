@@ -16,66 +16,14 @@ import {
   StatusBar,
   FlatList,
 } from 'react-native';
-import {Button, ButtonWithImage, PrimaryHeader} from '../../components';
+import {Button, ButtonWithImage, PrimaryHeader} from '../../../components';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {images, colors, fonts, perfectSize, strings} from '../../theme';
+import {images, colors, fonts, perfectSize, strings} from '../../../theme';
 import CalendarPicker from 'react-native-calendar-picker';
 import styles from './styles';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-
-//Categories data
-const data = [
-  {
-    title: 'Food',
-    image: images.food,
-  },
-  {
-    title: 'Cash',
-    image: images.cash,
-  },
-  {
-    title: 'Transfer',
-    image: images.transfer,
-  },
-  {
-    title: 'Entertainment',
-    image: images.entertainment,
-  },
-  {
-    title: 'Fuel',
-    image: images.fuel,
-  },
-  {
-    title: 'Groceries',
-    image: images.groceries,
-  },
-  {
-    title: 'Investment',
-    image: images.investment,
-  },
-  {
-    title: 'Loans',
-    image: images.loan,
-  },
-  {
-    title: 'Medical',
-    image: images.medical,
-  },
-  {
-    title: 'Shopping',
-    image: images.shopping,
-  },
-  {
-    title: 'Travel',
-    image: images.travel,
-  },
-  {
-    title: 'Other',
-    image: images.other,
-  },
-];
 
 //Months for date picker
 let months = [
@@ -134,13 +82,12 @@ const mapStateToProps = state => {
     state: state.signupReducer,
   };
 };
-class AddExpense extends Component {
+class AddIncome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ammount: '',
       notes: '',
-      selectedCat: {},
       isKeyboard: false,
       displayDate: '',
       modalDisplayDate: '',
@@ -190,7 +137,7 @@ class AddExpense extends Component {
     });
     Animated.parallel([
       Animated.timing(this.headerMarginTop, {
-        toValue: perfectSize(-250),
+        toValue: perfectSize(-200),
         duration: 350,
         useNativeDriver: false,
       }),
@@ -206,11 +153,6 @@ class AddExpense extends Component {
       }),
       Animated.timing(this.inputWidth, {
         toValue: perfectSize(360),
-        duration: 300,
-        useNativeDriver: false,
-      }),
-      Animated.timing(this.notesInputHeight, {
-        toValue: perfectSize(300),
         duration: 300,
         useNativeDriver: false,
       }),
@@ -254,11 +196,6 @@ class AddExpense extends Component {
         duration: 300,
         useNativeDriver: false,
       }),
-      Animated.timing(this.notesInputHeight, {
-        toValue: perfectSize(0),
-        duration: 350,
-        useNativeDriver: false,
-      }),
       Animated.timing(this.ammountInputMarginTop, {
         toValue: perfectSize(20),
         duration: 300,
@@ -272,58 +209,9 @@ class AddExpense extends Component {
     ]).start();
   };
 
-  renderCategories = (item, index) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          this.setState({
-            selectedCat: item.title,
-          });
-        }}
-        style={[
-          styles.catContainer,
-          {
-            backgroundColor:
-              this.state.selectedCat == item.title
-                ? colors.primaryLightColor
-                : colors.backgroundColor,
-            marginLeft: index % 3 == 0 ? 0 : perfectSize(30),
-          },
-        ]}>
-        <Image
-          source={item.image}
-          style={[
-            styles.catImage,
-            {
-              tintColor:
-                this.state.selectedCat == item.title
-                  ? colors.primary
-                  : colors.primaryLightColor,
-            },
-          ]}
-        />
-        <Text
-          numberOfLines={1}
-          style={[
-            styles.catTitle,
-            {
-              color:
-                this.state.selectedCat == item.title
-                  ? colors.primary
-                  : colors.primaryLightColor,
-            },
-          ]}>
-          {item.title}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
-
   isActive = () => {
-    const {ammount, selectedCat} = this.state;
-    return ammount.trim() == '' || Object.keys(selectedCat).length == 0
-      ? false
-      : true;
+    const {ammount} = this.state;
+    return ammount.trim() == '' ? false : true;
   };
 
   onDateChange = date => {
@@ -360,33 +248,27 @@ class AddExpense extends Component {
   };
 
   handleOnSubmit = async () => {
-    const {ammount, notes, displayDate, selectedCat} = this.state;
-    const expense = {
+    const {ammount, notes, displayDate} = this.state;
+    const income = {
       ammount: ammount,
       notes: notes,
       displayDate: displayDate,
-      selectedCat: selectedCat,
       createdAt: new Date(),
     };
     let uid = auth().currentUser.uid;
     await firestore()
       .collection('transactions')
       .doc(uid)
-      .collection('expenses')
+      .collection('income')
       .doc()
-      .set(expense)
+      .set(income)
       .then(() => {
-        console.log('Expense added');
+        console.log('Income added');
       });
   };
   render() {
-    const {
-      headerTitle,
-      ammountPlaceholder,
-      notesPlaceholder,
-      selectCat,
-      buttonTitle,
-    } = strings.addExpense;
+    const {headerTitle, ammountPlaceholder, notesPlaceholder, buttonTitle} =
+      strings.addIncome;
     return (
       <>
         <StatusBar
@@ -409,7 +291,7 @@ class AddExpense extends Component {
                 onPress={() => this.props.navigation.goBack()}
                 title={headerTitle}
                 leftImage={images.backArrow}
-                rightImage={images.expense}
+                rightImage={images.income}
               />
               <Text
                 style={styles.dateLabel}
@@ -444,55 +326,27 @@ class AddExpense extends Component {
                 onFocus={test => console.log(test)}
               />
             </Animated.View>
-            {this.state.isKeyboard && (
-              <Animated.View
-                style={[
-                  styles.notesInputContainer,
-                  {
-                    height: this.notesInputHeight,
-                    width: this.inputWidth,
-                  },
-                ]}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholderTextColor="rgba(255,255,255,0.3)"
-                  selectionColor={colors.primary}
-                  placeholder={notesPlaceholder}
-                  returnKeyType="next"
-                  onChangeText={notes => this.setState({notes: notes.trim()})}
-                  value={this.state.notes}
-                  blurOnSubmit={false}
-                  ref={input => {
-                    this.notesInput = input;
-                  }}
-                  multiline
-                  numberOfLines={5}
-                />
-              </Animated.View>
-            )}
-            <Animated.View
-              style={{
-                marginTop: this.catMarginTop,
-                opacity: this.opacity,
-              }}>
-              <Text style={styles.selectCatLabel}>{selectCat}</Text>
-            </Animated.View>
             <Animated.View
               style={[
-                styles.catListContainer,
+                styles.notesInputContainer,
                 {
-                  opacity: this.opacity,
+                  width: this.inputWidth,
                 },
               ]}>
-              <FlatList
-                data={data}
-                showsVerticalScrollIndicator={false}
-                numColumns={3}
-                contentContainerStyle={styles.catContentContainer}
-                renderItem={({item, index}) =>
-                  this.renderCategories(item, index)
-                }
-                keyExtractor={(item, index) => index.toString()}
+              <TextInput
+                style={styles.textInput}
+                placeholderTextColor="rgba(255,255,255,0.3)"
+                selectionColor={colors.primary}
+                placeholder={notesPlaceholder}
+                returnKeyType="next"
+                onChangeText={notes => this.setState({notes: notes.trim()})}
+                value={this.state.notes}
+                blurOnSubmit={false}
+                ref={input => {
+                  this.notesInput = input;
+                }}
+                multiline
+                numberOfLines={5}
               />
             </Animated.View>
             <Button
@@ -503,17 +357,18 @@ class AddExpense extends Component {
               onPress={() => this.handleOnSubmit()}
               disabled={!this.isActive()}
             />
-            <Animated.View
-              style={{
-                position: 'absolute',
-                top: perfectSize(430),
-                right: this.doneButtonRight,
-              }}>
-              <ButtonWithImage
-                onPress={() => Keyboard.dismiss()}
-                image={images.check}
-              />
-            </Animated.View>
+            {this.state.isKeyboard && (
+              <View
+                style={{
+                  alignSelf: 'flex-end',
+                  bottom: perfectSize(30),
+                }}>
+                <ButtonWithImage
+                  onPress={() => Keyboard.dismiss()}
+                  image={images.check}
+                />
+              </View>
+            )}
           </View>
         </TouchableWithoutFeedback>
         <Modal
@@ -579,4 +434,4 @@ class AddExpense extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddExpense);
+export default connect(mapStateToProps, mapDispatchToProps)(AddIncome);

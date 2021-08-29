@@ -22,6 +22,12 @@ const strings = {
   addTransaction: {
     headerTitle: 'Add New',
   },
+  addIncome: {
+    headerTitle: 'Add Income',
+    ammountPlaceholder: 'Ammount',
+    notesPlaceholder: 'Notes ...',
+    buttonTitle: 'CONTINUE',
+  },
   addExpense: {
     headerTitle: 'Add New \nExpense',
     ammountPlaceholder: 'Ammount',
