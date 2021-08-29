@@ -6,8 +6,10 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: perfectSize(56),
-    padding: perfectSize(23),
     backgroundColor: colors.backgroundColor,
+  },
+  listContentContainer: {
+    flex: 1,
   },
   cardContainer: {
     height: height / 5,
@@ -15,6 +17,8 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: perfectSize(10),
     marginTop: '10%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     shadowOpacity: 0.3,
     shadowRadius: 10,
     shadowOffset: {
@@ -22,7 +26,29 @@ export default styles = StyleSheet.create({
     },
     elevation: 24,
   },
-  listContentContainer: {
-    flex: 1,
+  cardDetailsContainer: {
+    height: '100%',
+    width: '60%',
+    justifyContent: 'center',
+    paddingLeft: perfectSize(20),
+  },
+  cardTitle: {
+    color: colors.primaryLightColor,
+    fontSize: perfectSize(25),
+    fontWeight: 'bold',
+    fontFamily: fonts.avenirHeavy,
+    textAlign: 'justify',
+  },
+  cardDescription: {
+    color: colors.primaryLightColor,
+    fontSize: perfectSize(14),
+    fontFamily: fonts.quicksandRegular,
+    textAlign: 'justify',
+    marginTop: perfectSize(10),
+  },
+  cardImage: {
+    height: '70%',
+    width: '30%',
+    alignSelf: 'center',
   },
 });

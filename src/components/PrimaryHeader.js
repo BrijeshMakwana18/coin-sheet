@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: perfectSize(35),
   },
   headerImage: {
-    height: perfectSize(170),
+    height: perfectSize(130),
     width: perfectSize(200),
     top: perfectSize(-40),
     position: 'absolute',

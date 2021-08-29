@@ -4,10 +4,11 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
+  Image,
   Platform,
   StatusBar,
   DeviceEventEmitter,
+  TouchableOpacity,
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, perfectSize} from '../../theme';
@@ -28,12 +29,27 @@ const mapStateToProps = state => {
 };
 const data = [
   {
+    label: 'Income',
+    image: images.income,
+    description:
+      'This transaction will be counted as your income. It could be your monthly salary or other income which you want to add or track',
+    screenName: 'AddIncome',
     backgroundColor: '#A440F6',
   },
   {
+    label: 'Expense',
+    image: images.expense,
+    description:
+      'This transaction will be counted as your expense. It cound be daily expenses that you should keep track of.',
+    screenName: 'AddExpense',
     backgroundColor: '#FF9478',
   },
   {
+    label: 'Goal',
+    image: images.goal,
+    description:
+      'You should always have a goal in a life CoinSheet will help you keep track of your goals on your fingertips.',
+    screenName: 'AddGoal',
     backgroundColor: '#246BFE',
   },
 ];
@@ -50,15 +66,21 @@ class AddTransaction extends Component {
   };
   renderItem = (item, index) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => this.props.navigation.navigate(item.screenName)}
         style={[
           styles.cardContainer,
           {
             backgroundColor: item.backgroundColor,
             shadowColor: item.backgroundColor,
           },
-        ]}
-      />
+        ]}>
+        <View style={styles.cardDetailsContainer}>
+          <Text style={styles.cardTitle}>{item.label}</Text>
+          <Text style={styles.cardDescription}>{item.description}</Text>
+        </View>
+        <Image source={item.image} style={styles.cardImage} />
+      </TouchableOpacity>
     );
   };
   render() {
@@ -71,15 +93,14 @@ class AddTransaction extends Component {
           barStyle="light-content"
         />
         <View style={styles.container}>
-          <PrimaryHeader
-            onPress={() => this.onBackButtonTapped()}
-            title={headerTitle}
-            leftImage={images.close}
-            rightImage={images.transactionHeader}
-          />
-          {/* <Text onPress={() => this.props.navigation.navigate('AddExpense')}>
-            Transaction
-          </Text> */}
+          <View style={{paddingLeft: perfectSize(23)}}>
+            <PrimaryHeader
+              onPress={() => this.onBackButtonTapped()}
+              title={headerTitle}
+              leftImage={images.close}
+              rightImage={images.transactionHeader}
+            />
+          </View>
           <View style={styles.listContentContainer}>
             <FlatList
               data={data}

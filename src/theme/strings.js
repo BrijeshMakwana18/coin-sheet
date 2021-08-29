@@ -20,7 +20,7 @@ const strings = {
     account: 'Account',
   },
   addTransaction: {
-    headerTitle: 'Add New\nTransaction',
+    headerTitle: 'Add New',
   },
   addExpense: {
     headerTitle: 'Add New \nExpense',
