@@ -8,7 +8,7 @@ import Signup from './Signup';
 import Statistics from './Statistics';
 import Goal from './Goal';
 import Account from './Account';
-import AddExpense from './AddExpense';
+import AddExpense from './AddTransaction/AddExpense';
 import AddTransaction from './AddTransaction';
 
 //Reducers
