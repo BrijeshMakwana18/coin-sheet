@@ -29,4 +29,5 @@ export default images = {
   close: require('../assets/images/close.png'),
   transactionHeader: require('../assets/images/transactionHeader.png'),
   income: require('../assets/images/income.png'),
+  addGoal: require('../assets/images/add-goal.png'),
 };

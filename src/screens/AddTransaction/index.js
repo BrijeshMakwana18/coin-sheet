@@ -34,7 +34,7 @@ const data = [
     description:
       'This transaction will be counted as your income. It could be your monthly salary or other income which you want to add or track',
     screenName: 'AddIncome',
-    backgroundColor: '#A440F6',
+    backgroundColor: '#246BFE',
   },
   {
     label: 'Expense/Debit',
@@ -46,11 +46,11 @@ const data = [
   },
   {
     label: 'Goal',
-    image: images.goal,
+    image: images.addGoal,
     description:
       'You should always have a goal in a life CoinSheet will help you keep track of your goals on your fingertips.',
     screenName: 'AddGoal',
-    backgroundColor: '#246BFE',
+    backgroundColor: '#A440F6',
   },
 ];
 class AddTransaction extends Component {
@@ -79,7 +79,11 @@ class AddTransaction extends Component {
           <Text style={styles.cardTitle}>{item.label}</Text>
           <Text style={styles.cardDescription}>{item.description}</Text>
         </View>
-        <Image source={item.image} style={styles.cardImage} />
+        <Image
+          source={item.image}
+          style={styles.cardImage}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
     );
   };
