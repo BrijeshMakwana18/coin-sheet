@@ -441,7 +441,6 @@ class AddGoal extends Component {
                 ref={input => {
                   this.ammountInput = input;
                 }}
-                onFocus={test => console.log(test)}
               />
             </Animated.View>
             {this.state.isKeyboard && (

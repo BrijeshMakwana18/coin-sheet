@@ -24,16 +24,26 @@ const strings = {
   },
   addIncome: {
     headerTitle: 'Add Income',
-    ammountPlaceholder: 'Ammount',
+    ammountPlaceholder: 'Amount',
     notesPlaceholder: 'Notes ...',
     buttonTitle: 'CONTINUE',
   },
   addExpense: {
     headerTitle: 'Add New \nExpense',
-    ammountPlaceholder: 'Ammount',
+    ammountPlaceholder: 'Amount',
     notesPlaceholder: 'Notes ...',
     selectCat: 'SELECT CATEGORY',
     buttonTitle: 'CONTINUE',
+  },
+  transactionSuccess: {
+    successMessage: 'Your transaction is successfully \nadded to your account',
+    transactionType: 'Transaction type',
+    category: 'Category',
+    date: 'Date',
+    amountHeader: 'Amount',
+    buttonTitle: 'CONTINUE',
+    incomeHeader: 'Income',
+    expenseHeader: 'Expense',
   },
 };
 

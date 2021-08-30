@@ -30,4 +30,5 @@ export default images = {
   transactionHeader: require('../assets/images/transactionHeader.png'),
   income: require('../assets/images/income.png'),
   addGoal: require('../assets/images/add-goal.png'),
+  transactionSuccess: require('../assets/images/transaction-success.png'),
 };

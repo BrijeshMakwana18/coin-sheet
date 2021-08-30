@@ -4,7 +4,13 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {AddTransaction, AddExpense, AddIncome, AddGoal} from '../screens';
+import {
+  AddTransaction,
+  AddExpense,
+  AddIncome,
+  AddGoal,
+  TransactionSuccess,
+} from '../screens';
 import {removeListeners} from '../util/globalMethods';
 const Stack = createStackNavigator();
 
@@ -58,6 +64,11 @@ export default class AddTransactionStack extends Component {
         <Stack.Screen
           name="AddGoal"
           component={AddGoal}
+          options={{header: () => null}}
+        />
+        <Stack.Screen
+          name="TransactionSuccess"
+          component={TransactionSuccess}
           options={{header: () => null}}
         />
       </Stack.Navigator>

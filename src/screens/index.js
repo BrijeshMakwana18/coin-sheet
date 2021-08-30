@@ -12,7 +12,7 @@ import AddTransaction from './AddTransaction';
 import AddExpense from './AddTransaction/AddExpense';
 import AddIncome from './AddTransaction/AddIncome';
 import AddGoal from './AddTransaction/AddGoal';
-
+import TransactionSuccess from './TransactionSuccess';
 //Reducers
 import signupReducer from './Signup/reducer';
 import loginReducer from './Login/reducer';
@@ -29,6 +29,7 @@ export {
   AddExpense,
   AddIncome,
   AddGoal,
+  TransactionSuccess,
 };
 
 export const rootReducer = combineReducers({

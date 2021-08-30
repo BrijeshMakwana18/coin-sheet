@@ -263,7 +263,12 @@ class AddIncome extends Component {
       .doc()
       .set(income)
       .then(() => {
-        console.log('Income added');
+        this.props.navigation.navigate('TransactionSuccess', {
+          isFromIncome: true,
+          amount: ammount,
+          notes: notes,
+          displayDate: displayDate,
+        });
       });
   };
   render() {
@@ -323,7 +328,6 @@ class AddIncome extends Component {
                 ref={input => {
                   this.ammountInput = input;
                 }}
-                onFocus={test => console.log(test)}
               />
             </Animated.View>
             <Animated.View

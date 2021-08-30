@@ -376,7 +376,13 @@ class AddExpense extends Component {
       .doc()
       .set(expense)
       .then(() => {
-        console.log('Expense added');
+        this.props.navigation.navigate('TransactionSuccess', {
+          isFromExpense: true,
+          amount: ammount,
+          notes: notes,
+          displayDate: displayDate,
+          selectedCat: selectedCat,
+        });
       });
   };
   render() {
@@ -441,7 +447,6 @@ class AddExpense extends Component {
                 ref={input => {
                   this.ammountInput = input;
                 }}
-                onFocus={test => console.log(test)}
               />
             </Animated.View>
             {this.state.isKeyboard && (
