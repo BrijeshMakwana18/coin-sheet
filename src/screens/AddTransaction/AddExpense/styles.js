@@ -90,7 +90,7 @@ export default styles = StyleSheet.create({
     marginTop: perfectSize(8),
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: perfectSize(20),
+    borderRadius: perfectSize(10),
   },
   catImage: {
     height: perfectSize(60),
