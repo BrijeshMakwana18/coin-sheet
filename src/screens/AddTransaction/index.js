@@ -5,7 +5,6 @@ import {
   View,
   Text,
   Image,
-  Platform,
   StatusBar,
   DeviceEventEmitter,
   TouchableOpacity,
@@ -17,6 +16,7 @@ import {PrimaryHeader} from '../../components';
 import {strings, images} from '../../theme';
 import styles from './styles';
 import {FlatList} from 'react-native-gesture-handler';
+import {Neomorph} from 'react-native-neomorph-shadows';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({}, dispatch);
@@ -68,22 +68,26 @@ class AddTransaction extends Component {
     return (
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate(item.screenName)}
-        style={[
-          styles.cardContainer,
-          {
-            backgroundColor: item.backgroundColor,
-            shadowColor: item.backgroundColor,
-          },
-        ]}>
-        <View style={styles.cardDetailsContainer}>
-          <Text style={styles.cardTitle}>{item.label}</Text>
-          <Text style={styles.cardDescription}>{item.description}</Text>
-        </View>
-        <Image
-          source={item.image}
-          style={styles.cardImage}
-          resizeMode="contain"
-        />
+        style={styles.cardContainer}>
+        <Neomorph
+          darkShadowColor={item.backgroundColor}
+          lightShadowColor={item.backgroundColor}
+          style={[
+            styles.innerCardContainer,
+            {
+              backgroundColor: item.backgroundColor,
+            },
+          ]}>
+          <View style={styles.cardDetailsContainer}>
+            <Text style={styles.cardTitle}>{item.label}</Text>
+            <Text style={styles.cardDescription}>{item.description}</Text>
+          </View>
+          <Image
+            source={item.image}
+            style={styles.cardImage}
+            resizeMode="contain"
+          />
+        </Neomorph>
       </TouchableOpacity>
     );
   };
@@ -109,7 +113,7 @@ class AddTransaction extends Component {
             <FlatList
               data={data}
               showsVerticalScrollIndicator={false}
-              // contentContainerStyle={styles.listContentContainer}
+              contentContainerStyle={styles.listContentContainer}
               renderItem={({item, index}) => this.renderItem(item, index)}
               keyExtractor={(item, index) => index.toString()}
             />
