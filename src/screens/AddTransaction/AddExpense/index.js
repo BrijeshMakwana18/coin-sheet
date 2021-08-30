@@ -290,18 +290,7 @@ class AddExpense extends Component {
             marginLeft: index % 3 == 0 ? 0 : perfectSize(30),
           },
         ]}>
-        <Image
-          source={item.image}
-          style={[
-            styles.catImage,
-            {
-              tintColor:
-                this.state.selectedCat == item.title
-                  ? colors.primary
-                  : colors.primaryLightColor,
-            },
-          ]}
-        />
+        <Image source={item.image} style={styles.catImage} />
         <Text
           numberOfLines={1}
           style={[

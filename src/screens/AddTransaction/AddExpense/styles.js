@@ -93,12 +93,13 @@ export default styles = StyleSheet.create({
     borderRadius: perfectSize(20),
   },
   catImage: {
-    height: perfectSize(30),
-    width: perfectSize(30),
+    height: perfectSize(60),
+    width: perfectSize(60),
+    resizeMode: 'contain',
   },
   catTitle: {
-    marginTop: '15%',
-    fontSize: perfectSize(15),
+    marginTop: '10%',
+    fontSize: perfectSize(14),
     fontFamily: fonts.quicksandBold,
   },
   //Date picker modal styles
