@@ -5,14 +5,16 @@ import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, perfectSize} from '../../theme';
 import {connect} from 'react-redux';
-
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {setUserData} from './actions';
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({setUserData}, dispatch);
 };
 
 const mapStateToProps = state => {
   return {
-    state: state.signupReducer,
+    appReducer: state.appReducer,
   };
 };
 class Home extends Component {
@@ -21,7 +23,14 @@ class Home extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  getCurrentUserData = async () => {
+    let user = await auth().currentUser;
+    this.props.setUserData(user);
+  };
+
+  componentDidMount() {
+    this.getCurrentUserData();
+  }
 
   render() {
     return (

@@ -16,7 +16,7 @@ import TransactionSuccess from './TransactionSuccess';
 //Reducers
 import signupReducer from './Signup/reducer';
 import loginReducer from './Login/reducer';
-
+import appReducer from './Home/reducer';
 export {
   Home,
   Statistics,
@@ -35,4 +35,5 @@ export {
 export const rootReducer = combineReducers({
   signupReducer,
   loginReducer,
+  appReducer,
 });
