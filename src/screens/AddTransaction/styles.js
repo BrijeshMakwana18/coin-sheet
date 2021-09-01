@@ -26,7 +26,7 @@ export default styles = StyleSheet.create({
   },
   innerCardContainer: {
     shadowOpacity: 0.3,
-    shadowRadius: 10,
+    shadowRadius: 6,
     height: height / 5,
     width: (width * 85) / 100,
     alignSelf: 'center',
