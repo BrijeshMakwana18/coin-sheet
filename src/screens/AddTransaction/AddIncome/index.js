@@ -253,7 +253,7 @@ class AddIncome extends Component {
       ammount: ammount,
       notes: notes,
       displayDate: displayDate,
-      createdAt: new Date(),
+      createdAt: firestore.FieldValue.serverTimestamp(),
     };
     let uid = auth().currentUser.uid;
     await firestore()

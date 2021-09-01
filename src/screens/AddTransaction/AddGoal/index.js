@@ -366,7 +366,7 @@ class AddGoal extends Component {
       notes: notes,
       displayDate: displayDate,
       selectedCat: selectedCat,
-      createdAt: new Date(),
+      createdAt: firestore.FieldValue.serverTimestamp(),
     };
     let uid = auth().currentUser.uid;
     await firestore()
