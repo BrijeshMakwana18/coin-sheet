@@ -15,4 +15,6 @@ export default actionTypes = {
 
   //App (Home)
   SET_USER_DATA: 'SET_USER_DATA',
+  SET_ALL_EXPENSES: 'SET_ALL_EXPENSES',
+  SET_ALL_INCOME: 'SET_ALL_INCOME',
 };

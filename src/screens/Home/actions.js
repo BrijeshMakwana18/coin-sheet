@@ -5,3 +5,15 @@ export const setUserData = user => {
     dispatch({type: actionTypes.SET_USER_DATA, payload: user});
   };
 };
+
+export const setUserExpenses = expenses => {
+  return dispatch => {
+    dispatch({type: actionTypes.SET_ALL_EXPENSES, payload: expenses});
+  };
+};
+
+export const setUserIncome = income => {
+  return dispatch => {
+    dispatch({type: actionTypes.SET_ALL_INCOME, payload: income});
+  };
+};
