@@ -351,7 +351,7 @@ class AddExpense extends Component {
   handleOnSubmit = async () => {
     const {ammount, notes, displayDate, selectedCat} = this.state;
     const expense = {
-      ammount: ammount,
+      ammount: parseFloat(ammount),
       notes: notes,
       displayDate: displayDate,
       selectedCat: selectedCat,
@@ -367,7 +367,7 @@ class AddExpense extends Component {
       .then(() => {
         this.props.navigation.navigate('TransactionSuccess', {
           isFromExpense: true,
-          amount: ammount,
+          amount: parseFloat(ammount),
           notes: notes,
           displayDate: displayDate,
           selectedCat: selectedCat,

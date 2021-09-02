@@ -250,7 +250,7 @@ class AddIncome extends Component {
   handleOnSubmit = async () => {
     const {ammount, notes, displayDate} = this.state;
     const income = {
-      ammount: ammount,
+      ammount: parseFloat(ammount),
       notes: notes,
       displayDate: displayDate,
       createdAt: firestore.FieldValue.serverTimestamp(),
@@ -265,7 +265,7 @@ class AddIncome extends Component {
       .then(() => {
         this.props.navigation.navigate('TransactionSuccess', {
           isFromIncome: true,
-          amount: ammount,
+          amount: parseFloat(ammount),
           notes: notes,
           displayDate: displayDate,
         });
