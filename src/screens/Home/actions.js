@@ -6,14 +6,26 @@ export const setUserData = user => {
   };
 };
 
+export const setUserIncome = income => {
+  return dispatch => {
+    dispatch({type: actionTypes.SET_ALL_INCOME, payload: income});
+  };
+};
+
 export const setUserExpenses = expenses => {
   return dispatch => {
     dispatch({type: actionTypes.SET_ALL_EXPENSES, payload: expenses});
   };
 };
 
-export const setUserIncome = income => {
+export const setTotalIncome = totalIncome => {
   return dispatch => {
-    dispatch({type: actionTypes.SET_ALL_INCOME, payload: income});
+    dispatch({type: actionTypes.SET_TOTAL_INCOME, payload: totalIncome});
+  };
+};
+
+export const setTotalExpenses = totalExpenses => {
+  return dispatch => {
+    dispatch({type: actionTypes.SET_TOTAL_EXPENSES, payload: totalExpenses});
   };
 };

@@ -7,11 +7,23 @@ import {colors, perfectSize} from '../../theme';
 import {connect} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {setUserData, setUserExpenses, setUserIncome} from './actions';
+import {
+  setUserData,
+  setUserIncome,
+  setUserExpenses,
+  setTotalIncome,
+  setTotalExpenses,
+} from './actions';
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    {setUserData, setUserExpenses, setUserIncome},
+    {
+      setUserData,
+      setUserIncome,
+      setUserExpenses,
+      setTotalIncome,
+      setTotalExpenses,
+    },
     dispatch,
   );
 };
@@ -24,9 +36,7 @@ const mapStateToProps = state => {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      label: 'test',
-    };
+    this.state = {};
   }
 
   getCurrentUserData = async () => {
@@ -44,15 +54,17 @@ class Home extends Component {
       .onSnapshot(async documentSnapshot => {
         let tempAllExpenses = [];
         documentSnapshot.forEach(async doc => {
-          let tempExpense = await doc.data();
+          let tempExpense = doc.data();
           if (!tempAllExpenses.includes(tempExpense)) {
             tempAllExpenses.push(tempExpense);
           }
         });
-        await this.props.setUserExpenses(tempAllExpenses);
+        let totalExpense = this.getTransactionSum(tempAllExpenses);
+        this.props.setUserExpenses(tempAllExpenses);
+        this.props.setTotalExpenses(totalExpense);
       });
 
-    this.userExpenses = await firestore()
+    this.userIncome = await firestore()
       .collection('transactions')
       .doc(userId)
       .collection('income')
@@ -65,8 +77,8 @@ class Home extends Component {
           }
         });
         let totalIncome = this.getTransactionSum(tempAllIncome);
-        console.log(totalIncome, 'a');
-        await this.props.setUserIncome(tempAllIncome);
+        this.props.setUserIncome(tempAllIncome);
+        this.props.setTotalIncome(totalIncome);
       });
   };
 
@@ -84,10 +96,11 @@ class Home extends Component {
 
   componentWillUnmount() {
     this.userExpenses();
-    this.userExpenses();
+    this.userIncome();
   }
 
   render() {
+    const {totalExpenses, totalIncome} = this.props.appReducer;
     return (
       <>
         <StatusBar
@@ -97,7 +110,10 @@ class Home extends Component {
         />
         <View style={styles.container}>
           <Text onPress={() => console.log(this.props.appReducer)}>
-            {this.state.label}
+            {totalIncome}
+          </Text>
+          <Text onPress={() => console.log(this.props.appReducer)}>
+            {totalExpenses}
           </Text>
         </View>
       </>
