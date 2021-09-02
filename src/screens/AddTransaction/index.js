@@ -34,7 +34,7 @@ const data = [
     description:
       'This transaction will be counted as your income. It could be your monthly salary or other income which you want to add or track',
     screenName: 'AddIncome',
-    backgroundColor: '#246BFE',
+    backgroundColor: colors.primary,
   },
   {
     label: 'Expense/Debit',
@@ -42,7 +42,7 @@ const data = [
     description:
       'This transaction will be counted as your expense. It cound be daily expenses that you should keep track of.',
     screenName: 'AddExpense',
-    backgroundColor: '#FF9478',
+    backgroundColor: colors.primary,
   },
   {
     label: 'Goal',
@@ -50,7 +50,7 @@ const data = [
     description:
       'You should always have a goal in a life CoinSheet will help you keep track of your goals on your fingertips.',
     screenName: 'AddGoal',
-    backgroundColor: '#A440F6',
+    backgroundColor: colors.primary,
   },
 ];
 class AddTransaction extends Component {
