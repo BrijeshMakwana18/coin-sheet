@@ -6,6 +6,7 @@ const initialState = {
   allIncome: {},
   totalExpenses: 0,
   totalIncome: 0,
+  totalExpensesByCategoty: {},
 };
 
 appReducer = (state = initialState, action) => {
@@ -20,6 +21,8 @@ appReducer = (state = initialState, action) => {
       return {...state, totalIncome: action.payload};
     case actionTypes.SET_TOTAL_EXPENSES:
       return {...state, totalExpenses: action.payload};
+    case actionTypes.SET_TOTAL_EXPENSES_CAT:
+      return {...state, totalExpensesByCategoty: action.payload};
     default:
       return state;
   }

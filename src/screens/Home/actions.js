@@ -29,3 +29,11 @@ export const setTotalExpenses = totalExpenses => {
     dispatch({type: actionTypes.SET_TOTAL_EXPENSES, payload: totalExpenses});
   };
 };
+export const setTotalExpensesByCat = totalExpensesByCat => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.SET_TOTAL_EXPENSES_CAT,
+      payload: totalExpensesByCat,
+    });
+  };
+};
