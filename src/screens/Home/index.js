@@ -1,9 +1,9 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native';
+import {View, Text, Platform, StatusBar, Image} from 'react-native';
 import {bindActionCreators} from 'redux';
-import {colors, perfectSize} from '../../theme';
+import {colors, images, perfectSize, strings} from '../../theme';
 import {connect} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -15,7 +15,7 @@ import {
   setTotalExpenses,
   setTotalExpensesByCat,
 } from './actions';
-
+import styles from './styles';
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -263,8 +263,14 @@ class Home extends Component {
   }
 
   render() {
-    const {totalExpenses, totalIncome, totalExpensesByCategoty} =
+    const {totalExpenses, totalIncome, totalExpensesByCategoty, user} =
       this.props.appReducer;
+    const {
+      headerTitle,
+      dashboardIncomeTitle,
+      dashboardExpenseTitle,
+      dashboardHeader,
+    } = strings.home;
     return (
       <>
         <StatusBar
@@ -272,37 +278,66 @@ class Home extends Component {
           backgroundColor={colors.backgroundColor}
           barStyle="light-content"
         />
-        <View style={styles.container}>
-          <Text
-            style={{
-              color: colors.primaryLightColor,
-              fontSize: perfectSize(20),
-            }}
-            onPress={() => console.log(this.props.appReducer)}>
-            Income {totalIncome}
-          </Text>
-          <Text
-            style={{
-              color: colors.primaryLightColor,
-              fontSize: perfectSize(20),
-            }}>
-            Expenses {totalExpenses}
-          </Text>
+        <View
+          style={[
+            styles.container,
+            {
+              paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
+            },
+          ]}>
+          <View style={styles.headerContainer}>
+            <View style={styles.headerTitleContainer}>
+              <Text style={styles.headerTitle}>
+                {headerTitle}Brijesh
+                {/* {user.displayName ? user.displayName : user.email} */}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.dashboardContainer}>
+            <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: '5%',
+              }}>
+              <View style={styles.incomeContainer}>
+                <View style={styles.arrowContainer}>
+                  <Image source={images.downArrow} style={styles.arrow} />
+                </View>
+                <View>
+                  <Text style={styles.dashboardIncomeHeaderStyle}>
+                    {dashboardIncomeTitle}
+                  </Text>
+                  <Text style={styles.dashboardIncomeStyle}>{totalIncome}</Text>
+                </View>
+              </View>
+              <View style={styles.expenseContainer}>
+                <View
+                  style={[
+                    styles.arrowContainer,
+                    {backgroundColor: 'rgba(255,179,25,0.2)'},
+                  ]}>
+                  <Image
+                    source={images.upArrow}
+                    style={[styles.arrow, {tintColor: 'rgb(255,179,25)'}]}
+                  />
+                </View>
+                <View>
+                  <Text style={styles.dashboardExpenseHeaderStyle}>
+                    {dashboardExpenseTitle}
+                  </Text>
+                  <Text style={styles.dashboardExpenseStyle}>
+                    {totalExpenses}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
         </View>
       </>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
-    padding: perfectSize(23),
-    backgroundColor: colors.backgroundColor,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

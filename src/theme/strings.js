@@ -45,6 +45,12 @@ const strings = {
     incomeHeader: 'Income',
     expenseHeader: 'Expense',
   },
+  home: {
+    headerTitle: 'Hey, ',
+    dashboardHeader: 'Transaction overview',
+    dashboardIncomeTitle: 'Income',
+    dashboardExpenseTitle: 'Expense',
+  },
 };
 
 export default strings;
