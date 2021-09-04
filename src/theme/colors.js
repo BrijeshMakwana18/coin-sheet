@@ -1,6 +1,6 @@
 const colors = {
   //Screen background color across the app
-  backgroundColor: '#111416',
+  backgroundColor: '#1E1E1E',
   //Light color across the app (Label title, Button background)
   primaryLightColor: 'white',
   //Primary color accross the app (Calendar picker background, Selected label title)
@@ -18,7 +18,7 @@ const colors = {
   //Inavtive tab icon color
   inactiveTabColor: '#607A92',
   //Tab bar background color
-  tabBarBackgroundColor: '#000000',
+  tabBarBackgroundColor: '#222222',
   //Primay tint color
   primaryTintColor: 'rgba(255,255,255,0.7)',
   //Add button background in bottom tab
