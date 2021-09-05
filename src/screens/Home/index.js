@@ -1,7 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 import React, {Component} from 'react';
-import {View, Text, Platform, StatusBar, Image} from 'react-native';
+import {
+  View,
+  Text,
+  Platform,
+  StatusBar,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, images, perfectSize, strings} from '../../theme';
 import {connect} from 'react-redux';
@@ -169,8 +178,8 @@ class Home extends Component {
     ];
     for (let i = 0; i < expenses.length; i++) {
       let tempExpense = expenses[i];
-      switch (tempExpense.selectedCat) {
-        case 'Food':
+      switch (tempExpense.selectedCat.toLowerCase()) {
+        case 'food':
           let catFood = element => element.category == 'food';
           let indexOfFood = filteredExpenses.findIndex(catFood);
           if (!filteredExpenses[indexOfFood].data.includes(tempExpense)) {
@@ -180,7 +189,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Cash':
+        case 'cash':
           let catCash = element => element.category == 'cash';
           let indexOfCash = filteredExpenses.findIndex(catCash);
           if (!filteredExpenses[indexOfCash].data.includes(tempExpense)) {
@@ -190,7 +199,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Transfer':
+        case 'transfer':
           let catTransfer = element => element.category == 'transfer';
           let indexOfTransfer = filteredExpenses.findIndex(catTransfer);
           if (!filteredExpenses[indexOfTransfer].data.includes(tempExpense)) {
@@ -200,7 +209,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Entertainment':
+        case 'entertainment':
           let catEntertainment = element => element.category == 'entertainment';
           let indexOfEntertainment =
             filteredExpenses.findIndex(catEntertainment);
@@ -213,7 +222,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Fuel':
+        case 'fuel':
           let catFuel = element => element.category == 'fuel';
           let indexOfFuel = filteredExpenses.findIndex(catFuel);
           if (!filteredExpenses[indexOfFuel].data.includes(tempExpense)) {
@@ -223,7 +232,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Groceries':
+        case 'groceries':
           let catGroceries = element => element.category == 'groceries';
           let indexOfGroceries = filteredExpenses.findIndex(catGroceries);
           if (!filteredExpenses[indexOfGroceries].data.includes(tempExpense)) {
@@ -233,7 +242,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Investment':
+        case 'investment':
           let catInvestment = element => element.category == 'investment';
           let indexOfInvestment = filteredExpenses.findIndex(catInvestment);
           if (!filteredExpenses[indexOfInvestment].data.includes(tempExpense)) {
@@ -243,7 +252,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Loans':
+        case 'loans':
           let catLoans = element => element.category == 'loans';
           let indexOfLoans = filteredExpenses.findIndex(catLoans);
           if (!filteredExpenses[indexOfLoans].data.includes(tempExpense)) {
@@ -253,7 +262,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Medical':
+        case 'medical':
           let catMedical = element => element.category == 'medical';
           let indexOfMedical = filteredExpenses.findIndex(catMedical);
           if (!filteredExpenses[indexOfMedical].data.includes(tempExpense)) {
@@ -263,7 +272,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Shopping':
+        case 'shopping':
           let catShopping = element => element.category == 'shopping';
           let indexOfShopping = filteredExpenses.findIndex(catShopping);
           if (!filteredExpenses[indexOfShopping].data.includes(tempExpense)) {
@@ -273,7 +282,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Travel':
+        case 'travel':
           let catTravel = element => element.category == 'travel';
           let indexOfTravel = filteredExpenses.findIndex(catTravel);
           if (!filteredExpenses[indexOfTravel].data.includes(tempExpense)) {
@@ -283,7 +292,7 @@ class Home extends Component {
               parseFloat(tempExpense.ammount);
           }
           break;
-        case 'Other':
+        case 'other':
           let catOther = element => element.category == 'other';
           let indexOfOther = filteredExpenses.findIndex(catOther);
           if (!filteredExpenses[indexOfOther].data.includes(tempExpense)) {
@@ -310,7 +319,69 @@ class Home extends Component {
     this.userExpenses();
     this.userIncome();
   }
-
+  renderTopCategories = (item, index) => {
+    if (item.total == 0 || index > 3) {
+      return null;
+    } else {
+      if (index < 3) {
+        let cat = item.category;
+        return (
+          <TouchableOpacity
+            onPress={() => {}}
+            style={[
+              styles.catContainer,
+              {
+                backgroundColor: colors.expenseCatColors[cat].backgroundColor,
+                marginLeft: '3.33%',
+                marginTop: index > 1 ? '3.33%' : 0,
+              },
+            ]}>
+            <View
+              style={[
+                styles.catImageContainer,
+                {
+                  backgroundColor: colors.expenseCatColors[cat].tintColor,
+                },
+              ]}>
+              <Image source={images[item.category]} style={styles.catImage} />
+            </View>
+            <Text numberOfLines={1} style={styles.catTitle}>
+              {item.category.toUpperCase()}
+            </Text>
+            <Text numberOfLines={1} style={styles.catTotalExpense}>
+              {item.total}
+            </Text>
+          </TouchableOpacity>
+        );
+      } else if (index == 3) {
+        return (
+          <TouchableOpacity
+            onPress={() => {}}
+            style={[
+              styles.catContainer,
+              {
+                backgroundColor: colors.primaryWithLightOpacity,
+                marginLeft: '3.33%',
+                marginTop: '3.33%',
+              },
+            ]}>
+            <View
+              style={[
+                styles.catImageContainer,
+                {
+                  backgroundColor: colors.primary,
+                },
+              ]}>
+              <Image source={images.rightArrow} style={styles.catImage} />
+            </View>
+            <Text numberOfLines={1} style={styles.catTitle}>
+              {strings.home.seeAll}
+            </Text>
+          </TouchableOpacity>
+        );
+      }
+    }
+  };
   render() {
     const {totalExpenses, totalIncome, totalExpensesByCategoty, user} =
       this.props.appReducer;
@@ -319,6 +390,7 @@ class Home extends Component {
       dashboardIncomeTitle,
       dashboardExpenseTitle,
       dashboardHeader,
+      topCatHeader,
     } = strings.home;
     return (
       <>
@@ -346,15 +418,10 @@ class Home extends Component {
           </View>
           <View style={styles.dashboardContainer}>
             <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginTop: '5%',
-              }}>
+            <View style={styles.dashboardInnerContainer}>
               <View style={styles.incomeContainer}>
-                <View style={styles.arrowContainer}>
-                  <Image source={images.downArrow} style={styles.arrow} />
+                <View style={styles.downArrowContainer}>
+                  <Image source={images.downArrow} style={styles.downArrow} />
                 </View>
                 <View>
                   <Text style={styles.dashboardIncomeHeaderStyle}>
@@ -364,15 +431,8 @@ class Home extends Component {
                 </View>
               </View>
               <View style={styles.expenseContainer}>
-                <View
-                  style={[
-                    styles.arrowContainer,
-                    {backgroundColor: 'rgba(255,179,25,0.2)'},
-                  ]}>
-                  <Image
-                    source={images.upArrow}
-                    style={[styles.arrow, {tintColor: 'rgb(255,179,25)'}]}
-                  />
+                <View style={styles.upArrowContainer}>
+                  <Image source={images.upArrow} style={styles.upArrow} />
                 </View>
                 <View>
                   <Text style={styles.dashboardExpenseHeaderStyle}>
@@ -384,6 +444,20 @@ class Home extends Component {
                 </View>
               </View>
             </View>
+          </View>
+          <View style={styles.topCatContainer}>
+            <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+            <FlatList
+              data={totalExpensesByCategoty}
+              showsVerticalScrollIndicator={false}
+              numColumns={2}
+              scrollEnabled={false}
+              style={styles.topCatListContainer}
+              renderItem={({item, index}) =>
+                this.renderTopCategories(item, index)
+              }
+              keyExtractor={(item, index) => index.toString()}
+            />
           </View>
         </View>
       </>

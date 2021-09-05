@@ -50,6 +50,8 @@ const strings = {
     dashboardHeader: 'Transaction overview',
     dashboardIncomeTitle: 'Income',
     dashboardExpenseTitle: 'Expense',
+    topCatHeader: 'Top categories',
+    seeAll: 'See all',
   },
 };
 

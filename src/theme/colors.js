@@ -3,10 +3,12 @@ const colors = {
   backgroundColor: '#1E1E1E',
   //Primary card background color (Cards used in home screen)
   primaryCardBackgroundColor: '#282828',
+  secondaryCardBackgroundColor: '#222222',
   //Light color across the app (Label title, Button background)
   primaryLightColor: 'white',
   //Primary color accross the app (Calendar picker background, Selected label title)
   primary: '#7E7BD6',
+  primaryWithLightOpacity: 'rgba(126,123,214,0.9)',
   //Modal background color accross the app (Calendar picker modal background)
   modalBackgroundColor: 'rgba(1,1,1,0.7)',
   //Textinput background color
@@ -25,6 +27,56 @@ const colors = {
   primaryTintColor: 'rgba(255,255,255,0.7)',
   //Add button background in bottom tab
   addTransactionButtonColor: '#246BFE',
+  expenseCatColors: {
+    food: {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    cash: {
+      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(7,158,213,0.9)',
+    },
+    transfer: {
+      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(141,95,239,0.9)',
+    },
+    entertainment: {
+      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(246,113,97,0.9)',
+    },
+    fuel: {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    groceries: {
+      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(7,158,213,0.9)',
+    },
+    investment: {
+      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(141,95,239,0.9)',
+    },
+    loans: {
+      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(246,113,97,0.9)',
+    },
+    medical: {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    shopping: {
+      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(7,158,213,0.9)',
+    },
+    travel: {
+      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(141,95,239,0.9)',
+    },
+    other: {
+      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(246,113,97,0.9)',
+    },
+  },
 };
 
 export default colors;

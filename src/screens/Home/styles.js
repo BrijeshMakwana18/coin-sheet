@@ -11,8 +11,6 @@ export default styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     marginTop: perfectSize(10),
-
-    // backgroundColor: 'green',
   },
   headerTitleContainer: {},
   headerTitle: {
@@ -44,6 +42,11 @@ export default styles = StyleSheet.create({
     fontFamily: fonts.quicksandBold,
     color: colors.primaryLightColor,
   },
+  dashboardInnerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: '5%',
+  },
   incomeContainer: {
     height: '100%',
     width: '45%',
@@ -62,7 +65,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
-  arrowContainer: {
+  downArrowContainer: {
     height: perfectSize(50),
     width: perfectSize(50),
     alignItems: 'center',
@@ -70,11 +73,25 @@ export default styles = StyleSheet.create({
     backgroundColor: 'rgba(128,237,153,0.2)',
     borderRadius: perfectSize(10),
   },
-  arrow: {
+  downArrow: {
     height: perfectSize(25),
     width: perfectSize(25),
     resizeMode: 'contain',
     tintColor: 'rgb(128,237,153)',
+  },
+  upArrowContainer: {
+    height: perfectSize(50),
+    width: perfectSize(50),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: perfectSize(10),
+    backgroundColor: 'rgba(255,179,25,0.2)',
+  },
+  upArrow: {
+    tintColor: 'rgb(255,179,25)',
+    height: perfectSize(25),
+    width: perfectSize(25),
+    resizeMode: 'contain',
   },
   dashboardIncomeHeaderStyle: {
     color: colors.primaryLightColor,
@@ -99,5 +116,57 @@ export default styles = StyleSheet.create({
     color: colors.primaryLightColor,
     fontFamily: fonts.quicksandBold,
     fontSize: perfectSize(18),
+  },
+  topCatContainer: {
+    width: '100%',
+    backgroundColor: colors.primaryCardBackgroundColor,
+    borderRadius: perfectSize(20),
+    marginTop: '5%',
+  },
+  topCatHeader: {
+    fontSize: perfectSize(18),
+    fontFamily: fonts.quicksandBold,
+    color: colors.primaryLightColor,
+    padding: perfectSize(20),
+  },
+  topCatListContainer: {
+    paddingBottom: '3.33%',
+  },
+  expenseCatContainer: {
+    alignItems: 'center',
+    backgroundColor: colors.primaryCardBackgroundColor,
+  },
+  //Category list styles
+  catContainer: {
+    height: perfectSize(200),
+    width: '45%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: perfectSize(20),
+  },
+  catImageContainer: {
+    height: perfectSize(70),
+    width: perfectSize(70),
+    borderRadius: perfectSize(35),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  catImage: {
+    height: '50%',
+    width: '50%',
+    resizeMode: 'contain',
+    tintColor: colors.primaryLightColor,
+  },
+  catTitle: {
+    marginTop: '20%',
+    fontSize: perfectSize(18),
+    color: colors.primaryLightColor,
+    fontFamily: fonts.quicksandBold,
+  },
+  catTotalExpense: {
+    // marginTop: '5%',
+    fontSize: perfectSize(18),
+    color: colors.primaryLightColor,
+    fontFamily: fonts.quicksandBold,
   },
 });
