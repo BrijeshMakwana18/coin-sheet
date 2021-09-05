@@ -22,9 +22,8 @@ export default function AppStack() {
           alignItems: 'center',
           justifyContent: 'center',
           position: 'absolute',
-          borderTopWidth: 0,
-          borderTopRightRadius: perfectSize(15),
-          borderTopLeftRadius: perfectSize(15),
+          borderTopWidth: perfectSize(0.5),
+          borderTopColor: 'rgba(255,255,255,0.1)',
         },
       }}>
       <Tab.Screen
