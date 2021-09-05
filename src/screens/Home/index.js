@@ -105,150 +105,199 @@ class Home extends Component {
 
   //To calculate sum of different categories expenses and to filter them
   filterExpensesCat = expenses => {
-    let filteredExpenses = {
-      food: {
+    let filteredExpenses = [
+      {
+        category: 'food',
         total: 0,
         data: [],
       },
-      cash: {
+      {
+        category: 'cash',
         total: 0,
         data: [],
       },
-      transfer: {
+      {
+        category: 'transfer',
         total: 0,
         data: [],
       },
-      entertainment: {
+      {
+        category: 'entertainment',
         total: 0,
         data: [],
       },
-      fuel: {
+      {
+        category: 'fuel',
         total: 0,
         data: [],
       },
-      groceries: {
+      {
+        category: 'groceries',
         total: 0,
         data: [],
       },
-      investment: {
+      {
+        category: 'investment',
         total: 0,
         data: [],
       },
-      loans: {
+      {
+        category: 'loans',
         total: 0,
         data: [],
       },
-      medical: {
+      {
+        category: 'medical',
         total: 0,
         data: [],
       },
-      shopping: {
+      {
+        category: 'shopping',
         total: 0,
         data: [],
       },
-      travel: {
+      {
+        category: 'travel',
         total: 0,
         data: [],
       },
-      other: {
+      {
+        category: 'other',
         total: 0,
         data: [],
       },
-    };
+    ];
     for (let i = 0; i < expenses.length; i++) {
       let tempExpense = expenses[i];
       switch (tempExpense.selectedCat) {
         case 'Food':
-          if (!filteredExpenses.food.data.includes(tempExpense)) {
-            filteredExpenses.food.data.push(tempExpense);
-            filteredExpenses.food.total =
-              filteredExpenses.food.total + parseFloat(tempExpense.ammount);
+          let catFood = element => element.category == 'food';
+          let indexOfFood = filteredExpenses.findIndex(catFood);
+          if (!filteredExpenses[indexOfFood].data.includes(tempExpense)) {
+            filteredExpenses[indexOfFood].data.push(tempExpense);
+            filteredExpenses[indexOfFood].total =
+              filteredExpenses[indexOfFood].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Cash':
-          if (!filteredExpenses.cash.data.includes(tempExpense)) {
-            filteredExpenses.cash.data.push(tempExpense);
-            filteredExpenses.cash.total =
-              filteredExpenses.cash.total + parseFloat(tempExpense.ammount);
+          let catCash = element => element.category == 'cash';
+          let indexOfCash = filteredExpenses.findIndex(catCash);
+          if (!filteredExpenses[indexOfCash].data.includes(tempExpense)) {
+            filteredExpenses[indexOfCash].data.push(tempExpense);
+            filteredExpenses[indexOfCash].total =
+              filteredExpenses[indexOfCash].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Transfer':
-          if (!filteredExpenses.transfer.data.includes(tempExpense)) {
-            filteredExpenses.transfer.data.push(tempExpense);
-            filteredExpenses.transfer.total =
-              filteredExpenses.transfer.total + parseFloat(tempExpense.ammount);
+          let catTransfer = element => element.category == 'transfer';
+          let indexOfTransfer = filteredExpenses.findIndex(catTransfer);
+          if (!filteredExpenses[indexOfTransfer].data.includes(tempExpense)) {
+            filteredExpenses[indexOfTransfer].data.push(tempExpense);
+            filteredExpenses[indexOfTransfer].total =
+              filteredExpenses[indexOfTransfer].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Entertainment':
-          if (!filteredExpenses.entertainment.data.includes(tempExpense)) {
-            filteredExpenses.entertainment.data.push(tempExpense);
-            filteredExpenses.entertainment.total =
-              filteredExpenses.entertainment.total +
+          let catEntertainment = element => element.category == 'entertainment';
+          let indexOfEntertainment =
+            filteredExpenses.findIndex(catEntertainment);
+          if (
+            !filteredExpenses[indexOfEntertainment].data.includes(tempExpense)
+          ) {
+            filteredExpenses[indexOfEntertainment].data.push(tempExpense);
+            filteredExpenses[indexOfEntertainment].total =
+              filteredExpenses[indexOfEntertainment].total +
               parseFloat(tempExpense.ammount);
           }
           break;
         case 'Fuel':
-          if (!filteredExpenses.fuel.data.includes(tempExpense)) {
-            filteredExpenses.fuel.data.push(tempExpense);
-            filteredExpenses.fuel.total =
-              filteredExpenses.fuel.total + parseFloat(tempExpense.ammount);
+          let catFuel = element => element.category == 'fuel';
+          let indexOfFuel = filteredExpenses.findIndex(catFuel);
+          if (!filteredExpenses[indexOfFuel].data.includes(tempExpense)) {
+            filteredExpenses[indexOfFuel].data.push(tempExpense);
+            filteredExpenses[indexOfFuel].total =
+              filteredExpenses[indexOfFuel].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Groceries':
-          if (!filteredExpenses.groceries.data.includes(tempExpense)) {
-            filteredExpenses.groceries.data.push(tempExpense);
-            filteredExpenses.groceries.total =
-              filteredExpenses.groceries.total +
+          let catGroceries = element => element.category == 'groceries';
+          let indexOfGroceries = filteredExpenses.findIndex(catGroceries);
+          if (!filteredExpenses[indexOfGroceries].data.includes(tempExpense)) {
+            filteredExpenses[indexOfGroceries].data.push(tempExpense);
+            filteredExpenses[indexOfGroceries].total =
+              filteredExpenses[indexOfGroceries].total +
               parseFloat(tempExpense.ammount);
           }
           break;
         case 'Investment':
-          if (!filteredExpenses.investment.data.includes(tempExpense)) {
-            filteredExpenses.investment.data.push(tempExpense);
-            filteredExpenses.investment.total =
-              filteredExpenses.investment.total +
+          let catInvestment = element => element.category == 'investment';
+          let indexOfInvestment = filteredExpenses.findIndex(catInvestment);
+          if (!filteredExpenses[indexOfInvestment].data.includes(tempExpense)) {
+            filteredExpenses[indexOfInvestment].data.push(tempExpense);
+            filteredExpenses[indexOfInvestment].total =
+              filteredExpenses[indexOfInvestment].total +
               parseFloat(tempExpense.ammount);
           }
           break;
         case 'Loans':
-          if (!filteredExpenses.loans.data.includes(tempExpense)) {
-            filteredExpenses.loans.data.push(tempExpense);
-            filteredExpenses.loans.total =
-              filteredExpenses.loans.total + parseFloat(tempExpense.ammount);
+          let catLoans = element => element.category == 'loans';
+          let indexOfLoans = filteredExpenses.findIndex(catLoans);
+          if (!filteredExpenses[indexOfLoans].data.includes(tempExpense)) {
+            filteredExpenses[indexOfLoans].data.push(tempExpense);
+            filteredExpenses[indexOfLoans].total =
+              filteredExpenses[indexOfLoans].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Medical':
-          if (!filteredExpenses.medical.data.includes(tempExpense)) {
-            filteredExpenses.medical.data.push(tempExpense);
-            filteredExpenses.medical.total =
-              filteredExpenses.medical.total + parseFloat(tempExpense.ammount);
+          let catMedical = element => element.category == 'medical';
+          let indexOfMedical = filteredExpenses.findIndex(catMedical);
+          if (!filteredExpenses[indexOfMedical].data.includes(tempExpense)) {
+            filteredExpenses[indexOfMedical].data.push(tempExpense);
+            filteredExpenses[indexOfMedical].total =
+              filteredExpenses[indexOfMedical].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Shopping':
-          if (!filteredExpenses.shopping.data.includes(tempExpense)) {
-            filteredExpenses.shopping.data.push(tempExpense);
-            filteredExpenses.shopping.total =
-              filteredExpenses.shopping.total + parseFloat(tempExpense.ammount);
+          let catShopping = element => element.category == 'shopping';
+          let indexOfShopping = filteredExpenses.findIndex(catShopping);
+          if (!filteredExpenses[indexOfShopping].data.includes(tempExpense)) {
+            filteredExpenses[indexOfShopping].data.push(tempExpense);
+            filteredExpenses[indexOfShopping].total =
+              filteredExpenses[indexOfShopping].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Travel':
-          if (!filteredExpenses.travel.data.includes(tempExpense)) {
-            filteredExpenses.travel.data.push(tempExpense);
-            filteredExpenses.travel.total =
-              filteredExpenses.travel.total + parseFloat(tempExpense.ammount);
+          let catTravel = element => element.category == 'travel';
+          let indexOfTravel = filteredExpenses.findIndex(catTravel);
+          if (!filteredExpenses[indexOfTravel].data.includes(tempExpense)) {
+            filteredExpenses[indexOfTravel].data.push(tempExpense);
+            filteredExpenses[indexOfTravel].total =
+              filteredExpenses[indexOfTravel].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         case 'Other':
-          if (!filteredExpenses.other.data.includes(tempExpense)) {
-            filteredExpenses.other.data.push(tempExpense);
-            filteredExpenses.other.total =
-              filteredExpenses.other.total + parseFloat(tempExpense.ammount);
+          let catOther = element => element.category == 'other';
+          let indexOfOther = filteredExpenses.findIndex(catOther);
+          if (!filteredExpenses[indexOfOther].data.includes(tempExpense)) {
+            filteredExpenses[indexOfOther].data.push(tempExpense);
+            filteredExpenses[indexOfOther].total =
+              filteredExpenses[indexOfOther].total +
+              parseFloat(tempExpense.ammount);
           }
           break;
         default:
           break;
       }
     }
+    // for(let i = 0; i< filteredExpenses.)
     this.props.setTotalExpensesByCat(filteredExpenses);
   };
 
@@ -287,7 +336,9 @@ class Home extends Component {
           ]}>
           <View style={styles.headerContainer}>
             <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>
+              <Text
+                onPress={() => console.log(this.props.appReducer)}
+                style={styles.headerTitle}>
                 {headerTitle}Brijesh
                 {/* {user.displayName ? user.displayName : user.email} */}
               </Text>
