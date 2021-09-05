@@ -2,11 +2,12 @@
 import {actionTypes} from '../../util';
 const initialState = {
   user: {},
-  allExpenses: {},
-  allIncome: {},
+  allExpenses: [],
+  allIncome: [],
   totalExpenses: 0,
   totalIncome: 0,
   totalExpensesByCategoty: [],
+  allTransactions: [],
 };
 
 appReducer = (state = initialState, action) => {
@@ -23,6 +24,8 @@ appReducer = (state = initialState, action) => {
       return {...state, totalExpenses: action.payload};
     case actionTypes.SET_TOTAL_EXPENSES_CAT:
       return {...state, totalExpensesByCategoty: action.payload};
+    case actionTypes.SET_ALL_TRANSACTIONS:
+      return {...state, allTransactions: action.payload};
     default:
       return state;
   }

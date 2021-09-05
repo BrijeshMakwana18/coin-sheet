@@ -23,6 +23,7 @@ import {
   setTotalIncome,
   setTotalExpenses,
   setTotalExpensesByCat,
+  setAllTransactions,
 } from './actions';
 import styles from './styles';
 const mapDispatchToProps = dispatch => {
@@ -34,6 +35,7 @@ const mapDispatchToProps = dispatch => {
       setTotalIncome,
       setTotalExpenses,
       setTotalExpensesByCat,
+      setAllTransactions,
     },
     dispatch,
   );
@@ -47,11 +49,16 @@ const mapStateToProps = state => {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isLoding: false,
+    };
   }
 
   //Fetching current user and storing it into store
   getCurrentUserData = async () => {
+    this.setState({
+      isLoding: true,
+    });
     let user = await auth().currentUser;
     this.props.setUserData(user);
     //To fetch expenses and income from transactions collection
@@ -80,6 +87,7 @@ class Home extends Component {
         this.props.setUserExpenses(tempAllExpenses);
         this.props.setTotalExpenses(totalExpense);
         this.filterExpensesCat(tempAllExpenses);
+        await this.generateAllTransactions();
       });
     //Fetching all income
     this.userIncome = await firestore()
@@ -100,7 +108,23 @@ class Home extends Component {
         //Storing income into store
         this.props.setUserIncome(tempAllIncome);
         this.props.setTotalIncome(totalIncome);
+        await this.generateAllTransactions();
       });
+  };
+
+  //To create an array of all transactions
+  generateAllTransactions = () => {
+    let {allExpenses, allIncome} = this.props.appReducer;
+    let allCreditTransactions = allIncome;
+    let allDebitTransactions = allExpenses;
+    let allTransactions = allCreditTransactions.concat(allDebitTransactions);
+    allTransactions.sort((a, b) =>
+      a.transactionDate > b.transactionDate ? -1 : 1,
+    );
+    this.props.setAllTransactions(allTransactions);
+    this.setState({
+      isLoding: false,
+    });
   };
 
   //To calculate sum of transactions
@@ -333,7 +357,6 @@ class Home extends Component {
               {
                 backgroundColor: colors.expenseCatColors[cat].backgroundColor,
                 marginLeft: '3.33%',
-                marginTop: index > 1 ? '3.33%' : 0,
               },
             ]}>
             <View
@@ -362,7 +385,6 @@ class Home extends Component {
               {
                 backgroundColor: colors.primaryWithLightOpacity,
                 marginLeft: '3.33%',
-                marginTop: '3.33%',
               },
             ]}>
             <View
@@ -399,56 +421,77 @@ class Home extends Component {
           backgroundColor={colors.backgroundColor}
           barStyle="light-content"
         />
-        <View
-          style={[
-            styles.container,
-            {
-              paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
-            },
-          ]}>
-          <View style={styles.headerContainer}>
-            <View style={styles.headerTitleContainer}>
-              <Text
-                onPress={() => console.log(this.props.appReducer)}
-                style={styles.headerTitle}>
-                {headerTitle}Brijesh
-                {/* {user.displayName ? user.displayName : user.email} */}
-              </Text>
-            </View>
+        {this.state.isLoding ? (
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'green',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text>Skeleton Here</Text>
           </View>
-          <View style={styles.dashboardContainer}>
-            <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
-            <View style={styles.dashboardInnerContainer}>
-              <View style={styles.incomeContainer}>
-                <View style={styles.downArrowContainer}>
-                  <Image source={images.downArrow} style={styles.downArrow} />
-                </View>
-                <View>
-                  <Text style={styles.dashboardIncomeHeaderStyle}>
-                    {dashboardIncomeTitle}
-                  </Text>
-                  <Text style={styles.dashboardIncomeStyle}>{totalIncome}</Text>
-                </View>
-              </View>
-              <View style={styles.expenseContainer}>
-                <View style={styles.upArrowContainer}>
-                  <Image source={images.upArrow} style={styles.upArrow} />
-                </View>
-                <View>
-                  <Text style={styles.dashboardExpenseHeaderStyle}>
-                    {dashboardExpenseTitle}
-                  </Text>
-                  <Text style={styles.dashboardExpenseStyle}>
-                    {totalExpenses}
-                  </Text>
-                </View>
+        ) : (
+          <View
+            style={[
+              styles.container,
+              {
+                paddingTop: perfectSize(Platform.OS == 'ios' ? 56 : 40),
+              },
+            ]}>
+            <View style={styles.headerContainer}>
+              <View style={styles.headerTitleContainer}>
+                <Text
+                  onPress={() => console.log(this.props.appReducer)}
+                  style={styles.headerTitle}>
+                  {headerTitle}Brijesh
+                  {/* {user.displayName ? user.displayName : user.email} */}
+                </Text>
               </View>
             </View>
-          </View>
-          {totalExpenses > 0 && (
-            <View style={styles.topCatContainer}>
-              <Text style={styles.topCatHeader}>{topCatHeader}</Text>
-              <FlatList
+            <View style={styles.dashboardContainer}>
+              <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
+              <View style={styles.dashboardInnerContainer}>
+                <View style={styles.incomeContainer}>
+                  <View style={styles.downArrowContainer}>
+                    <Image source={images.downArrow} style={styles.downArrow} />
+                  </View>
+                  <View>
+                    <Text style={styles.dashboardIncomeHeaderStyle}>
+                      {dashboardIncomeTitle}
+                    </Text>
+                    <Text style={styles.dashboardIncomeStyle}>
+                      {totalIncome}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.expenseContainer}>
+                  <View style={styles.upArrowContainer}>
+                    <Image source={images.upArrow} style={styles.upArrow} />
+                  </View>
+                  <View>
+                    <Text style={styles.dashboardExpenseHeaderStyle}>
+                      {dashboardExpenseTitle}
+                    </Text>
+                    <Text style={styles.dashboardExpenseStyle}>
+                      {totalExpenses}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            {totalExpenses > 0 && (
+              <View style={styles.topCatContainer}>
+                <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+                <View style={{flexDirection: 'row', paddingBottom: '3.33%'}}>
+                  {this.renderTopCategories(totalExpensesByCategoty[0], 0)}
+                  {this.renderTopCategories(totalExpensesByCategoty[1], 1)}
+                </View>
+                <View style={{flexDirection: 'row', paddingBottom: '3.33%'}}>
+                  {this.renderTopCategories(totalExpensesByCategoty[2], 2)}
+                  {this.renderTopCategories(totalExpensesByCategoty[3], 3)}
+                </View>
+                {/* <FlatList
                 data={totalExpensesByCategoty}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
@@ -458,10 +501,11 @@ class Home extends Component {
                   this.renderTopCategories(item, index)
                 }
                 keyExtractor={(item, index) => index.toString()}
-              />
-            </View>
-          )}
-        </View>
+              /> */}
+              </View>
+            )}
+          </View>
+        )}
       </>
     );
   }

@@ -37,3 +37,11 @@ export const setTotalExpensesByCat = totalExpensesByCat => {
     });
   };
 };
+export const setAllTransactions = allTransactions => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.SET_ALL_TRANSACTIONS,
+      payload: allTransactions,
+    });
+  };
+};
