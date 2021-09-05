@@ -24,56 +24,83 @@ import CalendarPicker from 'react-native-calendar-picker';
 import styles from './styles';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-
+// rgb(233,91,146)
+// rgb(7,158,213)
+// rgb(163,112,92)
+// rgb(220,137,136)
 //Categories data
 const data = [
   {
-    title: 'Food',
+    title: 'FOOD',
     image: images.food,
+    backgroundColor: 'rgba(246,78,162,0.9)',
+    tintColor: 'rgb(246,78,162)',
   },
   {
-    title: 'Cash',
+    title: 'CASH',
     image: images.cash,
+    backgroundColor: 'rgba(7,158,213,0.9)',
+    tintColor: 'rgb(7,158,213)',
   },
   {
-    title: 'Transfer',
+    title: 'TRANSFER',
     image: images.transfer,
+    backgroundColor: 'rgba(141,95,239,0.9)',
+    tintColor: 'rgb(141,95,239)',
   },
   {
-    title: 'Entertainment',
+    title: 'ENTERTAINMENT',
     image: images.entertainment,
+    backgroundColor: 'rgba(246,113,97,0.9)',
+    tintColor: 'rgb(246,113,97)',
   },
   {
-    title: 'Fuel',
+    title: 'FUEL',
     image: images.fuel,
+    backgroundColor: 'rgba(246,78,162,0.9)',
+    tintColor: 'rgb(246,78,162)',
   },
   {
-    title: 'Groceries',
+    title: 'GROCERIES',
     image: images.groceries,
+    backgroundColor: 'rgba(7,158,213,0.9)',
+    tintColor: 'rgb(7,158,213)',
   },
   {
-    title: 'Investment',
+    title: 'INVESTMENT',
     image: images.investment,
+    backgroundColor: 'rgba(141,95,239,0.9)',
+    tintColor: 'rgb(141,95,239)',
   },
   {
-    title: 'Loans',
+    title: 'LOANS',
     image: images.loan,
+    backgroundColor: 'rgba(246,113,97,0.9)',
+    tintColor: 'rgb(246,113,97)',
   },
   {
-    title: 'Medical',
+    title: 'MEDICAL',
     image: images.medical,
+    backgroundColor: 'rgba(246,78,162,0.9)',
+    tintColor: 'rgb(246,78,162)',
   },
   {
-    title: 'Shopping',
+    title: 'SHOPPING',
     image: images.shopping,
+    backgroundColor: 'rgba(7,158,213,0.9)',
+    tintColor: 'rgb(7,158,213)',
   },
   {
-    title: 'Travel',
+    title: 'TRAVEL',
     image: images.travel,
+    backgroundColor: 'rgba(141,95,239,0.9)',
+    tintColor: 'rgb(141,95,239)',
   },
   {
-    title: 'Other',
+    title: 'OTHER',
     image: images.other,
+    backgroundColor: 'rgba(246,113,97,0.9)',
+    tintColor: 'rgb(246,113,97)',
   },
 ];
 
@@ -153,7 +180,7 @@ class AddExpense extends Component {
   opacity = new Animated.Value(perfectSize(1));
   catMarginTop = new Animated.Value(perfectSize(0));
   inputWidth = new Animated.Value(perfectSize(360));
-  notesInputHeight = new Animated.Value(perfectSize(0));
+  notesInputHeight = new Animated.Value(perfectSize(80));
   ammountInputMarginTop = new Animated.Value(perfectSize(20));
   doneButtonRight = new Animated.Value(perfectSize(-100));
   datePickerMarginTop = new Animated.Value(perfectSize(950));
@@ -255,7 +282,7 @@ class AddExpense extends Component {
         useNativeDriver: false,
       }),
       Animated.timing(this.notesInputHeight, {
-        toValue: perfectSize(0),
+        toValue: perfectSize(80),
         duration: 350,
         useNativeDriver: false,
       }),
@@ -285,12 +312,15 @@ class AddExpense extends Component {
           {
             backgroundColor:
               this.state.selectedCat == item.title
-                ? colors.primaryLightColor
-                : colors.backgroundColor,
-            marginLeft: index % 3 == 0 ? 0 : perfectSize(30),
+                ? item.backgroundColor
+                : colors.primaryCardBackgroundColor,
+            marginLeft: index == 0 ? 0 : perfectSize(30),
           },
         ]}>
-        <Image source={item.image} style={styles.catImage} />
+        <View
+          style={[styles.catImageContainer, {backgroundColor: item.tintColor}]}>
+          <Image source={item.image} style={styles.catImage} />
+        </View>
         <Text
           numberOfLines={1}
           style={[
@@ -298,7 +328,7 @@ class AddExpense extends Component {
             {
               color:
                 this.state.selectedCat == item.title
-                  ? colors.primary
+                  ? colors.primaryLightColor
                   : colors.primaryLightColor,
             },
           ]}>
@@ -438,32 +468,32 @@ class AddExpense extends Component {
                 }}
               />
             </Animated.View>
-            {this.state.isKeyboard && (
-              <Animated.View
-                style={[
-                  styles.notesInputContainer,
-                  {
-                    height: this.notesInputHeight,
-                    width: this.inputWidth,
-                  },
-                ]}>
-                <TextInput
-                  style={styles.textInput}
-                  placeholderTextColor="rgba(255,255,255,0.3)"
-                  selectionColor={colors.primary}
-                  placeholder={notesPlaceholder}
-                  returnKeyType="next"
-                  onChangeText={notes => this.setState({notes: notes.trim()})}
-                  value={this.state.notes}
-                  blurOnSubmit={false}
-                  ref={input => {
-                    this.notesInput = input;
-                  }}
-                  multiline
-                  numberOfLines={5}
-                />
-              </Animated.View>
-            )}
+            {/* {this.state.isKeyboard && ( */}
+            <Animated.View
+              style={[
+                styles.notesInputContainer,
+                {
+                  height: this.notesInputHeight,
+                  width: this.inputWidth,
+                },
+              ]}>
+              <TextInput
+                style={styles.textInput}
+                placeholderTextColor="rgba(255,255,255,0.3)"
+                selectionColor={colors.primary}
+                placeholder={notesPlaceholder}
+                returnKeyType="next"
+                onChangeText={notes => this.setState({notes: notes.trim()})}
+                value={this.state.notes}
+                blurOnSubmit={false}
+                ref={input => {
+                  this.notesInput = input;
+                }}
+                multiline
+                numberOfLines={5}
+              />
+            </Animated.View>
+            {/* )} */}
             <Animated.View
               style={{
                 marginTop: this.catMarginTop,
@@ -480,8 +510,8 @@ class AddExpense extends Component {
               ]}>
               <FlatList
                 data={data}
-                showsVerticalScrollIndicator={false}
-                numColumns={3}
+                horizontal
+                showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.catContentContainer}
                 renderItem={({item, index}) =>
                   this.renderCategories(item, index)
