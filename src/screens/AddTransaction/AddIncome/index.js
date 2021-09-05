@@ -92,6 +92,7 @@ class AddIncome extends Component {
       displayDate: '',
       modalDisplayDate: '',
       datePicker: false,
+      modalDate: '',
     };
   }
 
@@ -123,6 +124,7 @@ class AddIncome extends Component {
     this.setState({
       displayDate: date,
       modalDisplayDate: date,
+      modalDate: today,
     });
   }
 
@@ -222,6 +224,7 @@ class AddIncome extends Component {
 
     this.setState({
       modalDisplayDate: temp,
+      modalDate: today,
     });
   };
 
@@ -248,9 +251,11 @@ class AddIncome extends Component {
   };
 
   handleOnSubmit = async () => {
-    const {ammount, notes, displayDate} = this.state;
+    const {ammount, notes, displayDate, modalDate} = this.state;
     const income = {
-      ammount: parseFloat(ammount),
+      type: 'credit',
+      amount: parseFloat(ammount),
+      transactionDate: modalDate,
       notes: notes,
       displayDate: displayDate,
       createdAt: firestore.FieldValue.serverTimestamp(),

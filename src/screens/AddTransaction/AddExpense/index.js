@@ -167,11 +167,12 @@ class AddExpense extends Component {
     this.state = {
       ammount: '',
       notes: '',
-      selectedCat: {},
+      selectedCat: '',
       isKeyboard: false,
       displayDate: '',
       modalDisplayDate: '',
       datePicker: false,
+      modalDate: '',
     };
   }
 
@@ -203,6 +204,7 @@ class AddExpense extends Component {
     this.setState({
       displayDate: date,
       modalDisplayDate: date,
+      modalDate: today,
     });
   }
 
@@ -353,6 +355,7 @@ class AddExpense extends Component {
 
     this.setState({
       modalDisplayDate: temp,
+      modalDate: today,
     });
   };
 
@@ -379,12 +382,14 @@ class AddExpense extends Component {
   };
 
   handleOnSubmit = async () => {
-    const {ammount, notes, displayDate, selectedCat} = this.state;
+    const {ammount, notes, displayDate, selectedCat, modalDate} = this.state;
     const expense = {
-      ammount: parseFloat(ammount),
+      type: 'debit',
+      amount: parseFloat(ammount),
+      transactionDate: modalDate,
       notes: notes,
       displayDate: displayDate,
-      selectedCat: selectedCat,
+      selectedCat: selectedCat.toLowerCase(),
       createdAt: firestore.FieldValue.serverTimestamp(),
     };
     let uid = auth().currentUser.uid;
