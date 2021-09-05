@@ -6,7 +6,7 @@ const initialState = {
   allIncome: {},
   totalExpenses: 0,
   totalIncome: 0,
-  totalExpensesByCategoty: {},
+  totalExpensesByCategoty: [],
 };
 
 appReducer = (state = initialState, action) => {

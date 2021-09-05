@@ -107,7 +107,7 @@ class Home extends Component {
   getTransactionSum = transactions => {
     let sum = 0;
     for (let i = 0; i < transactions.length; i++) {
-      sum = sum + transactions[i].ammount;
+      sum = sum + transactions[i].amount;
     }
     return sum;
   };
@@ -186,7 +186,7 @@ class Home extends Component {
             filteredExpenses[indexOfFood].data.push(tempExpense);
             filteredExpenses[indexOfFood].total =
               filteredExpenses[indexOfFood].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'cash':
@@ -196,7 +196,7 @@ class Home extends Component {
             filteredExpenses[indexOfCash].data.push(tempExpense);
             filteredExpenses[indexOfCash].total =
               filteredExpenses[indexOfCash].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'transfer':
@@ -206,7 +206,7 @@ class Home extends Component {
             filteredExpenses[indexOfTransfer].data.push(tempExpense);
             filteredExpenses[indexOfTransfer].total =
               filteredExpenses[indexOfTransfer].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'entertainment':
@@ -219,7 +219,7 @@ class Home extends Component {
             filteredExpenses[indexOfEntertainment].data.push(tempExpense);
             filteredExpenses[indexOfEntertainment].total =
               filteredExpenses[indexOfEntertainment].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'fuel':
@@ -229,7 +229,7 @@ class Home extends Component {
             filteredExpenses[indexOfFuel].data.push(tempExpense);
             filteredExpenses[indexOfFuel].total =
               filteredExpenses[indexOfFuel].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'groceries':
@@ -239,7 +239,7 @@ class Home extends Component {
             filteredExpenses[indexOfGroceries].data.push(tempExpense);
             filteredExpenses[indexOfGroceries].total =
               filteredExpenses[indexOfGroceries].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'investment':
@@ -249,7 +249,7 @@ class Home extends Component {
             filteredExpenses[indexOfInvestment].data.push(tempExpense);
             filteredExpenses[indexOfInvestment].total =
               filteredExpenses[indexOfInvestment].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'loans':
@@ -259,7 +259,7 @@ class Home extends Component {
             filteredExpenses[indexOfLoans].data.push(tempExpense);
             filteredExpenses[indexOfLoans].total =
               filteredExpenses[indexOfLoans].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'medical':
@@ -269,7 +269,7 @@ class Home extends Component {
             filteredExpenses[indexOfMedical].data.push(tempExpense);
             filteredExpenses[indexOfMedical].total =
               filteredExpenses[indexOfMedical].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'shopping':
@@ -279,7 +279,7 @@ class Home extends Component {
             filteredExpenses[indexOfShopping].data.push(tempExpense);
             filteredExpenses[indexOfShopping].total =
               filteredExpenses[indexOfShopping].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'travel':
@@ -289,7 +289,7 @@ class Home extends Component {
             filteredExpenses[indexOfTravel].data.push(tempExpense);
             filteredExpenses[indexOfTravel].total =
               filteredExpenses[indexOfTravel].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         case 'other':
@@ -299,7 +299,7 @@ class Home extends Component {
             filteredExpenses[indexOfOther].data.push(tempExpense);
             filteredExpenses[indexOfOther].total =
               filteredExpenses[indexOfOther].total +
-              parseFloat(tempExpense.ammount);
+              parseFloat(tempExpense.amount);
           }
           break;
         default:
@@ -445,20 +445,22 @@ class Home extends Component {
               </View>
             </View>
           </View>
-          <View style={styles.topCatContainer}>
-            <Text style={styles.topCatHeader}>{topCatHeader}</Text>
-            <FlatList
-              data={totalExpensesByCategoty}
-              showsVerticalScrollIndicator={false}
-              numColumns={2}
-              scrollEnabled={false}
-              style={styles.topCatListContainer}
-              renderItem={({item, index}) =>
-                this.renderTopCategories(item, index)
-              }
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
+          {totalExpenses > 0 && (
+            <View style={styles.topCatContainer}>
+              <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+              <FlatList
+                data={totalExpensesByCategoty}
+                showsVerticalScrollIndicator={false}
+                numColumns={2}
+                scrollEnabled={false}
+                style={styles.topCatListContainer}
+                renderItem={({item, index}) =>
+                  this.renderTopCategories(item, index)
+                }
+                keyExtractor={(item, index) => index.toString()}
+              />
+            </View>
+          )}
         </View>
       </>
     );
