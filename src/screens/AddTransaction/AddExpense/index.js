@@ -218,17 +218,17 @@ class AddExpense extends Component {
     Animated.parallel([
       Animated.timing(this.headerMarginTop, {
         toValue: perfectSize(-250),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.opacity, {
         toValue: perfectSize(0),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.catMarginTop, {
         toValue: perfectSize(600),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.inputWidth, {
@@ -263,17 +263,17 @@ class AddExpense extends Component {
     Animated.parallel([
       Animated.timing(this.headerMarginTop, {
         toValue: perfectSize(0),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.opacity, {
         toValue: perfectSize(1),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.catMarginTop, {
         toValue: perfectSize(0),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.inputWidth, {
@@ -283,7 +283,7 @@ class AddExpense extends Component {
       }),
       Animated.timing(this.notesInputHeight, {
         toValue: perfectSize(80),
-        duration: 350,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(this.ammountInputMarginTop, {
