@@ -297,7 +297,7 @@ class Home extends Component {
           break;
       }
     }
-    // for(let i = 0; i< filteredExpenses.)
+    filteredExpenses.sort((a, b) => (a.total > b.total ? -1 : 1));
     this.props.setTotalExpensesByCat(filteredExpenses);
   };
 
