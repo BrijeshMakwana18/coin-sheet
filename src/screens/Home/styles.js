@@ -5,12 +5,12 @@ import {colors, fonts, perfectSize, width} from '../../theme';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: perfectSize(23),
     backgroundColor: colors.backgroundColor,
   },
   headerContainer: {
     flexDirection: 'row',
     marginTop: perfectSize(10),
+    paddingLeft: perfectSize(23),
   },
   headerTitleContainer: {},
   headerTitle: {
@@ -25,16 +25,17 @@ export default styles = StyleSheet.create({
     marginTop: perfectSize(10),
     letterSpacing: perfectSize(1),
   },
+  scrollContainer: {
+    flex: 1,
+    padding: perfectSize(23),
+  },
   dashboardContainer: {
-    height: '17%',
     width: '100%',
     marginTop: '5%',
     alignSelf: 'center',
     borderRadius: perfectSize(20),
     backgroundColor: colors.primaryCardBackgroundColor,
-    // alignItems: 'center',
     justifyContent: 'center',
-    // flexDirection: 'row',
     padding: perfectSize(20),
   },
   dashboardHeader: {
@@ -48,20 +49,12 @@ export default styles = StyleSheet.create({
     marginTop: '5%',
   },
   incomeContainer: {
-    height: '100%',
-    width: '45%',
-    borderRadius: perfectSize(20),
-    alignSelf: 'center',
-    alignItems: 'center',
+    width: '48%',
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
   expenseContainer: {
-    height: '100%',
     width: '45%',
-    borderRadius: perfectSize(20),
-    alignSelf: 'center',
-    alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
@@ -118,19 +111,12 @@ export default styles = StyleSheet.create({
     fontSize: perfectSize(18),
   },
   topCatContainer: {
-    width: '100%',
-    backgroundColor: colors.primaryCardBackgroundColor,
-    borderRadius: perfectSize(20),
-    marginTop: '5%',
+    marginTop: '7%',
   },
   topCatHeader: {
     fontSize: perfectSize(18),
     fontFamily: fonts.quicksandBold,
     color: colors.primaryLightColor,
-    padding: perfectSize(20),
-  },
-  topCatListContainer: {
-    paddingBottom: '3.33%',
   },
   expenseCatContainer: {
     alignItems: 'center',
@@ -139,7 +125,7 @@ export default styles = StyleSheet.create({
   //Category list styles
   catContainer: {
     height: perfectSize(200),
-    width: '45%',
+    width: '47.77%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: perfectSize(20),
@@ -152,8 +138,8 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   catImage: {
-    height: '50%',
-    width: '50%',
+    height: perfectSize(35),
+    width: perfectSize(35),
     resizeMode: 'contain',
     tintColor: colors.primaryLightColor,
   },
@@ -164,9 +150,64 @@ export default styles = StyleSheet.create({
     fontFamily: fonts.quicksandBold,
   },
   catTotalExpense: {
-    // marginTop: '5%',
     fontSize: perfectSize(18),
     color: colors.primaryLightColor,
     fontFamily: fonts.quicksandBold,
+  },
+  recentTransactionsListContainer: {
+    width: '100%',
+    marginTop: '5%',
+    alignSelf: 'center',
+    borderRadius: perfectSize(20),
+    justifyContent: 'center',
+    marginBottom: '20%',
+  },
+  recentTransactionsHeader: {
+    fontSize: perfectSize(18),
+    fontFamily: fonts.quicksandBold,
+    color: colors.primaryLightColor,
+  },
+  //Recent transactions style
+  recentTransactionsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: perfectSize(10),
+    marginTop: perfectSize(15),
+    padding: '5%',
+  },
+  recentTransactionsImageContainer: {
+    height: perfectSize(70),
+    width: perfectSize(70),
+    borderRadius: perfectSize(35),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  recentTransactionsImage: {
+    height: perfectSize(35),
+    width: perfectSize(35),
+    resizeMode: 'contain',
+    tintColor: colors.primaryLightColor,
+  },
+  recentTransactionsDetailsContainer: {
+    marginLeft: '5%',
+  },
+  recentTransactionsTitle: {
+    color: colors.primaryLightColor,
+    fontSize: perfectSize(18),
+    fontFamily: fonts.quicksandBold,
+  },
+  recentTransactionsDate: {
+    color: colors.primaryLightColor,
+    fontSize: perfectSize(15),
+    fontFamily: fonts.quicksandBold,
+    opacity: 0.7,
+    marginTop: '6%',
+  },
+  recentTransactionsAmount: {
+    color: colors.primaryLightColor,
+    fontSize: perfectSize(18),
+    fontFamily: fonts.quicksandBold,
+    right: '4%',
+    position: 'absolute',
   },
 });

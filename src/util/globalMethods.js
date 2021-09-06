@@ -32,12 +32,3 @@ export const removeListeners = listnersArray => {
     });
   }
 };
-
-export const getDisplayDate = date => {
-  let today = new Date(date);
-  let displayDate = `${today.getDate()} ${months[
-    today.getMonth()
-  ].toUpperCase()}, ${today.getFullYear()}`;
-
-  return displayDate;
-};

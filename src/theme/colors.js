@@ -27,56 +27,46 @@ const colors = {
   primaryTintColor: 'rgba(255,255,255,0.7)',
   //Add button background in bottom tab
   addTransactionButtonColor: '#246BFE',
-  expenseCatColors: {
-    food: {
+  topCatIndexColors: [
+    {
       tintColor: 'rgb(246,78,162)',
       backgroundColor: 'rgba(246,78,162,0.9)',
     },
-    cash: {
+    {
       tintColor: 'rgb(7,158,213)',
       backgroundColor: 'rgba(7,158,213,0.9)',
     },
-    transfer: {
+    {
       tintColor: 'rgb(141,95,239)',
       backgroundColor: 'rgba(141,95,239,0.9)',
     },
-    entertainment: {
+    {
       tintColor: 'rgb(246,113,97)',
       backgroundColor: 'rgba(246,113,97,0.9)',
     },
-    fuel: {
+  ],
+  recentTransactionsIndexColor: [
+    {
       tintColor: 'rgb(246,78,162)',
       backgroundColor: 'rgba(246,78,162,0.9)',
     },
-    groceries: {
+    {
       tintColor: 'rgb(7,158,213)',
       backgroundColor: 'rgba(7,158,213,0.9)',
     },
-    investment: {
+    {
       tintColor: 'rgb(141,95,239)',
       backgroundColor: 'rgba(141,95,239,0.9)',
     },
-    loans: {
+    {
       tintColor: 'rgb(246,113,97)',
       backgroundColor: 'rgba(246,113,97,0.9)',
     },
-    medical: {
+    {
       tintColor: 'rgb(246,78,162)',
       backgroundColor: 'rgba(246,78,162,0.9)',
     },
-    shopping: {
-      tintColor: 'rgb(7,158,213)',
-      backgroundColor: 'rgba(7,158,213,0.9)',
-    },
-    travel: {
-      tintColor: 'rgb(141,95,239)',
-      backgroundColor: 'rgba(141,95,239,0.9)',
-    },
-    other: {
-      tintColor: 'rgb(246,113,97)',
-      backgroundColor: 'rgba(246,113,97,0.9)',
-    },
-  },
+  ],
 };
 
 export default colors;

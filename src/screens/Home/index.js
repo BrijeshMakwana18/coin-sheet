@@ -10,6 +10,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  DeviceEventEmitter,
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, images, perfectSize, strings} from '../../theme';
@@ -26,6 +27,7 @@ import {
   setAllTransactions,
 } from './actions';
 import styles from './styles';
+import {ScrollView} from 'react-native-gesture-handler';
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -50,7 +52,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoding: false,
+      isLoding: true,
     };
   }
 
@@ -343,27 +345,43 @@ class Home extends Component {
     this.userExpenses();
     this.userIncome();
   }
+  onScroll = event => {
+    let offset = 0;
+    DeviceEventEmitter.emit('HideTabBar', true);
+    var currentOffset = event.nativeEvent.contentOffset.y;
+    if (currentOffset > offset) {
+      this.props.navigation.dangerouslyGetParent().setOptions({
+        tabBarVisible: false,
+      });
+    } else {
+      DeviceEventEmitter.emit('HideTabBar', false);
+      this.props.navigation.dangerouslyGetParent().setOptions({
+        tabBarVisible: true,
+      });
+    }
+    offset = currentOffset;
+  };
   renderTopCategories = (item, index) => {
-    if (item.total == 0 || index > 3) {
+    if (item && item.total && (item.total == 0 || index > 3)) {
       return null;
     } else {
       if (index < 3) {
-        let cat = item.category;
         return (
           <TouchableOpacity
             onPress={() => {}}
             style={[
               styles.catContainer,
               {
-                backgroundColor: colors.expenseCatColors[cat].backgroundColor,
-                marginLeft: '3.33%',
+                backgroundColor:
+                  colors.topCatIndexColors[index].backgroundColor,
+                marginTop: index <= 1 ? '5%' : 0,
               },
             ]}>
             <View
               style={[
                 styles.catImageContainer,
                 {
-                  backgroundColor: colors.expenseCatColors[cat].tintColor,
+                  backgroundColor: colors.topCatIndexColors[index].tintColor,
                 },
               ]}>
               <Image source={images[item.category]} style={styles.catImage} />
@@ -383,15 +401,15 @@ class Home extends Component {
             style={[
               styles.catContainer,
               {
-                backgroundColor: colors.primaryWithLightOpacity,
-                marginLeft: '3.33%',
+                backgroundColor:
+                  colors.topCatIndexColors[index].backgroundColor,
               },
             ]}>
             <View
               style={[
                 styles.catImageContainer,
                 {
-                  backgroundColor: colors.primary,
+                  backgroundColor: colors.topCatIndexColors[index].tintColor,
                 },
               ]}>
               <Image source={images.rightArrow} style={styles.catImage} />
@@ -404,15 +422,74 @@ class Home extends Component {
       }
     }
   };
+
+  renderRecentTransactions = (item, index) => {
+    if (item && item.type && index < 4) {
+      return (
+        <TouchableOpacity
+          style={[
+            styles.recentTransactionsContainer,
+            {
+              backgroundColor:
+                item.type == 'debit'
+                  ? colors.recentTransactionsIndexColor[index].backgroundColor
+                  : 'green',
+            },
+          ]}>
+          <View
+            style={[
+              styles.recentTransactionsImageContainer,
+              {
+                backgroundColor:
+                  item.type == 'debit'
+                    ? colors.recentTransactionsIndexColor[index].backgroundColor
+                    : 'green',
+              },
+            ]}>
+            <Image
+              source={
+                item.type == 'debit'
+                  ? images[item.selectedCat]
+                  : images.downArrow
+              }
+              style={styles.recentTransactionsImage}
+            />
+          </View>
+          <View style={styles.recentTransactionsDetailsContainer}>
+            <Text style={styles.recentTransactionsTitle}>
+              {item.type == 'debit'
+                ? item.payee
+                : strings.home.dashboardIncomeTitle}
+            </Text>
+            <Text style={styles.recentTransactionsDate}>
+              {item.displayDate}
+            </Text>
+          </View>
+          <Text style={styles.recentTransactionsAmount}>
+            {item.type == 'debit' ? '-' : '+'}
+            {item.amount}
+          </Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
+  };
   render() {
-    const {totalExpenses, totalIncome, totalExpensesByCategoty, user} =
-      this.props.appReducer;
+    const {
+      totalExpenses,
+      totalIncome,
+      totalExpensesByCategoty,
+      user,
+      allTransactions,
+    } = this.props.appReducer;
     const {
       headerTitle,
       dashboardIncomeTitle,
       dashboardExpenseTitle,
       dashboardHeader,
       topCatHeader,
+      recentTransactionsHeader,
     } = strings.home;
     return (
       <>
@@ -449,61 +526,87 @@ class Home extends Component {
                 </Text>
               </View>
             </View>
-            <View style={styles.dashboardContainer}>
-              <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
-              <View style={styles.dashboardInnerContainer}>
-                <View style={styles.incomeContainer}>
-                  <View style={styles.downArrowContainer}>
-                    <Image source={images.downArrow} style={styles.downArrow} />
+            <ScrollView
+              onScroll={this.onScroll}
+              scrollEventThrottle={16}
+              showsVerticalScrollIndicator={false}
+              style={styles.scrollContainer}>
+              <View style={styles.dashboardContainer}>
+                <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
+                <View style={styles.dashboardInnerContainer}>
+                  <View style={styles.incomeContainer}>
+                    <View style={styles.downArrowContainer}>
+                      <Image
+                        source={images.downArrow}
+                        style={styles.downArrow}
+                      />
+                    </View>
+                    <View>
+                      <Text style={styles.dashboardIncomeHeaderStyle}>
+                        {dashboardIncomeTitle}
+                      </Text>
+                      <Text style={styles.dashboardIncomeStyle}>
+                        {totalIncome}
+                      </Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={styles.dashboardIncomeHeaderStyle}>
-                      {dashboardIncomeTitle}
-                    </Text>
-                    <Text style={styles.dashboardIncomeStyle}>
-                      {totalIncome}
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.expenseContainer}>
-                  <View style={styles.upArrowContainer}>
-                    <Image source={images.upArrow} style={styles.upArrow} />
-                  </View>
-                  <View>
-                    <Text style={styles.dashboardExpenseHeaderStyle}>
-                      {dashboardExpenseTitle}
-                    </Text>
-                    <Text style={styles.dashboardExpenseStyle}>
-                      {totalExpenses}
-                    </Text>
+                  <View style={styles.expenseContainer}>
+                    <View style={styles.upArrowContainer}>
+                      <Image source={images.upArrow} style={styles.upArrow} />
+                    </View>
+                    <View>
+                      <Text style={styles.dashboardExpenseHeaderStyle}>
+                        {dashboardExpenseTitle}
+                      </Text>
+                      <Text style={styles.dashboardExpenseStyle}>
+                        {totalExpenses}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-            {totalExpenses > 0 && (
-              <View style={styles.topCatContainer}>
-                <Text style={styles.topCatHeader}>{topCatHeader}</Text>
-                <View style={{flexDirection: 'row', paddingBottom: '3.33%'}}>
-                  {this.renderTopCategories(totalExpensesByCategoty[0], 0)}
-                  {this.renderTopCategories(totalExpensesByCategoty[1], 1)}
+              {totalExpensesByCategoty.length > 0 &&
+                totalExpensesByCategoty[0].total > 0 && (
+                  <View style={styles.topCatContainer}>
+                    <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}>
+                      {totalExpensesByCategoty[0].total > 0 &&
+                        this.renderTopCategories(totalExpensesByCategoty[0], 0)}
+                      {totalExpensesByCategoty[1].total > 0 &&
+                        this.renderTopCategories(totalExpensesByCategoty[1], 1)}
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: '3.33%',
+                        justifyContent: 'space-between',
+                      }}>
+                      {totalExpensesByCategoty[2].total > 0 &&
+                        this.renderTopCategories(totalExpensesByCategoty[2], 2)}
+                      {totalExpensesByCategoty[3].total > 0 &&
+                        this.renderTopCategories(totalExpensesByCategoty[3], 3)}
+                    </View>
+                  </View>
+                )}
+              {allTransactions.length > 0 && (
+                <View style={styles.recentTransactionsListContainer}>
+                  <Text style={styles.recentTransactionsHeader}>
+                    {recentTransactionsHeader}
+                  </Text>
+                  {this.renderRecentTransactions(allTransactions[0], 0)}
+                  {allTransactions.length >= 1 &&
+                    this.renderRecentTransactions(allTransactions[1], 1)}
+                  {allTransactions.length >= 2 &&
+                    this.renderRecentTransactions(allTransactions[2], 2)}
+                  {allTransactions.length >= 3 &&
+                    this.renderRecentTransactions(allTransactions[3], 3)}
                 </View>
-                <View style={{flexDirection: 'row', paddingBottom: '3.33%'}}>
-                  {this.renderTopCategories(totalExpensesByCategoty[2], 2)}
-                  {this.renderTopCategories(totalExpensesByCategoty[3], 3)}
-                </View>
-                {/* <FlatList
-                data={totalExpensesByCategoty}
-                showsVerticalScrollIndicator={false}
-                numColumns={2}
-                scrollEnabled={false}
-                style={styles.topCatListContainer}
-                renderItem={({item, index}) =>
-                  this.renderTopCategories(item, index)
-                }
-                keyExtractor={(item, index) => index.toString()}
-              /> */}
-              </View>
-            )}
+              )}
+            </ScrollView>
           </View>
         )}
       </>

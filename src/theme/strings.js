@@ -31,6 +31,7 @@ const strings = {
   addExpense: {
     headerTitle: 'Add New \nExpense',
     ammountPlaceholder: 'Amount',
+    payeePlaceholder: 'Payee',
     notesPlaceholder: 'Notes ...',
     selectCat: 'SELECT CATEGORY',
     buttonTitle: 'CONTINUE',
@@ -52,6 +53,7 @@ const strings = {
     dashboardExpenseTitle: 'Expense',
     topCatHeader: 'Top categories',
     seeAll: 'See all',
+    recentTransactionsHeader: 'Recent transactions',
   },
 };
 
