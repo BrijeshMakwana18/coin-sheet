@@ -166,6 +166,7 @@ class AddExpense extends Component {
     super(props);
     this.state = {
       ammount: '',
+      payee: '',
       notes: '',
       selectedCat: '',
       isKeyboard: false,
@@ -180,7 +181,6 @@ class AddExpense extends Component {
   headerMarginTop = new Animated.Value(perfectSize(0));
   opacity = new Animated.Value(perfectSize(1));
   catMarginTop = new Animated.Value(perfectSize(0));
-  inputWidth = new Animated.Value(perfectSize(360));
   notesInputHeight = new Animated.Value(perfectSize(80));
   ammountInputMarginTop = new Animated.Value(perfectSize(20));
   doneButtonRight = new Animated.Value(perfectSize(-100));
@@ -233,13 +233,8 @@ class AddExpense extends Component {
         duration: 300,
         useNativeDriver: false,
       }),
-      Animated.timing(this.inputWidth, {
-        toValue: perfectSize(360),
-        duration: 300,
-        useNativeDriver: false,
-      }),
       Animated.timing(this.notesInputHeight, {
-        toValue: perfectSize(300),
+        toValue: perfectSize(200),
         duration: 300,
         useNativeDriver: false,
       }),
@@ -275,11 +270,6 @@ class AddExpense extends Component {
       }),
       Animated.timing(this.catMarginTop, {
         toValue: perfectSize(0),
-        duration: 300,
-        useNativeDriver: false,
-      }),
-      Animated.timing(this.inputWidth, {
-        toValue: perfectSize(360),
         duration: 300,
         useNativeDriver: false,
       }),
@@ -341,8 +331,10 @@ class AddExpense extends Component {
   };
 
   isActive = () => {
-    const {ammount, selectedCat} = this.state;
-    return ammount.trim() == '' || Object.keys(selectedCat).length == 0
+    const {ammount, selectedCat, payee} = this.state;
+    return ammount.trim() == '' ||
+      payee.trim() == '' ||
+      Object.keys(selectedCat).length == 0
       ? false
       : true;
   };
@@ -382,10 +374,12 @@ class AddExpense extends Component {
   };
 
   handleOnSubmit = async () => {
-    const {ammount, notes, displayDate, selectedCat, modalDate} = this.state;
+    const {ammount, notes, displayDate, selectedCat, modalDate, payee} =
+      this.state;
     const expense = {
       type: 'debit',
       amount: parseFloat(ammount),
+      payee: payee,
       transactionDate: modalDate,
       notes: notes,
       displayDate: displayDate,
@@ -406,6 +400,7 @@ class AddExpense extends Component {
           notes: notes,
           displayDate: displayDate,
           selectedCat: selectedCat,
+          payee: payee,
         });
       });
   };
@@ -416,6 +411,7 @@ class AddExpense extends Component {
       notesPlaceholder,
       selectCat,
       buttonTitle,
+      payeePlaceholder,
     } = strings.addExpense;
     return (
       <>
@@ -451,7 +447,6 @@ class AddExpense extends Component {
               style={[
                 styles.ammountInputContainer,
                 {
-                  width: this.inputWidth,
                   marginTop: this.ammountInputMarginTop,
                 },
               ]}>
@@ -461,25 +456,37 @@ class AddExpense extends Component {
                 selectionColor={colors.primary}
                 placeholder={ammountPlaceholder}
                 keyboardType="decimal-pad"
-                onChangeText={ammount =>
-                  this.setState({ammount: ammount.trim()})
-                }
+                onChangeText={amount => this.setState({ammount: amount})}
                 value={this.state.ammount}
                 returnKeyType="next"
-                onSubmitEditing={() => this.notesInput.focus()}
+                onSubmitEditing={() => this.payeeInout.focus()}
                 blurOnSubmit={false}
                 ref={input => {
                   this.ammountInput = input;
                 }}
               />
             </Animated.View>
-            {/* {this.state.isKeyboard && ( */}
+            <Animated.View style={styles.payeeInputContainer}>
+              <TextInput
+                style={styles.textInput}
+                placeholderTextColor="rgba(255,255,255,0.3)"
+                selectionColor={colors.primary}
+                placeholder={payeePlaceholder}
+                onChangeText={payee => this.setState({payee: payee})}
+                value={this.state.payee}
+                returnKeyType="next"
+                onSubmitEditing={() => this.notesInput.focus()}
+                blurOnSubmit={false}
+                ref={input => {
+                  this.payeeInout = input;
+                }}
+              />
+            </Animated.View>
             <Animated.View
               style={[
                 styles.notesInputContainer,
                 {
                   height: this.notesInputHeight,
-                  width: this.inputWidth,
                 },
               ]}>
               <TextInput
@@ -488,7 +495,7 @@ class AddExpense extends Component {
                 selectionColor={colors.primary}
                 placeholder={notesPlaceholder}
                 returnKeyType="next"
-                onChangeText={notes => this.setState({notes: notes.trim()})}
+                onChangeText={notes => this.setState({notes: notes})}
                 value={this.state.notes}
                 blurOnSubmit={false}
                 ref={input => {
@@ -498,7 +505,6 @@ class AddExpense extends Component {
                 numberOfLines={5}
               />
             </Animated.View>
-            {/* )} */}
             <Animated.View
               style={{
                 marginTop: this.catMarginTop,

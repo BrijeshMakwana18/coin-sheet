@@ -50,7 +50,7 @@ export default styles = StyleSheet.create({
   },
   dateLabel: {
     textAlign: 'center',
-    marginTop: '10%',
+    marginTop: '5%',
     color: colors.primaryLightColor,
     opacity: 0.5,
     fontFamily: fonts.quicksandBold,
@@ -58,23 +58,31 @@ export default styles = StyleSheet.create({
     fontSize: perfectSize(18),
   },
   ammountInputContainer: {
+    width: '100%',
     height: perfectSize(80),
     alignSelf: 'center',
   },
+  payeeInputContainer: {
+    width: '100%',
+    height: perfectSize(80),
+    marginTop: perfectSize(20),
+    alignSelf: 'center',
+  },
   notesInputContainer: {
+    width: '100%',
     marginTop: perfectSize(20),
     alignSelf: 'center',
   },
   selectCatLabel: {
     textAlign: 'center',
-    marginTop: '10%',
+    marginTop: '5%',
     color: 'rgba(255,255,255,0.5)',
     fontFamily: fonts.quicksandBold,
     fontSize: perfectSize(18),
   },
   catListContainer: {
     marginLeft: perfectSize(-23),
-    marginTop: '5%',
+    // marginTop: '5%',
     width: width,
     // backgroundColor: 'green',
   },
