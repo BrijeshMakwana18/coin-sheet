@@ -174,6 +174,7 @@ export default styles = StyleSheet.create({
     borderRadius: perfectSize(10),
     marginTop: perfectSize(15),
     padding: '5%',
+    // backgroundColor: colors.secondaryCardBackgroundColor,
   },
   recentTransactionsImageContainer: {
     height: perfectSize(70),
@@ -204,7 +205,7 @@ export default styles = StyleSheet.create({
     marginTop: '6%',
   },
   recentTransactionsAmount: {
-    color: colors.primaryLightColor,
+    // color: colors.primaryLightColor,
     fontSize: perfectSize(18),
     fontFamily: fonts.quicksandBold,
     right: '4%',

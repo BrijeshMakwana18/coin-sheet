@@ -67,6 +67,10 @@ const colors = {
       backgroundColor: 'rgba(246,78,162,0.9)',
     },
   ],
+  creditTransactionBackgroundColor: 'rgba(0,128,0,0.9)',
+  creditTransactionTintColor: 'rgb(0,128,0)',
+  creditTransactionAmmountColor: 'white',
+  debitTransactionAmmountColor: 'white',
 };
 
 export default colors;

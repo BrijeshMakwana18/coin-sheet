@@ -433,7 +433,7 @@ class Home extends Component {
               backgroundColor:
                 item.type == 'debit'
                   ? colors.recentTransactionsIndexColor[index].backgroundColor
-                  : 'green',
+                  : colors.creditTransactionBackgroundColor,
             },
           ]}>
           <View
@@ -442,8 +442,8 @@ class Home extends Component {
               {
                 backgroundColor:
                   item.type == 'debit'
-                    ? colors.recentTransactionsIndexColor[index].backgroundColor
-                    : 'green',
+                    ? colors.recentTransactionsIndexColor[index].tintColor
+                    : colors.creditTransactionTintColor,
               },
             ]}>
             <Image
@@ -465,7 +465,16 @@ class Home extends Component {
               {item.displayDate}
             </Text>
           </View>
-          <Text style={styles.recentTransactionsAmount}>
+          <Text
+            style={[
+              styles.recentTransactionsAmount,
+              {
+                color:
+                  item.type == 'debit'
+                    ? colors.debitTransactionAmmountColor
+                    : colors.creditTransactionAmmountColor,
+              },
+            ]}>
             {item.type == 'debit' ? '-' : '+'}
             {item.amount}
           </Text>
