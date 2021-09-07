@@ -2,12 +2,19 @@
 import {actionTypes} from '../../util';
 const initialState = {
   user: {},
-  allExpenses: [],
   allIncome: [],
-  totalExpenses: 0,
+  allExpenses: [],
   totalIncome: 0,
+  totalExpenses: 0,
   totalExpensesByCategoty: [],
   allTransactions: [],
+  //Custom
+  customAllIncome: [],
+  customAllExpenses: [],
+  customTotalIncome: 0,
+  customTotalExpenses: 0,
+  customTotalExpensesByCategoty: [],
+  customAllTransactions: [],
 };
 
 appReducer = (state = initialState, action) => {
@@ -26,6 +33,19 @@ appReducer = (state = initialState, action) => {
       return {...state, totalExpensesByCategoty: action.payload};
     case actionTypes.SET_ALL_TRANSACTIONS:
       return {...state, allTransactions: action.payload};
+
+    case actionTypes.SET_CUSTOM_ALL_INCOME:
+      return {...state, customAllIncome: action.payload};
+    case actionTypes.SET_CUSTOM_ALL_EXPENSES:
+      return {...state, customAllExpenses: action.payload};
+    case actionTypes.SET_CUSTOM_TOTAL_INCOME:
+      return {...state, customTotalIncome: action.payload};
+    case actionTypes.SET_CUSTOM_TOTAL_EXPENSES:
+      return {...state, customTotalExpenses: action.payload};
+    case actionTypes.SET_CUSTOM_TOTAL_EXPENSES_CAT:
+      return {...state, customTotalExpensesByCategoty: action.payload};
+    case actionTypes.SET_CUSTOM_ALL_TRANSACTIONS:
+      return {...state, customAllTransactions: action.payload};
     default:
       return state;
   }

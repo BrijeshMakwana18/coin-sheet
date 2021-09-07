@@ -25,6 +25,12 @@ import {
   setTotalExpenses,
   setTotalExpensesByCat,
   setAllTransactions,
+  setCustomUserIncome,
+  setCustomUserExpenses,
+  setCustomTotalIncome,
+  setCustomTotalExpenses,
+  setCustomTotalExpensesByCat,
+  setCustomAllTransactions,
 } from './actions';
 import styles from './styles';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -38,6 +44,12 @@ const mapDispatchToProps = dispatch => {
       setTotalExpenses,
       setTotalExpensesByCat,
       setAllTransactions,
+      setCustomUserIncome,
+      setCustomUserExpenses,
+      setCustomTotalIncome,
+      setCustomTotalExpenses,
+      setCustomTotalExpensesByCat,
+      setCustomAllTransactions,
     },
     dispatch,
   );
@@ -111,20 +123,74 @@ class Home extends Component {
         //Storing income into store
         this.props.setUserIncome(tempAllIncome);
         this.props.setTotalIncome(totalIncome);
-        await this.generateAllTransactions();
+        this.generateAllTransactions();
+      });
+  };
+
+  getCustomTransactions = async (startDate, endDate) => {
+    const userId = this.props.appReducer.user.uid;
+    //Fetching all expenses
+    this.customExpenses = await firestore()
+      .collection('transactions')
+      .doc(userId)
+      .collection('expenses')
+      .where('transactionDate', '>=', startDate)
+      .where('transactionDate', '<=', endDate)
+      .onSnapshot(async documentSnapshot => {
+        let tempAllExpenses = [];
+        //Fetching each document data from expenses collenction
+        documentSnapshot.forEach(async doc => {
+          let tempExpense = doc.data();
+          if (!tempAllExpenses.includes(tempExpense)) {
+            tempAllExpenses.push(tempExpense);
+          }
+        });
+        //Sum of all expenses
+        let totalExpense = this.getTransactionSum(tempAllExpenses);
+        //Storing values into store
+        this.props.setCustomUserExpenses(tempAllExpenses);
+        this.props.setCustomTotalExpenses(totalExpense);
+        this.filterExpensesCat(tempAllExpenses, true);
+        await this.generateAllTransactions(true);
+      });
+    //Fetching all income
+    this.customIncome = await firestore()
+      .collection('transactions')
+      .doc(userId)
+      .collection('income')
+      .where('transactionDate', '>=', startDate)
+      .where('transactionDate', '<=', endDate)
+      .onSnapshot(async documentSnapshot => {
+        let tempAllIncome = [];
+        //Fetching each document data from income collenction
+        documentSnapshot.forEach(doc => {
+          let tempIncome = doc.data();
+          if (!tempAllIncome.includes(tempIncome)) {
+            tempAllIncome.push(tempIncome);
+          }
+        });
+        //Sum of all income
+        let totalIncome = this.getTransactionSum(tempAllIncome);
+        //Storing income into store
+        this.props.setCustomUserIncome(tempAllIncome);
+        this.props.setCustomTotalIncome(totalIncome);
+        this.generateAllTransactions(true);
       });
   };
 
   //To create an array of all transactions
-  generateAllTransactions = () => {
-    let {allExpenses, allIncome} = this.props.appReducer;
-    let allCreditTransactions = allIncome;
-    let allDebitTransactions = allExpenses;
+  generateAllTransactions = isCustom => {
+    let {allExpenses, allIncome, customAllIncome, customAllExpenses} =
+      this.props.appReducer;
+    let allCreditTransactions = isCustom ? customAllIncome : allIncome;
+    let allDebitTransactions = isCustom ? customAllExpenses : allExpenses;
     let allTransactions = allCreditTransactions.concat(allDebitTransactions);
     allTransactions.sort((a, b) =>
       a.transactionDate > b.transactionDate ? -1 : 1,
     );
-    this.props.setAllTransactions(allTransactions);
+    isCustom
+      ? this.props.setCustomAllTransactions(allTransactions)
+      : this.props.setAllTransactions(allTransactions);
     this.setState({
       isLoding: false,
     });
@@ -140,7 +206,7 @@ class Home extends Component {
   };
 
   //To calculate sum of different categories expenses and to filter them
-  filterExpensesCat = expenses => {
+  filterExpensesCat = (expenses, isFromCustom) => {
     let filteredExpenses = [
       {
         category: 'food',
@@ -334,7 +400,9 @@ class Home extends Component {
       }
     }
     filteredExpenses.sort((a, b) => (a.total > b.total ? -1 : 1));
-    this.props.setTotalExpensesByCat(filteredExpenses);
+    isFromCustom
+      ? this.props.setCustomTotalExpensesByCat(filteredExpenses)
+      : this.props.setTotalExpensesByCat(filteredExpenses);
   };
 
   componentDidMount() {
@@ -485,13 +553,62 @@ class Home extends Component {
       return null;
     }
   };
+  checkTotalExpensesByCat = () => {
+    const {selectedFilter} = this.state;
+    const {totalExpensesByCategoty, customTotalExpensesByCategoty} =
+      this.props.appReducer;
+    if (selectedFilter == 'all') {
+      if (
+        totalExpensesByCategoty.length > 0 &&
+        totalExpensesByCategoty[0].total > 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (
+        customTotalExpensesByCategoty.length > 0 &&
+        customTotalExpensesByCategoty[0].total > 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+  getTotalExpensesByCat = index => {
+    // {totalExpensesByCategoty[0].total > 0 &&
+    //   this.renderTopCategories(totalExpensesByCategoty[0], 0)}
+    // {totalExpensesByCategoty[1].total > 0 &&
+    //   this.renderTopCategories(totalExpensesByCategoty[1], 1)}
+    const {selectedFilter} = this.state;
+    const {totalExpensesByCategoty, customTotalExpensesByCategoty} =
+      this.props.appReducer;
+    if (selectedFilter == 'all') {
+      if (totalExpensesByCategoty[index].total > 0) {
+        return this.renderTopCategories(totalExpensesByCategoty[index], index);
+      }
+    } else {
+      if (customTotalExpensesByCategoty[index].total > 0) {
+        return this.renderTopCategories(
+          customTotalExpensesByCategoty[index],
+          index,
+        );
+      }
+    }
+  };
   render() {
     const {
+      user,
       totalExpenses,
       totalIncome,
       totalExpensesByCategoty,
-      user,
       allTransactions,
+      customTotalIncome,
+      customTotalExpenses,
+      customTotalExpensesByCategoty,
+      customAllTransactions,
     } = this.props.appReducer;
     const {
       headerTitle,
@@ -504,6 +621,7 @@ class Home extends Component {
       filterTwo,
       filterThree,
     } = strings.home;
+    const {selectedFilter} = this.state;
     return (
       <>
         <StatusBar
@@ -541,7 +659,9 @@ class Home extends Component {
             </View>
             <View style={styles.filterContainer}>
               <TouchableOpacity
-                onPress={() => this.setState({selectedFilter: 'all'})}
+                onPress={() => {
+                  this.setState({selectedFilter: 'all'});
+                }}
                 style={[
                   styles.filterButtonContainer,
                   {
@@ -554,7 +674,21 @@ class Home extends Component {
                 <Text style={styles.filterButtonTitle}>{filterOne}</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => this.setState({selectedFilter: 'month'})}
+                onPress={() => {
+                  let date = new Date();
+                  let firstDay = new Date(
+                    date.getFullYear(),
+                    date.getMonth(),
+                    1,
+                  );
+                  let lastDay = new Date(
+                    date.getFullYear(),
+                    date.getMonth() + 1,
+                    0,
+                  );
+                  this.setState({selectedFilter: 'month'});
+                  this.getCustomTransactions(firstDay, lastDay);
+                }}
                 style={[
                   styles.filterButtonContainer,
                   {
@@ -600,7 +734,9 @@ class Home extends Component {
                         {dashboardIncomeTitle}
                       </Text>
                       <Text style={styles.dashboardIncomeStyle}>
-                        {totalIncome}
+                        {selectedFilter == 'all'
+                          ? totalIncome
+                          : customTotalIncome}
                       </Text>
                     </View>
                   </View>
@@ -613,39 +749,36 @@ class Home extends Component {
                         {dashboardExpenseTitle}
                       </Text>
                       <Text style={styles.dashboardExpenseStyle}>
-                        {totalExpenses}
+                        {selectedFilter == 'all'
+                          ? totalExpenses
+                          : customTotalExpenses}
                       </Text>
                     </View>
                   </View>
                 </View>
               </View>
-              {totalExpensesByCategoty.length > 0 &&
-                totalExpensesByCategoty[0].total > 0 && (
-                  <View style={styles.topCatContainer}>
-                    <Text style={styles.topCatHeader}>{topCatHeader}</Text>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      {totalExpensesByCategoty[0].total > 0 &&
-                        this.renderTopCategories(totalExpensesByCategoty[0], 0)}
-                      {totalExpensesByCategoty[1].total > 0 &&
-                        this.renderTopCategories(totalExpensesByCategoty[1], 1)}
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        marginTop: '3.33%',
-                        justifyContent: 'space-between',
-                      }}>
-                      {totalExpensesByCategoty[2].total > 0 &&
-                        this.renderTopCategories(totalExpensesByCategoty[2], 2)}
-                      {totalExpensesByCategoty[3].total > 0 &&
-                        this.renderTopCategories(totalExpensesByCategoty[3], 3)}
-                    </View>
+              {this.checkTotalExpensesByCat() && (
+                <View style={styles.topCatContainer}>
+                  <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    {this.getTotalExpensesByCat(0)}
+                    {this.getTotalExpensesByCat(1)}
                   </View>
-                )}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginTop: '3.33%',
+                      justifyContent: 'space-between',
+                    }}>
+                    {this.getTotalExpensesByCat(2)}
+                    {this.getTotalExpensesByCat(3)}
+                  </View>
+                </View>
+              )}
               {allTransactions.length > 0 && (
                 <View style={styles.recentTransactionsListContainer}>
                   <Text style={styles.recentTransactionsHeader}>
