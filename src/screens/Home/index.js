@@ -125,6 +125,10 @@ class Home extends Component {
         this.props.setTotalIncome(totalIncome);
         this.generateAllTransactions();
       });
+    let date = new Date();
+    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    this.getCustomTransactions(firstDay, lastDay);
   };
 
   getCustomTransactions = async (startDate, endDate) => {
