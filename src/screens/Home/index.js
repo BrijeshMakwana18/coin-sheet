@@ -53,6 +53,7 @@ class Home extends Component {
     super(props);
     this.state = {
       isLoding: true,
+      selectedFilter: 'month',
     };
   }
 
@@ -499,6 +500,9 @@ class Home extends Component {
       dashboardHeader,
       topCatHeader,
       recentTransactionsHeader,
+      filterOne,
+      filterTwo,
+      filterThree,
     } = strings.home;
     return (
       <>
@@ -534,6 +538,47 @@ class Home extends Component {
                   {/* {user.displayName ? user.displayName : user.email} */}
                 </Text>
               </View>
+            </View>
+            <View style={styles.filterContainer}>
+              <TouchableOpacity
+                onPress={() => this.setState({selectedFilter: 'all'})}
+                style={[
+                  styles.filterButtonContainer,
+                  {
+                    backgroundColor:
+                      this.state.selectedFilter == 'all'
+                        ? colors.primary
+                        : colors.primaryCardBackgroundColor,
+                  },
+                ]}>
+                <Text style={styles.filterButtonTitle}>{filterOne}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.setState({selectedFilter: 'month'})}
+                style={[
+                  styles.filterButtonContainer,
+                  {
+                    backgroundColor:
+                      this.state.selectedFilter == 'month'
+                        ? colors.primary
+                        : colors.primaryCardBackgroundColor,
+                  },
+                ]}>
+                <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.setState({selectedFilter: 'custom'})}
+                style={[
+                  styles.filterButtonContainer,
+                  {
+                    backgroundColor:
+                      this.state.selectedFilter == 'custom'
+                        ? colors.primary
+                        : colors.primaryCardBackgroundColor,
+                  },
+                ]}>
+                <Text style={styles.filterButtonTitle}>{filterThree}</Text>
+              </TouchableOpacity>
             </View>
             <ScrollView
               onScroll={this.onScroll}

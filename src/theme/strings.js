@@ -54,6 +54,9 @@ const strings = {
     topCatHeader: 'Top categories',
     seeAll: 'See all',
     recentTransactionsHeader: 'Recent transactions',
+    filterOne: 'Overall',
+    filterTwo: 'This month',
+    filterThree: 'Custom',
   },
 };
 
