@@ -582,10 +582,6 @@ class Home extends Component {
     }
   };
   getTotalExpensesByCat = index => {
-    // {totalExpensesByCategoty[0].total > 0 &&
-    //   this.renderTopCategories(totalExpensesByCategoty[0], 0)}
-    // {totalExpensesByCategoty[1].total > 0 &&
-    //   this.renderTopCategories(totalExpensesByCategoty[1], 1)}
     const {selectedFilter} = this.state;
     const {totalExpensesByCategoty, customTotalExpensesByCategoty} =
       this.props.appReducer;
@@ -597,6 +593,39 @@ class Home extends Component {
       if (customTotalExpensesByCategoty[index].total > 0) {
         return this.renderTopCategories(
           customTotalExpensesByCategoty[index],
+          index,
+        );
+      }
+    }
+  };
+  checkRecentTransactions = () => {
+    const {selectedFilter} = this.state;
+    const {customAllTransactions, allTransactions} = this.props.appReducer;
+    if (selectedFilter == 'all') {
+      if (allTransactions.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (customAllTransactions.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+  getRecentTransactions = index => {
+    const {selectedFilter} = this.state;
+    const {customAllTransactions, allTransactions} = this.props.appReducer;
+    if (selectedFilter == 'all') {
+      if (allTransactions.length > index) {
+        return this.renderRecentTransactions(allTransactions[index], index);
+      }
+    } else {
+      if (customAllTransactions.length > index) {
+        return this.renderRecentTransactions(
+          customAllTransactions[index],
           index,
         );
       }
@@ -783,18 +812,15 @@ class Home extends Component {
                   </View>
                 </View>
               )}
-              {allTransactions.length > 0 && (
+              {this.checkRecentTransactions() && (
                 <View style={styles.recentTransactionsListContainer}>
                   <Text style={styles.recentTransactionsHeader}>
                     {recentTransactionsHeader}
                   </Text>
-                  {this.renderRecentTransactions(allTransactions[0], 0)}
-                  {allTransactions.length >= 1 &&
-                    this.renderRecentTransactions(allTransactions[1], 1)}
-                  {allTransactions.length >= 2 &&
-                    this.renderRecentTransactions(allTransactions[2], 2)}
-                  {allTransactions.length >= 3 &&
-                    this.renderRecentTransactions(allTransactions[3], 3)}
+                  {this.getRecentTransactions(0)}
+                  {this.getRecentTransactions(1)}
+                  {this.getRecentTransactions(2)}
+                  {this.getRecentTransactions(3)}
                 </View>
               )}
             </ScrollView>
