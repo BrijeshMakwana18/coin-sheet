@@ -8,9 +8,10 @@ import {
   Platform,
   StatusBar,
   Image,
-  FlatList,
+  Modal,
   TouchableOpacity,
   DeviceEventEmitter,
+  ScrollView,
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, images, perfectSize, strings} from '../../theme';
@@ -33,7 +34,8 @@ import {
   setCustomAllTransactions,
 } from './actions';
 import styles from './styles';
-import {ScrollView} from 'react-native-gesture-handler';
+import CalendarPicker from 'react-native-calendar-picker';
+import {ButtonWithImage} from '../../components';
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -60,12 +62,63 @@ const mapStateToProps = state => {
     appReducer: state.appReducer,
   };
 };
+let months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+//Custom styles for date picker
+const customDayHeaderStylesCallback = () => {
+  return {
+    textStyle: {
+      color: colors.backgroundColor,
+      fontSize: perfectSize(16),
+      fontFamily: fonts.quicksandBold,
+      opacity: 0.4,
+      displayDate: '',
+    },
+  };
+};
+
+//Custom styles for date picker
+const customDatesStylesCallback = date => {
+  let currentDate = new Date();
+  let tempDate = new Date(date);
+  let a = `${currentDate.getDate()} ${currentDate.getMonth()} ${currentDate.getFullYear()}`;
+  let b = `${tempDate.getDate()} ${tempDate.getMonth()} ${tempDate.getFullYear()}`;
+  if (a == b) {
+    return {
+      style: {
+        backgroundColor: colors.backgroundColor,
+        height: perfectSize(30),
+        width: perfectSize(30),
+      },
+      textStyle: {
+        color: colors.primaryLightColor,
+      },
+    };
+  }
+};
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoding: true,
       selectedFilter: 'month',
+      datePicker: false,
+      modalDisplayDate: '',
+      modalDate: '',
+      selectedStartDateTimeStamp: null,
+      selectedEndDateTimeStamp: null,
     };
   }
 
@@ -631,6 +684,27 @@ class Home extends Component {
       }
     }
   };
+  onDateChange = (date, type) => {
+    date = new Date(date);
+    if (type === 'END_DATE') {
+      this.setState({
+        selectedEndDateTimeStamp: date,
+      });
+    } else {
+      this.setState({
+        selectedStartDateTimeStamp: date,
+        selectedEndDateTimeStamp: null,
+      });
+    }
+  };
+  handleDateSubmit = () => {
+    const {selectedStartDateTimeStamp, selectedEndDateTimeStamp} = this.state;
+    this.getCustomTransactions(
+      selectedStartDateTimeStamp,
+      selectedEndDateTimeStamp,
+    );
+    this.setState({datePicker: false});
+  };
   render() {
     const {
       user,
@@ -655,6 +729,17 @@ class Home extends Component {
       filterThree,
     } = strings.home;
     const {selectedFilter} = this.state;
+    const {selectedStartDateTimeStamp, selectedEndDateTimeStamp} = this.state;
+    const startDate = selectedStartDateTimeStamp
+      ? `${selectedStartDateTimeStamp.getDate()} ${months[
+          selectedStartDateTimeStamp.getMonth()
+        ].toUpperCase()}, ${selectedStartDateTimeStamp.getFullYear()}`
+      : '';
+    const endDate = selectedEndDateTimeStamp
+      ? `${selectedEndDateTimeStamp.getDate()} ${months[
+          selectedEndDateTimeStamp.getMonth()
+        ].toUpperCase()}, ${selectedEndDateTimeStamp.getFullYear()}`
+      : '';
     return (
       <>
         <StatusBar
@@ -734,7 +819,9 @@ class Home extends Component {
                 <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => this.setState({selectedFilter: 'custom'})}
+                onPress={() => {
+                  this.setState({selectedFilter: 'custom', datePicker: true});
+                }}
                 style={[
                   styles.filterButtonContainer,
                   {
@@ -826,6 +913,63 @@ class Home extends Component {
             </ScrollView>
           </View>
         )}
+        <Modal
+          visible={this.state.datePicker}
+          style={styles.modal}
+          transparent
+          animationType="fade">
+          <View style={styles.modalViewContainer}>
+            <View style={styles.datePickerContainer}>
+              <View style={styles.datePickerHeaderContainer}>
+                <Text style={styles.datePickerHeaderLabel}>
+                  {startDate}
+                  {'\n'}To{'\n'}
+                  {endDate}
+                </Text>
+              </View>
+              <CalendarPicker
+                disabledDatesTextStyle={styles.disabledDatesTextStyle}
+                selectedDayStyle={styles.selectedDayStyle}
+                todayTextStyle={styles.todayTextStyle}
+                todayBackgroundColor={colors.primary}
+                textStyle={styles.textStyle}
+                allowRangeSelection
+                selectedDayTextColor={colors.primary}
+                monthYearHeaderWrapperStyle={styles.monthYearHeaderWrapperStyle}
+                yearTitleStyle={styles.yearTitleStyle}
+                monthTitleStyle={styles.monthTitleStyle}
+                dayLabelsWrapper={styles.dayLabelsWrapper}
+                customDayHeaderStyles={customDayHeaderStylesCallback}
+                customDatesStyles={customDatesStylesCallback}
+                dayShape="circle"
+                onDateChange={this.onDateChange}
+                width={perfectSize(320)}
+                weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
+                showDayStragglers
+                selectedDayColor={colors.primaryLightColor}
+                maxDate={new Date()}
+                previousComponent={
+                  <Image
+                    source={images.leftArrow}
+                    style={styles.previousComponent}
+                  />
+                }
+                nextComponent={
+                  <Image
+                    source={images.rightArrow}
+                    style={styles.nextComponent}
+                  />
+                }
+              />
+              <View style={styles.bottomViewContainer}>
+                <ButtonWithImage
+                  onPress={() => this.handleDateSubmit()}
+                  image={images.check}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
       </>
     );
   }

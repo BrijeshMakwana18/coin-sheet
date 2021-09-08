@@ -234,4 +234,97 @@ export default styles = StyleSheet.create({
     right: '4%',
     position: 'absolute',
   },
+  //Date picker modal styles
+  modal: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  modalViewContainer: {
+    flex: 1,
+    backgroundColor: colors.modalBackgroundColor,
+    alignItems: 'center',
+  },
+  datePickerContainer: {
+    height: perfectSize(450),
+    width: '85%',
+    borderRadius: perfectSize(25),
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: perfectSize(225),
+  },
+  datePickerHeaderContainer: {
+    width: '80%',
+    height: perfectSize(60),
+    backgroundColor: colors.primaryLightColor,
+    borderRadius: perfectSize(50),
+    position: 'absolute',
+    top: perfectSize(-30),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  datePickerHeaderLabel: {
+    textAlign: 'center',
+    color: colors.primary,
+    fontFamily: fonts.quicksandBold,
+    fontSize: perfectSize(14),
+  },
+  //Calendar picker styles
+  disabledDatesTextStyle: {
+    color: colors.backgroundColor,
+    opacity: 0.4,
+    fontSize: perfectSize(15),
+  },
+  selectedDayStyle: {
+    backgroundColor: colors.primaryLightColor,
+    height: perfectSize(30),
+    width: perfectSize(30),
+  },
+  todayTextStyle: {},
+  textStyle: {
+    fontFamily: fonts.quicksandBold,
+    color: colors.primaryLightColor,
+    fontSize: perfectSize(13),
+  },
+  previousComponent: {
+    height: perfectSize(20),
+    width: perfectSize(20),
+    resizeMode: 'contain',
+    tintColor: colors.primaryTintColor,
+    opacity: 0.5,
+  },
+  nextComponent: {
+    height: perfectSize(20),
+    width: perfectSize(20),
+    resizeMode: 'contain',
+    tintColor: colors.primaryTintColor,
+    opacity: 0.5,
+  },
+  monthYearHeaderWrapperStyle: {
+    flexDirection: 'column',
+    alignSelf: 'center',
+  },
+  yearTitleStyle: {
+    color: colors.primaryLightColor,
+    fontFamily: fonts.quicksandBold,
+    fontSize: perfectSize(16),
+    opacity: 0.6,
+  },
+  monthTitleStyle: {
+    color: colors.primaryLightColor,
+    fontFamily: fonts.quicksandBold,
+    fontSize: perfectSize(18),
+    textTransform: 'uppercase',
+  },
+  dayLabelsWrapper: {
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+  },
+  bottomViewContainer: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: perfectSize(-30),
+    width: '50%',
+    justifyContent: 'center',
+  },
 });
