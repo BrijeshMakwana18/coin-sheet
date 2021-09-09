@@ -685,7 +685,9 @@ class Home extends Component {
     }
   };
   onDateChange = (date, type) => {
-    date = new Date(date);
+    if (date != null) {
+      date = new Date(date);
+    }
     if (type === 'END_DATE') {
       this.setState({
         selectedEndDateTimeStamp: date,
@@ -934,6 +936,7 @@ class Home extends Component {
                 todayBackgroundColor={colors.primary}
                 textStyle={styles.textStyle}
                 allowRangeSelection
+                allowBackwardRangeSelect
                 selectedDayTextColor={colors.primary}
                 monthYearHeaderWrapperStyle={styles.monthYearHeaderWrapperStyle}
                 yearTitleStyle={styles.yearTitleStyle}
