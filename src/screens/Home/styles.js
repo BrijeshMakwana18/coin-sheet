@@ -29,9 +29,15 @@ export default styles = StyleSheet.create({
     width: '100%',
     paddingLeft: perfectSize(23),
     paddingRight: perfectSize(23),
-    marginBottom: '5%',
     marginTop: perfectSize(23),
+    // justifyContent: 'space-between',
+    marginBottom: '5%',
+    // flexDirection: 'row',
+  },
+  filterInnerContainer: {
+    width: '100%',
     justifyContent: 'space-between',
+    // marginBottom: '5%',
     flexDirection: 'row',
   },
   filterButtonContainer: {
@@ -47,6 +53,15 @@ export default styles = StyleSheet.create({
     color: colors.primaryLightColor,
     fontFamily: fonts.avenirHeavy,
     fontWeight: 'bold',
+  },
+  dateLabel: {
+    textAlign: 'center',
+    marginTop: '5%',
+    color: colors.primaryLightColor,
+    opacity: 0.5,
+    fontFamily: fonts.quicksandBold,
+    textDecorationLine: 'underline',
+    fontSize: perfectSize(18),
   },
   scrollContainer: {
     flex: 1,

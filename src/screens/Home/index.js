@@ -12,6 +12,8 @@ import {
   TouchableOpacity,
   DeviceEventEmitter,
   ScrollView,
+  Animated,
+  Easing,
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import {colors, images, perfectSize, strings} from '../../theme';
@@ -35,7 +37,7 @@ import {
 } from './actions';
 import styles from './styles';
 import CalendarPicker from 'react-native-calendar-picker';
-import {ButtonWithImage} from '../../components';
+import {ButtonWithImage, ErrorSlider} from '../../components';
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -63,18 +65,18 @@ const mapStateToProps = state => {
   };
 };
 let months = [
-  'January',
-  'February',
-  'March',
-  'April',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
   'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 //Custom styles for date picker
 const customDayHeaderStylesCallback = () => {
@@ -120,6 +122,7 @@ class Home extends Component {
       selectedStartDateTimeStamp: null,
       selectedEndDateTimeStamp: null,
     };
+    this.errorModalTop = new Animated.Value(perfectSize(-500));
   }
 
   //Fetching current user and storing it into store
@@ -470,6 +473,8 @@ class Home extends Component {
     //Removing snapshot listener
     this.userExpenses();
     this.userIncome();
+    this.customExpenses();
+    this.customIncome();
   }
   onScroll = event => {
     let offset = 0;
@@ -701,11 +706,33 @@ class Home extends Component {
   };
   handleDateSubmit = () => {
     const {selectedStartDateTimeStamp, selectedEndDateTimeStamp} = this.state;
-    this.getCustomTransactions(
-      selectedStartDateTimeStamp,
-      selectedEndDateTimeStamp,
-    );
-    this.setState({datePicker: false});
+    if (
+      selectedStartDateTimeStamp == null ||
+      selectedEndDateTimeStamp == null
+    ) {
+      this.showError();
+    } else {
+      this.getCustomTransactions(
+        selectedStartDateTimeStamp,
+        selectedEndDateTimeStamp,
+      );
+      this.setState({datePicker: false});
+    }
+  };
+  showError = () => {
+    Animated.timing(this.errorModalTop, {
+      toValue: Platform.OS == 'ios' ? perfectSize(50) : perfectSize(40),
+      duration: 1000,
+      useNativeDriver: false,
+      easing: Easing.elastic(Platform.OS == 'android' ? 1 : 1),
+    }).start();
+    setTimeout(() => {
+      Animated.timing(this.errorModalTop, {
+        toValue: -perfectSize(500),
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
+    }, 2000);
   };
   render() {
     const {
@@ -778,63 +805,82 @@ class Home extends Component {
               </View>
             </View>
             <View style={styles.filterContainer}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.setState({selectedFilter: 'all'});
-                }}
-                style={[
-                  styles.filterButtonContainer,
-                  {
-                    backgroundColor:
-                      this.state.selectedFilter == 'all'
-                        ? colors.primary
-                        : colors.primaryCardBackgroundColor,
-                  },
-                ]}>
-                <Text style={styles.filterButtonTitle}>{filterOne}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  let date = new Date();
-                  let firstDay = new Date(
-                    date.getFullYear(),
-                    date.getMonth(),
-                    1,
-                  );
-                  let lastDay = new Date(
-                    date.getFullYear(),
-                    date.getMonth() + 1,
-                    0,
-                  );
-                  this.setState({selectedFilter: 'month'});
-                  this.getCustomTransactions(firstDay, lastDay);
-                }}
-                style={[
-                  styles.filterButtonContainer,
-                  {
-                    backgroundColor:
-                      this.state.selectedFilter == 'month'
-                        ? colors.primary
-                        : colors.primaryCardBackgroundColor,
-                  },
-                ]}>
-                <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  this.setState({selectedFilter: 'custom', datePicker: true});
-                }}
-                style={[
-                  styles.filterButtonContainer,
-                  {
-                    backgroundColor:
-                      this.state.selectedFilter == 'custom'
-                        ? colors.primary
-                        : colors.primaryCardBackgroundColor,
-                  },
-                ]}>
-                <Text style={styles.filterButtonTitle}>{filterThree}</Text>
-              </TouchableOpacity>
+              <View style={styles.filterInnerContainer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.customExpenses();
+                    this.customIncome();
+                    this.setState({
+                      selectedFilter: 'all',
+                      selectedStartDateTimeStamp: null,
+                      selectedEndDateTimeStamp: null,
+                    });
+                  }}
+                  style={[
+                    styles.filterButtonContainer,
+                    {
+                      backgroundColor:
+                        this.state.selectedFilter == 'all'
+                          ? colors.primary
+                          : colors.primaryCardBackgroundColor,
+                    },
+                  ]}>
+                  <Text style={styles.filterButtonTitle}>{filterOne}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    let date = new Date();
+                    let firstDay = new Date(
+                      date.getFullYear(),
+                      date.getMonth(),
+                      1,
+                    );
+                    let lastDay = new Date(
+                      date.getFullYear(),
+                      date.getMonth() + 1,
+                      0,
+                    );
+                    this.setState({
+                      selectedFilter: 'month',
+                      selectedStartDateTimeStamp: null,
+                      selectedEndDateTimeStamp: null,
+                    });
+                    this.getCustomTransactions(firstDay, lastDay);
+                  }}
+                  style={[
+                    styles.filterButtonContainer,
+                    {
+                      backgroundColor:
+                        this.state.selectedFilter == 'month'
+                          ? colors.primary
+                          : colors.primaryCardBackgroundColor,
+                    },
+                  ]}>
+                  <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({selectedFilter: 'custom', datePicker: true});
+                  }}
+                  style={[
+                    styles.filterButtonContainer,
+                    {
+                      backgroundColor:
+                        this.state.selectedFilter == 'custom'
+                          ? colors.primary
+                          : colors.primaryCardBackgroundColor,
+                    },
+                  ]}>
+                  <Text style={styles.filterButtonTitle}>{filterThree}</Text>
+                </TouchableOpacity>
+              </View>
+              {selectedFilter == 'custom' && (
+                <Text
+                  style={styles.dateLabel}
+                  onPress={() => this.setState({datePicker: true})}>
+                  {startDate} To {endDate}
+                </Text>
+              )}
             </View>
             <ScrollView
               onScroll={this.onScroll}
@@ -972,6 +1018,10 @@ class Home extends Component {
               </View>
             </View>
           </View>
+          <ErrorSlider
+            error="Please select date range"
+            top={this.errorModalTop}
+          />
         </Modal>
       </>
     );

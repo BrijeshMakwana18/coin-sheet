@@ -5,7 +5,7 @@ import Add from './AddTransaction';
 import Offline from './Offline';
 import ButtonWithImage from './ButtonWithImage';
 import PrimaryHeader from './PrimaryHeader';
-
+import ErrorSlider from './ErrorSlider';
 export {
   Button,
   TextInput,
@@ -14,4 +14,5 @@ export {
   Offline,
   ButtonWithImage,
   PrimaryHeader,
+  ErrorSlider,
 };

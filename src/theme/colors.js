@@ -71,6 +71,7 @@ const colors = {
   creditTransactionTintColor: 'rgb(0,128,0)',
   creditTransactionAmmountColor: 'white',
   debitTransactionAmmountColor: 'white',
+  errorModalBackgroundColor: '#C45156',
 };
 
 export default colors;
