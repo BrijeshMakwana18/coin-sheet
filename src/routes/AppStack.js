@@ -39,7 +39,14 @@ export default function AppStack() {
           ),
         }}
       />
-
+      <Tab.Screen
+        name="Add"
+        component={AddTransactionStack}
+        options={props => ({
+          tabBarIcon: props => <Add {...props} />,
+          tabBarVisible: false,
+        })}
+      />
       <Tab.Screen
         name="Stat"
         component={Statistics}
@@ -54,16 +61,7 @@ export default function AppStack() {
         }}
       />
 
-      <Tab.Screen
-        name="Add"
-        component={AddTransactionStack}
-        options={props => ({
-          tabBarIcon: props => <Add {...props} />,
-          tabBarVisible: false,
-        })}
-      />
-
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Goal"
         component={Goal}
         options={{
@@ -89,7 +87,7 @@ export default function AppStack() {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
