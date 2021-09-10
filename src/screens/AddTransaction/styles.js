@@ -17,22 +17,15 @@ export default styles = StyleSheet.create({
     marginTop: '10%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // shadowOpacity: 0.3,
-    // shadowRadius: 10,
-    // shadowOffset: {
-    //   height: 10,
-    // },
-    // elevation: 24,
-  },
-  innerCardContainer: {
     shadowOpacity: 0.3,
-    shadowRadius: 6,
+    shadowRadius: 10,
+    shadowOffset: {
+      height: 10,
+    },
+    elevation: 24,
     height: height / 5,
     width: (width * 85) / 100,
-    alignSelf: 'center',
-    borderRadius: perfectSize(10),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    backgroundColor: colors.primaryCardBackgroundColor,
   },
   cardDetailsContainer: {
     height: '100%',

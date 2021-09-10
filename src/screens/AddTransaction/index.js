@@ -69,25 +69,15 @@ class AddTransaction extends Component {
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate(item.screenName)}
         style={styles.cardContainer}>
-        <Neomorph
-          darkShadowColor={item.backgroundColor}
-          lightShadowColor={item.backgroundColor}
-          style={[
-            styles.innerCardContainer,
-            {
-              backgroundColor: item.backgroundColor,
-            },
-          ]}>
-          <View style={styles.cardDetailsContainer}>
-            <Text style={styles.cardTitle}>{item.label}</Text>
-            <Text style={styles.cardDescription}>{item.description}</Text>
-          </View>
-          <Image
-            source={item.image}
-            style={styles.cardImage}
-            resizeMode="contain"
-          />
-        </Neomorph>
+        <View style={styles.cardDetailsContainer}>
+          <Text style={styles.cardTitle}>{item.label}</Text>
+          <Text style={styles.cardDescription}>{item.description}</Text>
+        </View>
+        <Image
+          source={item.image}
+          style={styles.cardImage}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
     );
   };
