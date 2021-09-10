@@ -86,7 +86,6 @@ const customDayHeaderStylesCallback = () => {
       fontSize: perfectSize(16),
       fontFamily: fonts.quicksandBold,
       opacity: 0.4,
-      displayDate: '',
     },
   };
 };
