@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: perfectSize(56),
-    padding: perfectSize(23),
+    padding: perfectSize(20),
     backgroundColor: colors.backgroundColor,
   },
   textInput: {

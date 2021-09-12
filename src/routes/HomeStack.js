@@ -3,7 +3,7 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {Home, AddExpense} from '../screens';
+import {Home, AllExpenseCat} from '../screens';
 import {hidden_bottom} from './config';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {DeviceEventEmitter} from 'react-native';
@@ -37,8 +37,8 @@ export default function HomeStack({navigation, route}) {
         options={{header: () => null}}
       />
       <Stack.Screen
-        name="AddExpense"
-        component={AddExpense}
+        name="AllExpenseCat"
+        component={AllExpenseCat}
         options={{header: () => null}}
       />
     </Stack.Navigator>

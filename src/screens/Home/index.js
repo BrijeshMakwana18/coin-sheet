@@ -477,12 +477,12 @@ class Home extends Component {
   }
   onScroll = event => {
     let offset = 0;
-    DeviceEventEmitter.emit('HideTabBar', true);
     var currentOffset = event.nativeEvent.contentOffset.y;
     if (currentOffset > offset) {
       this.props.navigation.dangerouslyGetParent().setOptions({
         tabBarVisible: false,
       });
+      DeviceEventEmitter.emit('HideTabBar', true);
     } else {
       DeviceEventEmitter.emit('HideTabBar', false);
       this.props.navigation.dangerouslyGetParent().setOptions({
@@ -527,7 +527,9 @@ class Home extends Component {
       } else if (index == 3) {
         return (
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => {
+              this.props.navigation.navigate('AllExpenseCat');
+            }}
             style={[
               styles.catContainer,
               {
@@ -882,7 +884,7 @@ class Home extends Component {
               )}
             </View>
             <ScrollView
-              onScroll={this.onScroll}
+              // onScroll={this.onScroll}
               scrollEventThrottle={16}
               showsVerticalScrollIndicator={false}
               style={styles.scrollContainer}>

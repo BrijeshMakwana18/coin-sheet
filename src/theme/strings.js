@@ -58,6 +58,9 @@ const strings = {
     filterTwo: 'This month',
     filterThree: 'Custom',
   },
+  allExpenseCat: {
+    headerTitle: 'All\nCategories',
+  },
 };
 
 export default strings;
