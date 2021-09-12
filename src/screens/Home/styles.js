@@ -342,4 +342,23 @@ export default styles = StyleSheet.create({
     width: '50%',
     justifyContent: 'center',
   },
+  seeAllTransactions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: perfectSize(10),
+    marginTop: perfectSize(15),
+    padding: '5%',
+    backgroundColor: colors.primaryLightColor,
+    justifyContent: 'space-between',
+  },
+  seeAllTransactionsLabel: {
+    color: colors.primary,
+    fontSize: perfectSize(16),
+    fontFamily: fonts.quicksandBold,
+  },
+  seeAllTransactionsImage: {
+    height: perfectSize(25),
+    width: perfectSize(25),
+    tintColor: colors.primary,
+  },
 });

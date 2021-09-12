@@ -57,6 +57,7 @@ const strings = {
     filterOne: 'Overall',
     filterTwo: 'This month',
     filterThree: 'Custom',
+    seeAllTransactions: 'See all transactions',
   },
   allExpenseCat: {
     headerTitle: 'All\nCategories',

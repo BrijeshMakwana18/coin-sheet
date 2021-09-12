@@ -771,6 +771,7 @@ class Home extends Component {
       filterOne,
       filterTwo,
       filterThree,
+      seeAllTransactions,
     } = strings.home;
     const {selectedFilter} = this.state;
     const {selectedStartDateTimeStamp, selectedEndDateTimeStamp} = this.state;
@@ -971,6 +972,15 @@ class Home extends Component {
                   {this.getRecentTransactions(1)}
                   {this.getRecentTransactions(2)}
                   {this.getRecentTransactions(3)}
+                  <TouchableOpacity style={styles.seeAllTransactions}>
+                    <Text style={styles.seeAllTransactionsLabel}>
+                      {seeAllTransactions}
+                    </Text>
+                    <Image
+                      source={images.rightArrow}
+                      style={styles.seeAllTransactionsImage}
+                    />
+                  </TouchableOpacity>
                 </View>
               )}
             </ScrollView>
