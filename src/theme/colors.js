@@ -72,6 +72,68 @@ const colors = {
   creditTransactionAmmountColor: 'white',
   debitTransactionAmmountColor: 'white',
   errorModalBackgroundColor: '#C45156',
+  allExpenseCatColor: [
+    {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    {
+      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(7,158,213,0.9)',
+    },
+    {
+      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(141,95,239,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(246,113,97,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    {
+      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(7,158,213,0.9)',
+    },
+    {
+      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(141,95,239,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(246,113,97,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+    {
+      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(7,158,213,0.9)',
+    },
+    {
+      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(141,95,239,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(246,113,97,0.9)',
+    },
+    {
+      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(246,78,162,0.9)',
+    },
+  ],
 };
 
 export default colors;

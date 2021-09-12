@@ -60,6 +60,11 @@ const strings = {
   },
   allExpenseCat: {
     headerTitle: 'All\nCategories',
+    transactions: 'Transactions',
+    transaction: 'Transaction',
+    overallExpense: 'You are viewing overall transaction categories',
+    monthlyExpense: 'You are viewing current month transaction categories',
+    customExpense: 'You are viewing transaction categories for time period',
   },
 };
 

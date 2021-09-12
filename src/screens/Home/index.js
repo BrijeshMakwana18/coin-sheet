@@ -492,6 +492,11 @@ class Home extends Component {
     offset = currentOffset;
   };
   renderTopCategories = (item, index) => {
+    const {
+      selectedStartDateTimeStamp,
+      selectedEndDateTimeStamp,
+      selectedFilter,
+    } = this.state;
     if (item && item.total && (item.total == 0 || index > 3)) {
       return null;
     } else {
@@ -528,7 +533,16 @@ class Home extends Component {
         return (
           <TouchableOpacity
             onPress={() => {
-              this.props.navigation.navigate('AllExpenseCat');
+              this.props.navigation.navigate('AllExpenseCat', {
+                selectedFilter: selectedFilter,
+                dateRange:
+                  selectedFilter == 'all'
+                    ? false
+                    : {
+                        start: selectedStartDateTimeStamp,
+                        end: selectedEndDateTimeStamp,
+                      },
+              });
             }}
             style={[
               styles.catContainer,
