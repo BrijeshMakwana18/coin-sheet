@@ -14,6 +14,7 @@ import AddIncome from './AddTransaction/AddIncome';
 import AddGoal from './AddTransaction/AddGoal';
 import TransactionSuccess from './TransactionSuccess';
 import AllExpenseCat from './AllExpenseCat';
+import TransactionList from './TransactionList';
 //Reducers
 import signupReducer from './Signup/reducer';
 import loginReducer from './Login/reducer';
@@ -32,6 +33,7 @@ export {
   AddGoal,
   TransactionSuccess,
   AllExpenseCat,
+  TransactionList,
 };
 
 export const rootReducer = combineReducers({

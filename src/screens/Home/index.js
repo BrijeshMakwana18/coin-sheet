@@ -972,7 +972,20 @@ class Home extends Component {
                   {this.getRecentTransactions(1)}
                   {this.getRecentTransactions(2)}
                   {this.getRecentTransactions(3)}
-                  <TouchableOpacity style={styles.seeAllTransactions}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.props.navigation.navigate('TransactionList', {
+                        selectedFilter: selectedFilter,
+                        dateRange:
+                          selectedFilter == 'all'
+                            ? false
+                            : {
+                                start: selectedStartDateTimeStamp,
+                                end: selectedEndDateTimeStamp,
+                              },
+                      });
+                    }}
+                    style={styles.seeAllTransactions}>
                     <Text style={styles.seeAllTransactionsLabel}>
                       {seeAllTransactions}
                     </Text>
