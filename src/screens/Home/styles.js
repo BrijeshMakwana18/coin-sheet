@@ -198,7 +198,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: perfectSize(20),
     justifyContent: 'center',
-    marginBottom: '20%',
+    marginBottom: '10%',
   },
   recentTransactionsHeader: {
     fontSize: perfectSize(18),
