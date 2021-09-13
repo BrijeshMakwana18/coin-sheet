@@ -25,7 +25,7 @@ import styles from './styles';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 // rgb(233,91,146)
-// rgb(7,158,213)
+// rgb(255,72,72)
 // rgb(163,112,92)
 // rgb(220,137,136)
 //Categories data
@@ -39,20 +39,20 @@ const data = [
   {
     title: 'CASH',
     image: images.cash,
-    backgroundColor: 'rgba(7,158,213,0.9)',
-    tintColor: 'rgb(7,158,213)',
+    backgroundColor: 'rgba(255,72,72,0.9)',
+    tintColor: 'rgb(255,72,72)',
   },
   {
     title: 'TRANSFER',
     image: images.transfer,
-    backgroundColor: 'rgba(141,95,239,0.9)',
-    tintColor: 'rgb(141,95,239)',
+    backgroundColor: 'rgba(72,19,128,0.9)',
+    tintColor: 'rgb(72,19,128)',
   },
   {
     title: 'ENTERTAINMENT',
     image: images.entertainment,
-    backgroundColor: 'rgba(246,113,97,0.9)',
-    tintColor: 'rgb(246,113,97)',
+    backgroundColor: 'rgba(36,107,254,0.9)',
+    tintColor: 'rgb(36,107,254)',
   },
   {
     title: 'FUEL',
@@ -63,20 +63,20 @@ const data = [
   {
     title: 'GROCERIES',
     image: images.groceries,
-    backgroundColor: 'rgba(7,158,213,0.9)',
-    tintColor: 'rgb(7,158,213)',
+    backgroundColor: 'rgba(255,72,72,0.9)',
+    tintColor: 'rgb(255,72,72)',
   },
   {
     title: 'INVESTMENT',
     image: images.investment,
-    backgroundColor: 'rgba(141,95,239,0.9)',
-    tintColor: 'rgb(141,95,239)',
+    backgroundColor: 'rgba(36,107,254,0.9)',
+    tintColor: 'rgb(36,107,254)',
   },
   {
     title: 'LOANS',
     image: images.loan,
-    backgroundColor: 'rgba(246,113,97,0.9)',
-    tintColor: 'rgb(246,113,97)',
+    backgroundColor: 'rgba(72,19,128,0.9)',
+    tintColor: 'rgb(72,19,128)',
   },
   {
     title: 'MEDICAL',
@@ -87,20 +87,20 @@ const data = [
   {
     title: 'SHOPPING',
     image: images.shopping,
-    backgroundColor: 'rgba(7,158,213,0.9)',
-    tintColor: 'rgb(7,158,213)',
+    backgroundColor: 'rgba(255,72,72,0.9)',
+    tintColor: 'rgb(255,72,72)',
   },
   {
     title: 'TRAVEL',
     image: images.travel,
-    backgroundColor: 'rgba(141,95,239,0.9)',
-    tintColor: 'rgb(141,95,239)',
+    backgroundColor: 'rgba(72,19,128,0.9)',
+    tintColor: 'rgb(72,19,128)',
   },
   {
     title: 'OTHER',
     image: images.other,
-    backgroundColor: 'rgba(246,113,97,0.9)',
-    tintColor: 'rgb(246,113,97)',
+    backgroundColor: 'rgba(36,107,254,0.9)',
+    tintColor: 'rgb(36,107,254)',
   },
 ];
 

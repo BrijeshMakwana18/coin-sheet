@@ -26,45 +26,41 @@ const colors = {
   //Primay tint color
   primaryTintColor: 'rgba(255,255,255,0.7)',
   //Add button background in bottom tab
-  addTransactionButtonColor: '#246BFE',
+  addTransactionButtonColor: '#7E7BD6',
   topCatIndexColors: [
     {
-      tintColor: 'rgb(246,78,162)',
-      backgroundColor: 'rgba(246,78,162,0.9)',
+      tintColor: 'rgb(255,0,228)',
+      backgroundColor: 'rgba(255,0,228,0.9)',
     },
     {
-      tintColor: 'rgb(7,158,213)',
-      backgroundColor: 'rgba(7,158,213,0.9)',
+      tintColor: 'rgb(255,72,72)',
+      backgroundColor: 'rgba(255,72,72,0.9)',
     },
     {
-      tintColor: 'rgb(141,95,239)',
-      backgroundColor: 'rgba(141,95,239,0.9)',
+      tintColor: 'rgb(72,19,128)',
+      backgroundColor: 'rgba(72,19,128,0.9)',
     },
     {
-      tintColor: 'rgb(246,113,97)',
-      backgroundColor: 'rgba(246,113,97,0.9)',
+      tintColor: 'rgb(36,107,254)',
+      backgroundColor: 'rgba(36,107,254,0.9)',
     },
   ],
   recentTransactionsIndexColor: [
     {
-      tintColor: 'rgb(246,78,162)',
-      backgroundColor: 'rgba(246,78,162,0.9)',
+      tintColor: 'rgb(255,0,228)',
+      backgroundColor: 'rgba(255,0,228,0.9)',
     },
     {
-      tintColor: 'rgb(7,158,213)',
-      backgroundColor: 'rgba(7,158,213,0.9)',
+      tintColor: 'rgb(255,72,72)',
+      backgroundColor: 'rgba(255,72,72,0.9)',
     },
     {
-      tintColor: 'rgb(141,95,239)',
-      backgroundColor: 'rgba(141,95,239,0.9)',
+      tintColor: 'rgb(72,19,128)',
+      backgroundColor: 'rgba(72,19,128,0.9)',
     },
     {
-      tintColor: 'rgb(246,113,97)',
-      backgroundColor: 'rgba(246,113,97,0.9)',
-    },
-    {
-      tintColor: 'rgb(246,78,162)',
-      backgroundColor: 'rgba(246,78,162,0.9)',
+      tintColor: 'rgb(36,107,254)',
+      backgroundColor: 'rgba(36,107,254,0.9)',
     },
   ],
   creditTransactionBackgroundColor: 'rgba(0,128,0,0.9)',
@@ -74,52 +70,52 @@ const colors = {
   errorModalBackgroundColor: '#C45156',
   expenseCatColor: {
     food: {
-      backgroundColor: 'rgba(246,78,162,0.9)',
-      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(255,0,228,0.9)',
+      tintColor: 'rgb(255,0,228)',
     },
     cash: {
-      backgroundColor: 'rgba(7,158,213,0.9)',
-      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(255,72,72,0.9)',
+      tintColor: 'rgb(255,72,72)',
     },
     transfer: {
-      backgroundColor: 'rgba(141,95,239,0.9)',
-      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(72,19,128,0.9)',
+      tintColor: 'rgb(72,19,128)',
     },
     entertainment: {
-      backgroundColor: 'rgba(246,113,97,0.9)',
-      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(36,107,254,0.9)',
+      tintColor: 'rgb(36,107,254)',
     },
     fuel: {
-      backgroundColor: 'rgba(246,78,162,0.9)',
-      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(255,0,228,0.9)',
+      tintColor: 'rgb(255,0,228)',
     },
     groceries: {
-      backgroundColor: 'rgba(7,158,213,0.9)',
-      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(255,72,72,0.9)',
+      tintColor: 'rgb(255,72,72)',
     },
     investment: {
-      backgroundColor: 'rgba(141,95,239,0.9)',
-      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(72,19,128,0.9)',
+      tintColor: 'rgb(72,19,128)',
     },
     loan: {
-      backgroundColor: 'rgba(246,113,97,0.9)',
-      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(36,107,254,0.9)',
+      tintColor: 'rgb(36,107,254)',
     },
     medical: {
-      backgroundColor: 'rgba(246,78,162,0.9)',
-      tintColor: 'rgb(246,78,162)',
+      backgroundColor: 'rgba(255,0,228,0.9)',
+      tintColor: 'rgb(255,0,228)',
     },
     shopping: {
-      backgroundColor: 'rgba(7,158,213,0.9)',
-      tintColor: 'rgb(7,158,213)',
+      backgroundColor: 'rgba(255,72,72,0.9)',
+      tintColor: 'rgb(255,72,72)',
     },
     travel: {
-      backgroundColor: 'rgba(141,95,239,0.9)',
-      tintColor: 'rgb(141,95,239)',
+      backgroundColor: 'rgba(72,19,128,0.9)',
+      tintColor: 'rgb(72,19,128)',
     },
     other: {
-      backgroundColor: 'rgba(246,113,97,0.9)',
-      tintColor: 'rgb(246,113,97)',
+      backgroundColor: 'rgba(36,107,254,0.9)',
+      tintColor: 'rgb(36,107,254)',
     },
   },
 };
