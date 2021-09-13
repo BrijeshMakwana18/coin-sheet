@@ -72,68 +72,56 @@ const colors = {
   creditTransactionAmmountColor: 'white',
   debitTransactionAmmountColor: 'white',
   errorModalBackgroundColor: '#C45156',
-  allExpenseCatColor: [
-    {
-      tintColor: 'rgb(246,78,162)',
+  expenseCatColor: {
+    food: {
       backgroundColor: 'rgba(246,78,162,0.9)',
+      tintColor: 'rgb(246,78,162)',
     },
-    {
-      tintColor: 'rgb(7,158,213)',
+    cash: {
       backgroundColor: 'rgba(7,158,213,0.9)',
-    },
-    {
-      tintColor: 'rgb(141,95,239)',
-      backgroundColor: 'rgba(141,95,239,0.9)',
-    },
-    {
-      tintColor: 'rgb(246,113,97)',
-      backgroundColor: 'rgba(246,113,97,0.9)',
-    },
-    {
-      tintColor: 'rgb(246,78,162)',
-      backgroundColor: 'rgba(246,78,162,0.9)',
-    },
-    {
-      tintColor: 'rgb(246,78,162)',
-      backgroundColor: 'rgba(246,78,162,0.9)',
-    },
-    {
       tintColor: 'rgb(7,158,213)',
-      backgroundColor: 'rgba(7,158,213,0.9)',
     },
-    {
-      tintColor: 'rgb(141,95,239)',
+    transfer: {
       backgroundColor: 'rgba(141,95,239,0.9)',
+      tintColor: 'rgb(141,95,239)',
     },
-    {
-      tintColor: 'rgb(246,113,97)',
+    entertainment: {
       backgroundColor: 'rgba(246,113,97,0.9)',
+      tintColor: 'rgb(246,113,97)',
     },
-    {
-      tintColor: 'rgb(246,78,162)',
+    fuel: {
       backgroundColor: 'rgba(246,78,162,0.9)',
-    },
-    {
       tintColor: 'rgb(246,78,162)',
-      backgroundColor: 'rgba(246,78,162,0.9)',
     },
-    {
+    groceries: {
+      backgroundColor: 'rgba(7,158,213,0.9)',
       tintColor: 'rgb(7,158,213)',
-      backgroundColor: 'rgba(7,158,213,0.9)',
     },
-    {
-      tintColor: 'rgb(141,95,239)',
+    investment: {
       backgroundColor: 'rgba(141,95,239,0.9)',
+      tintColor: 'rgb(141,95,239)',
     },
-    {
-      tintColor: 'rgb(246,113,97)',
+    loan: {
       backgroundColor: 'rgba(246,113,97,0.9)',
+      tintColor: 'rgb(246,113,97)',
     },
-    {
-      tintColor: 'rgb(246,78,162)',
+    medical: {
       backgroundColor: 'rgba(246,78,162,0.9)',
+      tintColor: 'rgb(246,78,162)',
     },
-  ],
+    shopping: {
+      backgroundColor: 'rgba(7,158,213,0.9)',
+      tintColor: 'rgb(7,158,213)',
+    },
+    travel: {
+      backgroundColor: 'rgba(141,95,239,0.9)',
+      tintColor: 'rgb(141,95,239)',
+    },
+    other: {
+      backgroundColor: 'rgba(246,113,97,0.9)',
+      tintColor: 'rgb(246,113,97)',
+    },
+  },
 };
 
 export default colors;
