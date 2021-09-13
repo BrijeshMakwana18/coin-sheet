@@ -1,3 +1,3 @@
-const hidden_bottom = ['AddExpense', 'AllExpenseCat'];
+const hidden_bottom = ['AddExpense', 'AllExpenseCat', 'TransactionList'];
 
 export {hidden_bottom};
