@@ -45,7 +45,7 @@ class TransactionList extends Component {
           {
             backgroundColor:
               type == 'debit'
-                ? colors.secondaryCardBackgroundColor
+                ? colors.expenseCatColor[selectedCat].backgroundColor
                 : colors.creditTransactionBackgroundColor,
           },
         ]}>
@@ -55,7 +55,7 @@ class TransactionList extends Component {
             {
               backgroundColor:
                 type == 'debit'
-                  ? colors.rsecondaryCardBackgroundColor
+                  ? colors.expenseCatColor[selectedCat].tintColor
                   : colors.creditTransactionTintColor,
             },
           ]}>
