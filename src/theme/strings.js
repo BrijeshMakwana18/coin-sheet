@@ -67,6 +67,16 @@ const strings = {
     monthlyExpense: 'You are viewing current month transaction categories',
     customExpense: 'You are viewing transaction categories for time period',
   },
+  allTransactions: {
+    headerTitle: 'All\nTransactions',
+    transactions: 'Transactions',
+    transaction: 'Transaction',
+    overallExpense: 'You are viewing overall transactions',
+    monthlyExpense: 'You are viewing current month transactions',
+    customExpense: 'You are viewing transactions for time period',
+    filterOne: 'Debit',
+    filterTwo: 'Credit',
+  },
 };
 
 export default strings;
