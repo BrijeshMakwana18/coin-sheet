@@ -40,9 +40,28 @@ class AllExpenseCat extends Component {
     const {transaction, transactions} = strings.allExpenseCat;
     const {total, category, data} = item;
     const {selectedFilter, dateRange} = this.props.route.params;
+    let selectedStartDateTimeStamp, selectedEndDateTimeStamp;
+    if (dateRange) {
+      selectedStartDateTimeStamp = dateRange.start;
+      selectedEndDateTimeStamp = dateRange.end;
+    }
     if (item.total > 0 && item.data && item.data.length > 0) {
       return (
         <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('TransactionList', {
+              selectedExpenseCat: category,
+              isFromExpenseCat: true,
+              selectedFilter: selectedFilter,
+              dateRange:
+                selectedFilter == 'all'
+                  ? false
+                  : {
+                      start: selectedStartDateTimeStamp,
+                      end: selectedEndDateTimeStamp,
+                    },
+            });
+          }}
           style={[
             styles.catContainer,
             {

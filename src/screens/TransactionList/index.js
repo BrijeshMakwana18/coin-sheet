@@ -122,6 +122,31 @@ class TransactionList extends Component {
         break;
     }
   };
+
+  getListData = () => {
+    const {selectedFilter, isFromExpenseCat, selectedExpenseCat} =
+      this.props.route.params;
+    const {totalExpensesByCategoty, customTotalExpensesByCategoty} =
+      this.props.appReducer;
+    const {customAllTransactions, allTransactions} = this.props.appReducer;
+    if (isFromExpenseCat) {
+      if (selectedFilter == 'all') {
+        return totalExpensesByCategoty.find(
+          element => element.category == selectedExpenseCat,
+        ).data;
+      } else {
+        return customTotalExpensesByCategoty.find(
+          element => element.category == selectedExpenseCat,
+        ).data;
+      }
+    } else {
+      if (selectedFilter == 'all') {
+        return allTransactions;
+      } else {
+        return customAllTransactions;
+      }
+    }
+  };
   render() {
     const {
       headerTitle,
@@ -132,7 +157,8 @@ class TransactionList extends Component {
       filterTwo,
     } = strings.allTransactions;
     const {customAllTransactions, allTransactions} = this.props.appReducer;
-    const {selectedFilter} = this.props.route.params;
+    const {selectedFilter, isFromExpenseCat, allTransactionsFromExpenseCat} =
+      this.props.route.params;
     return (
       <View style={styles.container}>
         <PrimaryHeader
@@ -144,38 +170,38 @@ class TransactionList extends Component {
         <Text style={styles.transactionPeriodTitle}>
           {this.getTransactionPeriodTitle()}
         </Text>
-        <View style={styles.filterContainer}>
-          <TouchableOpacity
-            onPress={() => this.setState({selectedFilter: 'debit'})}
-            style={[
-              styles.filterButtonContainer,
-              {
-                backgroundColor:
-                  this.state.selectedFilter == 'debit'
-                    ? colors.primary
-                    : colors.primaryCardBackgroundColor,
-              },
-            ]}>
-            <Text style={styles.filterButtonTitle}>{filterOne}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.setState({selectedFilter: 'credit'})}
-            style={[
-              styles.filterButtonContainer,
-              {
-                backgroundColor:
-                  this.state.selectedFilter == 'credit'
-                    ? colors.primary
-                    : colors.primaryCardBackgroundColor,
-              },
-            ]}>
-            <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
-          </TouchableOpacity>
-        </View>
+        {!isFromExpenseCat && (
+          <View style={styles.filterContainer}>
+            <TouchableOpacity
+              onPress={() => this.setState({selectedFilter: 'debit'})}
+              style={[
+                styles.filterButtonContainer,
+                {
+                  backgroundColor:
+                    this.state.selectedFilter == 'debit'
+                      ? colors.primary
+                      : colors.primaryCardBackgroundColor,
+                },
+              ]}>
+              <Text style={styles.filterButtonTitle}>{filterOne}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({selectedFilter: 'credit'})}
+              style={[
+                styles.filterButtonContainer,
+                {
+                  backgroundColor:
+                    this.state.selectedFilter == 'credit'
+                      ? colors.primary
+                      : colors.primaryCardBackgroundColor,
+                },
+              ]}>
+              <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <FlatList
-          data={
-            selectedFilter == 'all' ? allTransactions : customAllTransactions
-          }
+          data={this.getListData()}
           contentContainerStyle={styles.catListContainer}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index}) =>
