@@ -31,65 +31,69 @@ let months = [
 class TransactionList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedFilter: 'debit',
+    };
   }
 
   componentDidMount() {}
 
   renderAllTransactions = (item, index) => {
     const {type, selectedCat, payee, displayDate, amount} = item;
-    return (
-      <TouchableOpacity
-        style={[
-          styles.transactionContainer,
-          {
-            backgroundColor:
-              type == 'debit'
-                ? colors.expenseCatColor[selectedCat].backgroundColor
-                : colors.creditTransactionBackgroundColor,
-          },
-        ]}>
-        <View
+    if (type == this.state.selectedFilter) {
+      return (
+        <TouchableOpacity
           style={[
-            styles.transactionImageContainer,
+            styles.transactionContainer,
             {
               backgroundColor:
                 type == 'debit'
-                  ? colors.expenseCatColor[selectedCat].tintColor
-                  : colors.creditTransactionTintColor,
+                  ? colors.expenseCatColor[selectedCat].backgroundColor
+                  : colors.creditTransactionBackgroundColor,
             },
           ]}>
-          <Image
-            source={type == 'debit' ? images[selectedCat] : images.downArrow}
-            style={styles.transactionImage}
-          />
-        </View>
-        <View style={styles.transactionDetailsContainer}>
-          <Text style={styles.transactionPayee}>
-            {type == 'debit' ? payee : strings.home.dashboardIncomeTitle}
+          <View
+            style={[
+              styles.transactionImageContainer,
+              {
+                backgroundColor:
+                  type == 'debit'
+                    ? colors.expenseCatColor[selectedCat].tintColor
+                    : colors.creditTransactionTintColor,
+              },
+            ]}>
+            <Image
+              source={type == 'debit' ? images[selectedCat] : images.downArrow}
+              style={styles.transactionImage}
+            />
+          </View>
+          <View style={styles.transactionDetailsContainer}>
+            <Text style={styles.transactionPayee}>
+              {type == 'debit' ? payee : strings.home.dashboardIncomeTitle}
+            </Text>
+            <Text style={styles.transactionDate}>{displayDate}</Text>
+          </View>
+          <Text
+            style={[
+              styles.transactionAmount,
+              {
+                color:
+                  type == 'debit'
+                    ? colors.debitTransactionAmmountColor
+                    : colors.creditTransactionAmmountColor,
+              },
+            ]}>
+            {type == 'debit' ? '-' : '+'}
+            {amount}
           </Text>
-          <Text style={styles.transactionDate}>{displayDate}</Text>
-        </View>
-        <Text
-          style={[
-            styles.transactionAmount,
-            {
-              color:
-                type == 'debit'
-                  ? colors.debitTransactionAmmountColor
-                  : colors.creditTransactionAmmountColor,
-            },
-          ]}>
-          {type == 'debit' ? '-' : '+'}
-          {amount}
-        </Text>
-      </TouchableOpacity>
-    );
+        </TouchableOpacity>
+      );
+    }
   };
 
   getTransactionPeriodTitle = () => {
     const {overallExpense, monthlyExpense, customExpense} =
-      strings.allExpenseCat;
+      strings.allTransactions;
     const {selectedFilter, dateRange} = this.props.route.params;
     let selectedStartDateTimeStamp, selectedEndDateTimeStamp;
     if (dateRange) {
@@ -119,8 +123,14 @@ class TransactionList extends Component {
     }
   };
   render() {
-    const {headerTitle, overallExpense, monthlyExpense, customExpense} =
-      strings.allExpenseCat;
+    const {
+      headerTitle,
+      overallExpense,
+      monthlyExpense,
+      customExpense,
+      filterOne,
+      filterTwo,
+    } = strings.allTransactions;
     const {customAllTransactions, allTransactions} = this.props.appReducer;
     const {selectedFilter} = this.props.route.params;
     return (
@@ -134,6 +144,34 @@ class TransactionList extends Component {
         <Text style={styles.transactionPeriodTitle}>
           {this.getTransactionPeriodTitle()}
         </Text>
+        <View style={styles.filterContainer}>
+          <TouchableOpacity
+            onPress={() => this.setState({selectedFilter: 'debit'})}
+            style={[
+              styles.filterButtonContainer,
+              {
+                backgroundColor:
+                  this.state.selectedFilter == 'debit'
+                    ? colors.primary
+                    : colors.primaryCardBackgroundColor,
+              },
+            ]}>
+            <Text style={styles.filterButtonTitle}>{filterOne}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.setState({selectedFilter: 'credit'})}
+            style={[
+              styles.filterButtonContainer,
+              {
+                backgroundColor:
+                  this.state.selectedFilter == 'credit'
+                    ? colors.primary
+                    : colors.primaryCardBackgroundColor,
+              },
+            ]}>
+            <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
+          </TouchableOpacity>
+        </View>
         <FlatList
           data={
             selectedFilter == 'all' ? allTransactions : customAllTransactions
