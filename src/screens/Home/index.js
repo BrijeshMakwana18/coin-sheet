@@ -989,10 +989,6 @@ class Home extends Component {
                     <Text style={styles.seeAllTransactionsLabel}>
                       {seeAllTransactions}
                     </Text>
-                    <Image
-                      source={images.rightArrow}
-                      style={styles.seeAllTransactionsImage}
-                    />
                   </TouchableOpacity>
                 </View>
               )}

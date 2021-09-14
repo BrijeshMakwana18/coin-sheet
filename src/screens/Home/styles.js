@@ -343,13 +343,12 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   seeAllTransactions: {
-    flexDirection: 'row',
     alignItems: 'center',
     borderRadius: perfectSize(10),
     marginTop: perfectSize(15),
     padding: '5%',
     backgroundColor: colors.primaryLightColor,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   seeAllTransactionsLabel: {
     color: colors.primary,
