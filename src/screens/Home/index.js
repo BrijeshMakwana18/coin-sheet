@@ -503,7 +503,20 @@ class Home extends Component {
       if (index < 3) {
         return (
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => {
+              this.props.navigation.navigate('TransactionList', {
+                selectedExpenseCat: item.category,
+                isFromExpenseCat: true,
+                selectedFilter: selectedFilter,
+                dateRange:
+                  selectedFilter == 'all'
+                    ? false
+                    : {
+                        start: selectedStartDateTimeStamp,
+                        end: selectedEndDateTimeStamp,
+                      },
+              });
+            }}
             style={[
               styles.catContainer,
               {
