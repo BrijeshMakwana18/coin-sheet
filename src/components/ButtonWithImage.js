@@ -4,23 +4,24 @@ import {TouchableOpacity, Image} from 'react-native';
 import {colors, perfectSize} from '../theme';
 
 export default function ButtonWithImage(props) {
+  const {onPress, image, animatedButton} = props;
   return (
     <TouchableOpacity
       style={{
         height: perfectSize(60),
         width: perfectSize(60),
-        backgroundColor: colors.primaryLightColor,
+        backgroundColor: !animatedButton && colors.primaryLightColor,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: perfectSize(15),
+        borderRadius: perfectSize(animatedButton ? 0 : 15),
       }}
-      onPress={props.onPress}>
+      onPress={onPress}>
       <Image
-        source={props.image}
+        source={image}
         style={{
-          height: perfectSize(20),
-          width: perfectSize(20),
-          tintColor: colors.primary,
+          height: perfectSize(animatedButton ? 60 : 20),
+          width: perfectSize(animatedButton ? 60 : 20),
+          tintColor: !animatedButton && colors.primary,
         }}
       />
     </TouchableOpacity>

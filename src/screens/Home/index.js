@@ -1027,7 +1027,8 @@ class Home extends Component {
               <View style={styles.bottomViewContainer}>
                 <ButtonWithImage
                   onPress={() => this.handleDateSubmit()}
-                  image={images.check}
+                  image={images.confirm}
+                  animatedButton
                 />
               </View>
             </View>

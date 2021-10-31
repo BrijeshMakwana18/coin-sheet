@@ -99,7 +99,7 @@ export default styles = StyleSheet.create({
   },
   catImageContainer: {
     marginTop: '10%',
-    height: '60%',
+    height: '50%',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',

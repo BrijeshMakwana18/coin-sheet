@@ -25,10 +25,10 @@ export default class Add extends Component {
             <Image
               source={images.add}
               style={{
-                height: perfectSize(25),
-                width: perfectSize(25),
+                height: '100%',
+                width: '100%',
                 resizeMode: 'contain',
-                tintColor: 'white',
+                // tintColor: 'white',
               }}
             />
           </View>
@@ -42,17 +42,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: perfectSize(60),
+    width: perfectSize(70),
     borderRadius: perfectSize(15),
-    backgroundColor: colors.addTransactionButtonColor,
-    height: perfectSize(60),
+    height: perfectSize(70),
     top: -hp('2%'),
-    shadowColor: colors.addTransactionButtonColor,
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    shadowOffset: {
-      height: 10,
-    },
-    elevation: 5,
   },
 });

@@ -97,6 +97,10 @@ class AddTransaction extends Component {
               title={headerTitle}
               leftImage={images.close}
               rightImage={images.transactionHeader}
+              // leftTintColorDisabled
+              rightTintColorDisabled
+              leftImageOpacity={0.7}
+              rightImageOpacity={1}
             />
           </View>
           <View style={styles.listContentContainer}>

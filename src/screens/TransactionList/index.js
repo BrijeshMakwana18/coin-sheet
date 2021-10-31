@@ -157,6 +157,8 @@ class TransactionList extends Component {
           title={headerTitle}
           leftImage={images.backArrow}
           rightImage={images.expense}
+          rightTintColorDisabled
+          rightImageOpacity={1}
         />
         <Text style={styles.transactionPeriodTitle}>
           {this.getTransactionPeriodTitle()}

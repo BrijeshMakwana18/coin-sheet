@@ -168,7 +168,7 @@ export default styles = StyleSheet.create({
     borderRadius: perfectSize(20),
   },
   catImageContainer: {
-    height: '60%',
+    height: '50%',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',

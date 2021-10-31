@@ -302,6 +302,8 @@ class AddIncome extends Component {
                 title={headerTitle}
                 leftImage={images.backArrow}
                 rightImage={images.income}
+                rightTintColorDisabled
+                rightImageOpacity={1}
               />
               <Text
                 style={styles.dateLabel}
@@ -374,7 +376,8 @@ class AddIncome extends Component {
                 }}>
                 <ButtonWithImage
                   onPress={() => Keyboard.dismiss()}
-                  image={images.check}
+                  image={images.confirm}
+                  animatedButton
                 />
               </View>
             )}
@@ -428,11 +431,13 @@ class AddIncome extends Component {
               <View style={styles.bottomViewContainer}>
                 <ButtonWithImage
                   onPress={() => this.handleCancelDate()}
-                  image={images.cross}
+                  image={images.cancel}
+                  animatedButton
                 />
                 <ButtonWithImage
                   onPress={() => this.handleDateSubmit()}
-                  image={images.check}
+                  image={images.confirm}
+                  animatedButton
                 />
               </View>
             </View>
