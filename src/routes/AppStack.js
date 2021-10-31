@@ -34,7 +34,7 @@ export default function AppStack() {
         },
         style: {
           backgroundColor: colors.tabBarBackgroundColor,
-          height: perfectSize(70),
+          height: perfectSize(80),
           // alignItems: 'center',
           // justifyContent: 'center',
           // position: 'absolute',

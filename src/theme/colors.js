@@ -1,9 +1,9 @@
 const colors = {
   //Screen background color across the app
-  backgroundColor: '#1E1E1E',
+  backgroundColor: '#171C20',
   //Primary card background color (Cards used in home screen)
-  primaryCardBackgroundColor: '#282828',
-  secondaryCardBackgroundColor: '#222222',
+  primaryCardBackgroundColor: '#262A34',
+  secondaryCardBackgroundColor: '#262A34',
   //Light color across the app (Label title, Button background)
   primaryLightColor: 'white',
   //Primary color accross the app (Calendar picker background, Selected label title)
