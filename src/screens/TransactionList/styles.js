@@ -62,10 +62,9 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   transactionImage: {
-    height: perfectSize(35),
-    width: perfectSize(35),
+    height: '100%',
+    width: '100%',
     resizeMode: 'contain',
-    tintColor: colors.primaryLightColor,
   },
   transactionDetailsContainer: {
     marginLeft: '5%',

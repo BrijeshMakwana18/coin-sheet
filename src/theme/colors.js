@@ -30,37 +30,37 @@ const colors = {
   topCatIndexColors: [
     {
       tintColor: 'rgb(255,0,228)',
-      backgroundColor: 'rgba(255,0,228,0.9)',
+      backgroundColor: '#262A34',
     },
     {
       tintColor: 'rgb(255,72,72)',
-      backgroundColor: 'rgba(255,72,72,0.9)',
+      backgroundColor: '#262A34',
     },
     {
       tintColor: 'rgb(72,19,128)',
-      backgroundColor: 'rgba(72,19,128,0.9)',
+      backgroundColor: '#262A34',
     },
     {
       tintColor: 'rgb(36,107,254)',
-      backgroundColor: 'rgba(36,107,254,0.9)',
+      backgroundColor: '#262A34',
     },
   ],
   recentTransactionsIndexColor: [
     {
       tintColor: 'rgb(255,0,228)',
-      backgroundColor: 'rgba(255,0,228,0.9)',
+      backgroundColor: '#262A34',
     },
     {
       tintColor: 'rgb(255,72,72)',
-      backgroundColor: 'rgba(255,72,72,0.9)',
+      backgroundColor: '#262A34',
     },
     {
       tintColor: 'rgb(72,19,128)',
-      backgroundColor: 'rgba(72,19,128,0.9)',
+      backgroundColor: '#262A34',
     },
     {
       tintColor: 'rgb(36,107,254)',
-      backgroundColor: 'rgba(36,107,254,0.9)',
+      backgroundColor: '#262A34',
     },
   ],
   creditTransactionBackgroundColor: 'rgba(0,128,0,0.9)',
@@ -70,51 +70,51 @@ const colors = {
   errorModalBackgroundColor: '#C45156',
   expenseCatColor: {
     food: {
-      backgroundColor: 'rgba(255,0,228,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(255,0,228)',
     },
     cash: {
-      backgroundColor: 'rgba(255,72,72,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(255,72,72)',
     },
     transfer: {
-      backgroundColor: 'rgba(72,19,128,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(72,19,128)',
     },
     entertainment: {
-      backgroundColor: 'rgba(36,107,254,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(36,107,254)',
     },
     fuel: {
-      backgroundColor: 'rgba(255,0,228,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(255,0,228)',
     },
     groceries: {
-      backgroundColor: 'rgba(255,72,72,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(255,72,72)',
     },
     investment: {
-      backgroundColor: 'rgba(72,19,128,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(72,19,128)',
     },
     loan: {
-      backgroundColor: 'rgba(36,107,254,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(36,107,254)',
     },
     medical: {
-      backgroundColor: 'rgba(255,0,228,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(255,0,228)',
     },
     shopping: {
-      backgroundColor: 'rgba(255,72,72,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(255,72,72)',
     },
     travel: {
-      backgroundColor: 'rgba(72,19,128,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(72,19,128)',
     },
     other: {
-      backgroundColor: 'rgba(36,107,254,0.9)',
+      backgroundColor: '#282828',
       tintColor: 'rgb(36,107,254)',
     },
   },

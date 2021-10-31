@@ -52,16 +52,7 @@ class TransactionList extends Component {
                   : colors.creditTransactionBackgroundColor,
             },
           ]}>
-          <View
-            style={[
-              styles.transactionImageContainer,
-              {
-                backgroundColor:
-                  type == 'debit'
-                    ? colors.expenseCatColor[selectedCat].tintColor
-                    : colors.creditTransactionTintColor,
-              },
-            ]}>
+          <View style={styles.transactionImageContainer}>
             <Image
               source={type == 'debit' ? images[selectedCat] : images.downArrow}
               style={styles.transactionImage}

@@ -500,7 +500,19 @@ class Home extends Component {
     if (item && item.total && (item.total == 0 || index > 3)) {
       return null;
     } else {
-      if (index < 3) {
+      if (index < 4) {
+        // onPress={() => {
+        //   this.props.navigation.navigate('AllExpenseCat', {
+        //     selectedFilter: selectedFilter,
+        //     dateRange:
+        //       selectedFilter == 'all'
+        //         ? false
+        //         : {
+        //             start: selectedStartDateTimeStamp,
+        //             end: selectedEndDateTimeStamp,
+        //           },
+        //   });
+        // }
         return (
           <TouchableOpacity
             onPress={() => {
@@ -529,7 +541,7 @@ class Home extends Component {
               style={[
                 styles.catImageContainer,
                 {
-                  backgroundColor: colors.topCatIndexColors[index].tintColor,
+                  // backgroundColor: colors.topCatIndexColors[index].tintColor,
                 },
               ]}>
               <Image source={images[item.category]} style={styles.catImage} />
@@ -539,42 +551,6 @@ class Home extends Component {
             </Text>
             <Text numberOfLines={1} style={styles.catTotalExpense}>
               {item.total}
-            </Text>
-          </TouchableOpacity>
-        );
-      } else if (index == 3) {
-        return (
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate('AllExpenseCat', {
-                selectedFilter: selectedFilter,
-                dateRange:
-                  selectedFilter == 'all'
-                    ? false
-                    : {
-                        start: selectedStartDateTimeStamp,
-                        end: selectedEndDateTimeStamp,
-                      },
-              });
-            }}
-            style={[
-              styles.catContainer,
-              {
-                backgroundColor:
-                  colors.topCatIndexColors[index].backgroundColor,
-              },
-            ]}>
-            <View
-              style={[
-                styles.catImageContainer,
-                {
-                  backgroundColor: colors.topCatIndexColors[index].tintColor,
-                },
-              ]}>
-              <Image source={images.rightArrow} style={styles.catImage} />
-            </View>
-            <Text numberOfLines={1} style={styles.catTitle}>
-              {strings.home.seeAll}
             </Text>
           </TouchableOpacity>
         );
@@ -595,16 +571,7 @@ class Home extends Component {
                   : colors.creditTransactionBackgroundColor,
             },
           ]}>
-          <View
-            style={[
-              styles.recentTransactionsImageContainer,
-              {
-                backgroundColor:
-                  item.type == 'debit'
-                    ? colors.recentTransactionsIndexColor[index].tintColor
-                    : colors.creditTransactionTintColor,
-              },
-            ]}>
+          <View style={styles.recentTransactionsImageContainer}>
             <Image
               source={
                 item.type == 'debit'

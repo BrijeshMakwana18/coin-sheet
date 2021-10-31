@@ -309,8 +309,7 @@ class AddExpense extends Component {
             marginLeft: index == 0 ? 0 : perfectSize(30),
           },
         ]}>
-        <View
-          style={[styles.catImageContainer, {backgroundColor: item.tintColor}]}>
+        <View style={[styles.catImageContainer]}>
           <Image source={item.image} style={styles.catImage} />
         </View>
         <Text
