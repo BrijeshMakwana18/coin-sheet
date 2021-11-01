@@ -341,7 +341,7 @@ export default styles = StyleSheet.create({
     position: 'absolute',
     bottom: perfectSize(-30),
     width: '50%',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   seeAllTransactions: {
     alignItems: 'center',

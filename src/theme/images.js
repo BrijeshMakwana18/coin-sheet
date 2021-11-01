@@ -35,4 +35,5 @@ export default images = {
   upArrow: require('../assets/images/up-arrow.png'),
   downArrow: require('../assets/images/down-arrow.png'),
   dashboardImage: require('../assets/images/dashboardImage.png'),
+  emptyDashboardImage: require('../assets/images/emptyDashboardImage.png'),
 };

@@ -59,6 +59,12 @@ const strings = {
     filterThree: 'Custom',
     seeAllTransactions: 'See all transactions',
     selectDateError: 'Please select date range',
+    overallEmptyDashboardTitle:
+      'Oh! Looks like you do not have any transactions.',
+    monthlyEmptyDashboardTitle:
+      'Oh! Looks like you do not have any transactions in current month.',
+    customEmptyDashboardTitle:
+      'Oh! Looks like you do not have any transactions during selected time period.',
   },
   allExpenseCat: {
     headerTitle: 'All\nCategories',

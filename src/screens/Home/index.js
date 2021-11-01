@@ -16,7 +16,7 @@ import {
   Easing,
 } from 'react-native';
 import {bindActionCreators} from 'redux';
-import {colors, images, perfectSize, strings} from '../../theme';
+import {colors, fonts, images, perfectSize, strings} from '../../theme';
 import {connect} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -702,6 +702,19 @@ class Home extends Component {
       this.setState({datePicker: false});
     }
   };
+  handleCancelDate = () => {
+    const {selectedStartDateTimeStamp, selectedEndDateTimeStamp} = this.state;
+    if (selectedEndDateTimeStamp && selectedStartDateTimeStamp) {
+      this.setState({
+        datePicker: false,
+      });
+    } else {
+      this.setState({
+        selectedFilter: 'month',
+        datePicker: false,
+      });
+    }
+  };
   showError = () => {
     Animated.timing(this.errorModalTop, {
       toValue: Platform.OS == 'ios' ? perfectSize(50) : perfectSize(40),
@@ -716,6 +729,63 @@ class Home extends Component {
         useNativeDriver: false,
       }).start();
     }, 2000);
+  };
+
+  getDashboardVisibility = () => {
+    const {selectedFilter} = this.state;
+    const {allTransactions, customAllTransactions} = this.props.appReducer;
+
+    if (
+      selectedFilter == 'all' &&
+      allTransactions &&
+      allTransactions.length > 0
+    ) {
+      return true;
+    } else if (customAllTransactions && customAllTransactions.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  renderEmptyDashboard = () => {
+    const {selectedFilter} = this.state;
+    const {
+      overallEmptyDashboardTitle,
+      monthlyEmptyDashboardTitle,
+      customEmptyDashboardTitle,
+    } = strings.home;
+    let emptyDashboardImage, emptyDashboardTitle;
+    if (selectedFilter == 'all') {
+      emptyDashboardImage = images.emptyDashboardImage;
+      emptyDashboardTitle = overallEmptyDashboardTitle;
+    } else if (selectedFilter == 'month') {
+      emptyDashboardImage = images.emptyDashboardImage;
+      emptyDashboardTitle = monthlyEmptyDashboardTitle;
+    } else if (selectedFilter == 'custom') {
+      emptyDashboardImage = images.emptyDashboardImage;
+      emptyDashboardTitle = customEmptyDashboardTitle;
+    }
+    return (
+      <View style={{flex: 1}}>
+        <Image
+          source={emptyDashboardImage}
+          style={{
+            height: '70%',
+            width: '100%',
+            resizeMode: 'contain',
+          }}
+        />
+        <Text
+          style={{
+            fontSize: perfectSize(18),
+            fontFamily: fonts.quicksandBold,
+            textAlign: 'center',
+            color: colors.primaryLightColor,
+          }}>
+          {emptyDashboardTitle}
+        </Text>
+      </View>
+    );
   };
   render() {
     const {
@@ -867,120 +937,123 @@ class Home extends Component {
                 </Text>
               )}
             </View>
-            <ScrollView
-              // onScroll={this.onScroll}
-              scrollEventThrottle={16}
-              showsVerticalScrollIndicator={false}
-              style={styles.scrollContainer}>
-              <View style={styles.dashboardContainer}>
-                <Text style={styles.myBalanceTitle}>{myBalanceTitle}</Text>
-                <Text style={styles.myBalanceStyle}>
-                  {selectedFilter == 'all'
-                    ? totalIncome - totalExpenses
-                    : customTotalIncome - customTotalExpenses}
-                </Text>
-                <View style={styles.dashboardInnerContainer}>
-                  <View style={styles.incomeContainer}>
-                    <View>
-                      <Text style={styles.dashboardIncomeHeaderStyle}>
-                        {dashboardIncomeTitle}
-                      </Text>
-                      <Text style={styles.dashboardIncomeStyle}>
-                        {selectedFilter == 'all'
-                          ? totalIncome
-                          : customTotalIncome}
-                      </Text>
+            {!this.getDashboardVisibility() && this.renderEmptyDashboard()}
+            {this.getDashboardVisibility() && (
+              <ScrollView
+                // onScroll={this.onScroll}
+                scrollEventThrottle={16}
+                showsVerticalScrollIndicator={false}
+                style={styles.scrollContainer}>
+                <View style={styles.dashboardContainer}>
+                  <Text style={styles.myBalanceTitle}>{myBalanceTitle}</Text>
+                  <Text style={styles.myBalanceStyle}>
+                    {selectedFilter == 'all'
+                      ? totalIncome - totalExpenses
+                      : customTotalIncome - customTotalExpenses}
+                  </Text>
+                  <View style={styles.dashboardInnerContainer}>
+                    <View style={styles.incomeContainer}>
+                      <View>
+                        <Text style={styles.dashboardIncomeHeaderStyle}>
+                          {dashboardIncomeTitle}
+                        </Text>
+                        <Text style={styles.dashboardIncomeStyle}>
+                          {selectedFilter == 'all'
+                            ? totalIncome
+                            : customTotalIncome}
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={styles.expenseContainer}>
+                      <View>
+                        <Text style={styles.dashboardExpenseHeaderStyle}>
+                          {dashboardExpenseTitle}
+                        </Text>
+                        <Text style={styles.dashboardExpenseStyle}>
+                          {selectedFilter == 'all'
+                            ? totalExpenses
+                            : customTotalExpenses}
+                        </Text>
+                      </View>
                     </View>
                   </View>
-                  <View style={styles.expenseContainer}>
-                    <View>
-                      <Text style={styles.dashboardExpenseHeaderStyle}>
-                        {dashboardExpenseTitle}
-                      </Text>
-                      <Text style={styles.dashboardExpenseStyle}>
-                        {selectedFilter == 'all'
-                          ? totalExpenses
-                          : customTotalExpenses}
-                      </Text>
-                    </View>
-                  </View>
+                  <Image
+                    source={images.dashboardImage}
+                    style={styles.dashboardImage}
+                  />
                 </View>
-                <Image
-                  source={images.dashboardImage}
-                  style={styles.dashboardImage}
-                />
-              </View>
-              {this.checkTotalExpensesByCat() && (
-                <View style={styles.topCatContainer}>
-                  <View style={styles.catHeaderContainer}>
-                    <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+                {this.checkTotalExpensesByCat() && (
+                  <View style={styles.topCatContainer}>
+                    <View style={styles.catHeaderContainer}>
+                      <Text style={styles.topCatHeader}>{topCatHeader}</Text>
 
-                    <TouchableOpacity
-                      onPress={() => {
-                        this.props.navigation.navigate('AllExpenseCat', {
-                          selectedFilter: selectedFilter,
-                          dateRange:
-                            selectedFilter == 'all'
-                              ? false
-                              : {
-                                  start: selectedStartDateTimeStamp,
-                                  end: selectedEndDateTimeStamp,
-                                },
-                        });
-                      }}
-                      style={styles.seeAllContainer}>
-                      <Text style={styles.seeAllTitle}>{'See all'}</Text>
-                    </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.props.navigation.navigate('AllExpenseCat', {
+                            selectedFilter: selectedFilter,
+                            dateRange:
+                              selectedFilter == 'all'
+                                ? false
+                                : {
+                                    start: selectedStartDateTimeStamp,
+                                    end: selectedEndDateTimeStamp,
+                                  },
+                          });
+                        }}
+                        style={styles.seeAllContainer}>
+                        <Text style={styles.seeAllTitle}>{'See all'}</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}>
+                      {this.getTotalExpensesByCat(0)}
+                      {this.getTotalExpensesByCat(1)}
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        marginTop: '3.33%',
+                        justifyContent: 'space-between',
+                      }}>
+                      {this.getTotalExpensesByCat(2)}
+                      {this.getTotalExpensesByCat(3)}
+                    </View>
                   </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    {this.getTotalExpensesByCat(0)}
-                    {this.getTotalExpensesByCat(1)}
+                )}
+                {this.checkRecentTransactions() && (
+                  <View style={styles.recentTransactionsListContainer}>
+                    <View style={styles.catHeaderContainer}>
+                      <Text style={styles.recentTransactionsHeader}>
+                        {recentTransactionsHeader}
+                      </Text>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.props.navigation.navigate('TransactionList', {
+                            selectedFilter: selectedFilter,
+                            dateRange:
+                              selectedFilter == 'all'
+                                ? false
+                                : {
+                                    start: selectedStartDateTimeStamp,
+                                    end: selectedEndDateTimeStamp,
+                                  },
+                          });
+                        }}
+                        style={styles.seeAllContainer}>
+                        <Text style={styles.seeAllTitle}>{'See all'}</Text>
+                      </TouchableOpacity>
+                    </View>
+                    {this.getRecentTransactions(0)}
+                    {this.getRecentTransactions(1)}
+                    {this.getRecentTransactions(2)}
+                    {this.getRecentTransactions(3)}
                   </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      marginTop: '3.33%',
-                      justifyContent: 'space-between',
-                    }}>
-                    {this.getTotalExpensesByCat(2)}
-                    {this.getTotalExpensesByCat(3)}
-                  </View>
-                </View>
-              )}
-              {this.checkRecentTransactions() && (
-                <View style={styles.recentTransactionsListContainer}>
-                  <View style={styles.catHeaderContainer}>
-                    <Text style={styles.recentTransactionsHeader}>
-                      {recentTransactionsHeader}
-                    </Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        this.props.navigation.navigate('TransactionList', {
-                          selectedFilter: selectedFilter,
-                          dateRange:
-                            selectedFilter == 'all'
-                              ? false
-                              : {
-                                  start: selectedStartDateTimeStamp,
-                                  end: selectedEndDateTimeStamp,
-                                },
-                        });
-                      }}
-                      style={styles.seeAllContainer}>
-                      <Text style={styles.seeAllTitle}>{'See all'}</Text>
-                    </TouchableOpacity>
-                  </View>
-                  {this.getRecentTransactions(0)}
-                  {this.getRecentTransactions(1)}
-                  {this.getRecentTransactions(2)}
-                  {this.getRecentTransactions(3)}
-                </View>
-              )}
-            </ScrollView>
+                )}
+              </ScrollView>
+            )}
           </View>
         )}
         <Modal
@@ -1033,6 +1106,11 @@ class Home extends Component {
                 }
               />
               <View style={styles.bottomViewContainer}>
+                <ButtonWithImage
+                  onPress={() => this.handleCancelDate()}
+                  image={images.cancel}
+                  animatedButton
+                />
                 <ButtonWithImage
                   onPress={() => this.handleDateSubmit()}
                   image={images.confirm}
