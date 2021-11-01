@@ -501,18 +501,6 @@ class Home extends Component {
       return null;
     } else {
       if (index < 4) {
-        // onPress={() => {
-        //   this.props.navigation.navigate('AllExpenseCat', {
-        //     selectedFilter: selectedFilter,
-        //     dateRange:
-        //       selectedFilter == 'all'
-        //         ? false
-        //         : {
-        //             start: selectedStartDateTimeStamp,
-        //             end: selectedEndDateTimeStamp,
-        //           },
-        //   });
-        // }
         return (
           <TouchableOpacity
             onPress={() => {
@@ -924,7 +912,26 @@ class Home extends Component {
               </View>
               {this.checkTotalExpensesByCat() && (
                 <View style={styles.topCatContainer}>
-                  <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+                  <View style={styles.catHeaderContainer}>
+                    <Text style={styles.topCatHeader}>{topCatHeader}</Text>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.props.navigation.navigate('AllExpenseCat', {
+                          selectedFilter: selectedFilter,
+                          dateRange:
+                            selectedFilter == 'all'
+                              ? false
+                              : {
+                                  start: selectedStartDateTimeStamp,
+                                  end: selectedEndDateTimeStamp,
+                                },
+                        });
+                      }}
+                      style={styles.seeAllContainer}>
+                      <Text style={styles.seeAllTitle}>{'See all'}</Text>
+                    </TouchableOpacity>
+                  </View>
                   <View
                     style={{
                       flexDirection: 'row',
@@ -946,31 +953,31 @@ class Home extends Component {
               )}
               {this.checkRecentTransactions() && (
                 <View style={styles.recentTransactionsListContainer}>
-                  <Text style={styles.recentTransactionsHeader}>
-                    {recentTransactionsHeader}
-                  </Text>
+                  <View style={styles.catHeaderContainer}>
+                    <Text style={styles.recentTransactionsHeader}>
+                      {recentTransactionsHeader}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.props.navigation.navigate('TransactionList', {
+                          selectedFilter: selectedFilter,
+                          dateRange:
+                            selectedFilter == 'all'
+                              ? false
+                              : {
+                                  start: selectedStartDateTimeStamp,
+                                  end: selectedEndDateTimeStamp,
+                                },
+                        });
+                      }}
+                      style={styles.seeAllContainer}>
+                      <Text style={styles.seeAllTitle}>{'See all'}</Text>
+                    </TouchableOpacity>
+                  </View>
                   {this.getRecentTransactions(0)}
                   {this.getRecentTransactions(1)}
                   {this.getRecentTransactions(2)}
                   {this.getRecentTransactions(3)}
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.props.navigation.navigate('TransactionList', {
-                        selectedFilter: selectedFilter,
-                        dateRange:
-                          selectedFilter == 'all'
-                            ? false
-                            : {
-                                start: selectedStartDateTimeStamp,
-                                end: selectedEndDateTimeStamp,
-                              },
-                      });
-                    }}
-                    style={styles.seeAllTransactions}>
-                    <Text style={styles.seeAllTransactionsLabel}>
-                      {seeAllTransactions}
-                    </Text>
-                  </TouchableOpacity>
                 </View>
               )}
             </ScrollView>

@@ -151,6 +151,21 @@ export default styles = StyleSheet.create({
   topCatContainer: {
     marginTop: '7%',
   },
+  catHeaderContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  seeAllContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  seeAllTitle: {
+    color: colors.headerTitleColor,
+    fontFamily: fonts.avenirMedium,
+    fontSize: perfectSize(14),
+  },
   topCatHeader: {
     fontSize: perfectSize(18),
     fontFamily: fonts.quicksandBold,
