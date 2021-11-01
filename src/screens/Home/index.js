@@ -733,7 +733,7 @@ class Home extends Component {
       headerTitle,
       dashboardIncomeTitle,
       dashboardExpenseTitle,
-      dashboardHeader,
+      myBalanceTitle,
       topCatHeader,
       recentTransactionsHeader,
       filterOne,
@@ -873,15 +873,14 @@ class Home extends Component {
               showsVerticalScrollIndicator={false}
               style={styles.scrollContainer}>
               <View style={styles.dashboardContainer}>
-                <Text style={styles.dashboardHeader}>{dashboardHeader}</Text>
+                <Text style={styles.myBalanceTitle}>{myBalanceTitle}</Text>
+                <Text style={styles.myBalanceStyle}>
+                  {selectedFilter == 'all'
+                    ? totalIncome - totalExpenses
+                    : customTotalIncome - customTotalExpenses}
+                </Text>
                 <View style={styles.dashboardInnerContainer}>
                   <View style={styles.incomeContainer}>
-                    <View style={styles.downArrowContainer}>
-                      <Image
-                        source={images.downArrow}
-                        style={styles.downArrow}
-                      />
-                    </View>
                     <View>
                       <Text style={styles.dashboardIncomeHeaderStyle}>
                         {dashboardIncomeTitle}
@@ -894,9 +893,6 @@ class Home extends Component {
                     </View>
                   </View>
                   <View style={styles.expenseContainer}>
-                    <View style={styles.upArrowContainer}>
-                      <Image source={images.upArrow} style={styles.upArrow} />
-                    </View>
                     <View>
                       <Text style={styles.dashboardExpenseHeaderStyle}>
                         {dashboardExpenseTitle}
@@ -909,6 +905,10 @@ class Home extends Component {
                     </View>
                   </View>
                 </View>
+                <Image
+                  source={images.dashboardImage}
+                  style={styles.dashboardImage}
+                />
               </View>
               {this.checkTotalExpensesByCat() && (
                 <View style={styles.topCatContainer}>

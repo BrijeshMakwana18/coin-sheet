@@ -34,4 +34,5 @@ export default images = {
   transactionSuccess: require('../assets/images/transaction-success.png'),
   upArrow: require('../assets/images/up-arrow.png'),
   downArrow: require('../assets/images/down-arrow.png'),
+  dashboardImage: require('../assets/images/dashboardImage.png'),
 };

@@ -48,7 +48,7 @@ const strings = {
   },
   home: {
     headerTitle: 'Hey, ',
-    dashboardHeader: 'Transaction overview',
+    myBalanceTitle: 'My balance',
     dashboardIncomeTitle: 'Income',
     dashboardExpenseTitle: 'Expense',
     topCatHeader: 'Top categories',
