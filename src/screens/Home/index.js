@@ -752,6 +752,7 @@ class Home extends Component {
       filterTwo,
       filterThree,
       seeAllTransactions,
+      selectDateError,
     } = strings.home;
     const {selectedFilter} = this.state;
     const {selectedStartDateTimeStamp, selectedEndDateTimeStamp} = this.state;
@@ -1033,10 +1034,7 @@ class Home extends Component {
               </View>
             </View>
           </View>
-          <ErrorSlider
-            error="Please select date range"
-            top={this.errorModalTop}
-          />
+          <ErrorSlider error={selectDateError} top={this.errorModalTop} />
         </Modal>
       </>
     );

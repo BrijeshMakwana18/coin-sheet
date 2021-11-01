@@ -58,6 +58,7 @@ const strings = {
     filterTwo: 'This month',
     filterThree: 'Custom',
     seeAllTransactions: 'See all transactions',
+    selectDateError: 'Please select date range',
   },
   allExpenseCat: {
     headerTitle: 'All\nCategories',
