@@ -6,6 +6,7 @@ import Offline from './Offline';
 import ButtonWithImage from './ButtonWithImage';
 import PrimaryHeader from './PrimaryHeader';
 import ErrorSlider from './ErrorSlider';
+import DashboardSkeleton from './Skeletons/DashboardSkeleton';
 export {
   Button,
   TextInput,
@@ -15,4 +16,5 @@ export {
   ButtonWithImage,
   PrimaryHeader,
   ErrorSlider,
+  DashboardSkeleton,
 };

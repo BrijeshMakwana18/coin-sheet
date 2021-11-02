@@ -37,7 +37,11 @@ import {
 } from './actions';
 import styles from './styles';
 import CalendarPicker from 'react-native-calendar-picker';
-import {ButtonWithImage, ErrorSlider} from '../../components';
+import {
+  ButtonWithImage,
+  ErrorSlider,
+  DashboardSkeleton,
+} from '../../components';
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
@@ -113,7 +117,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoding: true,
+      isLoading: true,
       selectedFilter: 'month',
       datePicker: false,
       modalDisplayDate: '',
@@ -127,7 +131,7 @@ class Home extends Component {
   //Fetching current user and storing it into store
   getCurrentUserData = async () => {
     this.setState({
-      isLoding: true,
+      isLoading: true,
     });
     let user = await auth().currentUser;
     this.props.setUserData(user);
@@ -251,7 +255,7 @@ class Home extends Component {
       ? this.props.setCustomAllTransactions(allTransactions)
       : this.props.setAllTransactions(allTransactions);
     this.setState({
-      isLoding: false,
+      isLoading: false,
     });
   };
 
@@ -831,15 +835,15 @@ class Home extends Component {
           backgroundColor={colors.backgroundColor}
           barStyle="light-content"
         />
-        {this.state.isLoding ? (
+        {this.state.isLoading ? (
           <View
-            style={{
-              flex: 1,
-              backgroundColor: 'green',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text>Skeleton Here</Text>
+            style={[
+              styles.skeletonContainer,
+              {
+                paddingTop: perfectSize(60),
+              },
+            ]}>
+            <DashboardSkeleton />
           </View>
         ) : (
           <View

@@ -7,6 +7,11 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
+  skeletonContainer: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
+    // alignItems: 'center',
+  },
   headerContainer: {
     flexDirection: 'row',
     marginTop: perfectSize(10),
