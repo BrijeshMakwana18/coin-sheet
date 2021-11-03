@@ -8,7 +8,7 @@ export default function App() {
   return (
     <SkeletonPlaceholder
       backgroundColor="#34363C"
-      speed={800}
+      speed={500}
       highlightColor="#2D302D">
       <View
         style={{

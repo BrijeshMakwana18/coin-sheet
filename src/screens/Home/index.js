@@ -191,6 +191,9 @@ class Home extends Component {
   };
 
   getCustomTransactions = async (startDate, endDate) => {
+    this.setState({
+      isLoading: true,
+    });
     const userId = this.props.appReducer.user.uid;
     //Fetching all expenses
     this.customExpenses = await firestore()
@@ -239,6 +242,9 @@ class Home extends Component {
         this.props.setCustomTotalIncome(totalIncome);
         this.generateAllTransactions(true);
       });
+    this.setState({
+      isLoading: false,
+    });
   };
 
   //To create an array of all transactions
