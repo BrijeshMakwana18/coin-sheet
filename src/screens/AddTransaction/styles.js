@@ -5,27 +5,41 @@ import {colors, fonts, height, perfectSize, width} from '../../theme';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: perfectSize(56),
+    // paddingTop: perfectSize(56),
     backgroundColor: colors.backgroundColor,
+  },
+  closeImage: {
+    height: perfectSize(30),
+    width: perfectSize(30),
+    resizeMode: 'contain',
+    opacity: 0.7,
   },
   listContentContainer: {
     flex: 1,
+    justifyContent: 'center',
+  },
+  objectImage: {
+    height: perfectSize(300),
+    width: perfectSize(300),
+    resizeMode: 'contain',
+    position: 'absolute',
   },
   cardContainer: {
     alignSelf: 'center',
     borderRadius: perfectSize(10),
-    marginTop: '10%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: height / 10,
+    width: (width * 50) / 100,
+    backgroundColor: colors.primaryCardBackgroundColor,
+    shadowColor: '#000',
     shadowOpacity: 0.3,
     shadowRadius: 10,
     shadowOffset: {
       height: 10,
     },
     elevation: 24,
-    height: height / 5,
-    width: (width * 85) / 100,
-    backgroundColor: colors.primaryCardBackgroundColor,
   },
   cardDetailsContainer: {
     height: '100%',

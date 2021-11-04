@@ -19,9 +19,7 @@ const strings = {
     goal: 'Goal',
     account: 'Account',
   },
-  addTransaction: {
-    headerTitle: 'Add New',
-  },
+  addTransaction: {},
   addIncome: {
     headerTitle: 'Add Income',
     ammountPlaceholder: 'Amount',
@@ -60,11 +58,11 @@ const strings = {
     seeAllTransactions: 'See all transactions',
     selectDateError: 'Please select date range',
     overallEmptyDashboardTitle:
-      'Oh! Looks like you do not have any transactions.',
+      'Oh! Looks like you do not have any transaction.',
     monthlyEmptyDashboardTitle:
-      'Oh! Looks like you do not have any transactions in current month.',
+      'Oh! Looks like you do not have any transaction in current month.',
     customEmptyDashboardTitle:
-      'Oh! Looks like you do not have any transactions during selected time period.',
+      'Oh! Looks like you do not have any transaction during selected time period.',
   },
   allExpenseCat: {
     headerTitle: 'All\nCategories',
@@ -83,6 +81,8 @@ const strings = {
     customExpense: 'You are viewing transactions for time period',
     filterOne: 'Debit',
     filterTwo: 'Credit',
+    emptyDebitList: 'Oh! Looks like you do not have any debit transaction.',
+    emptyCreditList: 'Oh! Looks like you do not have any credit transaction.',
   },
 };
 

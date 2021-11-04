@@ -452,11 +452,15 @@ class AddExpense extends Component {
                 },
               ]}>
               <TextInput
-                style={styles.textInput}
+                contextMenuHidden={true}
+                style={[
+                  styles.textInput,
+                  Platform.OS == 'android' && {fontWeight: 'normal'},
+                ]}
                 placeholderTextColor="rgba(255,255,255,0.3)"
                 selectionColor={colors.primary}
                 placeholder={ammountPlaceholder}
-                keyboardType="decimal-pad"
+                keyboardType="numeric"
                 onChangeText={amount => this.setState({ammount: amount})}
                 value={this.state.ammount}
                 returnKeyType="next"
@@ -469,7 +473,11 @@ class AddExpense extends Component {
             </Animated.View>
             <Animated.View style={styles.payeeInputContainer}>
               <TextInput
-                style={styles.textInput}
+                contextMenuHidden={true}
+                style={[
+                  styles.textInput,
+                  Platform.OS == 'android' && {fontWeight: 'normal'},
+                ]}
                 placeholderTextColor="rgba(255,255,255,0.3)"
                 selectionColor={colors.primary}
                 placeholder={payeePlaceholder}
@@ -491,7 +499,11 @@ class AddExpense extends Component {
                 },
               ]}>
               <TextInput
-                style={styles.textInput}
+                contextMenuHidden={true}
+                style={[
+                  styles.textInput,
+                  Platform.OS == 'android' && {fontWeight: 'normal'},
+                ]}
                 placeholderTextColor="rgba(255,255,255,0.3)"
                 selectionColor={colors.primary}
                 placeholder={notesPlaceholder}

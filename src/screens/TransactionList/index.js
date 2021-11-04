@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
 import {PrimaryHeader} from '../../components';
-import {strings, images, colors} from '../../theme';
+import {strings, images, colors, perfectSize} from '../../theme';
 import styles from './styles';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -33,14 +33,41 @@ class TransactionList extends Component {
     super(props);
     this.state = {
       selectedFilter: 'debit',
+      hasDebitTransactions: false,
+      hasCreditTransactions: false,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const {isFromExpenseCat} = this.props.route.params;
+    let allTransactions = this.getListData();
+    console.log(allTransactions);
+    if (!isFromExpenseCat && allTransactions) {
+      for (let i = 0; i < allTransactions?.length - 1; i++) {
+        if (allTransactions[i].type == 'debit') {
+          this.setState({
+            hasDebitTransactions: true,
+          });
+          console.log('debit is there');
+          break;
+        }
+      }
+      for (let i = 0; i < allTransactions?.length; i++) {
+        if (allTransactions[i].type == 'credit') {
+          this.setState({
+            hasCreditTransactions: true,
+          });
+          console.log('credit is there');
+          break;
+        }
+      }
+    }
+  }
 
   renderAllTransactions = (item, index) => {
     const {type, selectedCat, payee, displayDate, amount} = item;
-    if (type == this.state.selectedFilter) {
+    const {selectedFilter} = this.state;
+    if (type == selectedFilter) {
       return (
         <TouchableOpacity
           style={[
@@ -54,7 +81,9 @@ class TransactionList extends Component {
           ]}>
           <View style={styles.transactionImageContainer}>
             <Image
-              source={type == 'debit' ? images[selectedCat] : images.downArrow}
+              source={
+                type == 'debit' ? images[selectedCat] : images.incomePlaceholder
+              }
               style={styles.transactionImage}
             />
           </View>
@@ -138,6 +167,57 @@ class TransactionList extends Component {
       }
     }
   };
+  getDasListVisibility = () => {
+    const {isFromExpenseCat} = this.props.route.params;
+    if (!isFromExpenseCat) {
+      const {selectedFilter, hasCreditTransactions, hasDebitTransactions} =
+        this.state;
+
+      if (selectedFilter == 'debit' && hasDebitTransactions) {
+        return true;
+      } else if (selectedFilter == 'credit' && hasCreditTransactions) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  };
+  renderEmptyDashboard = () => {
+    const {selectedFilter} = this.state;
+    const {emptyCreditList, emptyDebitList} = strings.allTransactions;
+    let emptyDashboardImage, emptyDashboardTitle;
+    if (selectedFilter == 'debit') {
+      emptyDashboardImage = images.emptyDashboardImage;
+      emptyDashboardTitle = emptyDebitList;
+    } else if (selectedFilter == 'credit') {
+      emptyDashboardImage = images.emptyDashboardImage;
+      emptyDashboardTitle = emptyCreditList;
+    }
+    return (
+      <View style={{flex: 1}}>
+        <Image
+          source={emptyDashboardImage}
+          style={{
+            height: '70%',
+            width: '100%',
+            resizeMode: 'contain',
+          }}
+        />
+        <Text
+          style={{
+            fontSize: perfectSize(18),
+            fontFamily: fonts.quicksandBold,
+            textAlign: 'center',
+            padding: '5%',
+            color: colors.primaryLightColor,
+          }}>
+          {emptyDashboardTitle}
+        </Text>
+      </View>
+    );
+  };
   render() {
     const {
       headerTitle,
@@ -148,15 +228,18 @@ class TransactionList extends Component {
       filterTwo,
     } = strings.allTransactions;
     const {customAllTransactions, allTransactions} = this.props.appReducer;
-    const {selectedFilter, isFromExpenseCat, allTransactionsFromExpenseCat} =
+    const {isFromExpenseCat, allTransactionsFromExpenseCat} =
       this.props.route.params;
+    const {selectedFilter} = this.state;
     return (
       <View style={styles.container}>
         <PrimaryHeader
           onPress={() => this.props.navigation.goBack()}
           title={headerTitle}
           leftImage={images.backArrow}
-          rightImage={images.expense}
+          rightImage={
+            selectedFilter == 'credit' ? images.income : images.expense
+          }
           rightTintColorDisabled
           rightImageOpacity={1}
         />
@@ -171,7 +254,7 @@ class TransactionList extends Component {
                 styles.filterButtonContainer,
                 {
                   backgroundColor:
-                    this.state.selectedFilter == 'debit'
+                    selectedFilter == 'debit'
                       ? colors.primary
                       : colors.primaryCardBackgroundColor,
                 },
@@ -184,7 +267,7 @@ class TransactionList extends Component {
                 styles.filterButtonContainer,
                 {
                   backgroundColor:
-                    this.state.selectedFilter == 'credit'
+                    selectedFilter == 'credit'
                       ? colors.primary
                       : colors.primaryCardBackgroundColor,
                 },
@@ -193,15 +276,20 @@ class TransactionList extends Component {
             </TouchableOpacity>
           </View>
         )}
-        <FlatList
-          data={this.getListData()}
-          contentContainerStyle={styles.catListContainer}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item, index}) =>
-            this.renderAllTransactions(item, index)
-          }
-          showsVerticalScrollIndicator={false}
-        />
+        {this.getDasListVisibility() ? (
+          <FlatList
+            data={this.getListData()}
+            contentContainerStyle={styles.catListContainer}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item, index}) =>
+              this.renderAllTransactions(item, index)
+            }
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={this.renderEmptyDashboard()}
+          />
+        ) : (
+          this.renderEmptyDashboard()
+        )}
       </View>
     );
   }

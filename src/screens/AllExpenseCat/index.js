@@ -68,13 +68,7 @@ class AllExpenseCat extends Component {
               backgroundColor: colors.expenseCatColor[category].backgroundColor,
             },
           ]}>
-          <View
-            style={[
-              styles.catImageContainer,
-              {
-                backgroundColor: colors.expenseCatColor[category].tintColor,
-              },
-            ]}>
+          <View style={styles.catImageContainer}>
             <Image source={images[category]} style={styles.catImage} />
           </View>
           <View style={styles.catDetailsContainer}>

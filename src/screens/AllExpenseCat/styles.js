@@ -40,10 +40,9 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   catImage: {
-    height: perfectSize(35),
-    width: perfectSize(35),
+    height: perfectSize(70),
+    width: perfectSize(70),
     resizeMode: 'contain',
-    tintColor: colors.primaryLightColor,
   },
   catDetailsContainer: {
     marginLeft: '5%',

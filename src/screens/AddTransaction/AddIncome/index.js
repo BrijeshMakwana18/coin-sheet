@@ -350,7 +350,7 @@ class AddIncome extends Component {
                 selectionColor={colors.primary}
                 placeholder={notesPlaceholder}
                 returnKeyType="next"
-                onChangeText={notes => this.setState({notes: notes.trim()})}
+                onChangeText={notes => this.setState({notes: notes})}
                 value={this.state.notes}
                 blurOnSubmit={false}
                 ref={input => {
@@ -366,7 +366,7 @@ class AddIncome extends Component {
               bottom={perfectSize(30)}
               active={this.isActive()}
               onPress={() => this.handleOnSubmit()}
-              disabled={!this.isActive()}
+              // disabled={!this.isActive()}
             />
             {this.state.isKeyboard && (
               <View

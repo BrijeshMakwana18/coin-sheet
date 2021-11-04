@@ -42,32 +42,7 @@ import {
   ErrorSlider,
   DashboardSkeleton,
 } from '../../components';
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      setUserData,
-      setUserIncome,
-      setUserExpenses,
-      setTotalIncome,
-      setTotalExpenses,
-      setTotalExpensesByCat,
-      setAllTransactions,
-      setCustomUserIncome,
-      setCustomUserExpenses,
-      setCustomTotalIncome,
-      setCustomTotalExpenses,
-      setCustomTotalExpensesByCat,
-      setCustomAllTransactions,
-    },
-    dispatch,
-  );
-};
 
-const mapStateToProps = state => {
-  return {
-    appReducer: state.appReducer,
-  };
-};
 let months = [
   'Jan',
   'Feb',
@@ -574,7 +549,7 @@ class Home extends Component {
               source={
                 item.type == 'debit'
                   ? images[item.selectedCat]
-                  : images.downArrow
+                  : images.incomePlaceholder
               }
               style={styles.recentTransactionsImage}
             />
@@ -791,6 +766,7 @@ class Home extends Component {
             fontFamily: fonts.quicksandBold,
             textAlign: 'center',
             color: colors.primaryLightColor,
+            padding: '5%',
           }}>
           {emptyDashboardTitle}
         </Text>
@@ -947,8 +923,7 @@ class Home extends Component {
                 </Text>
               )}
             </View>
-            {!this.getDashboardVisibility() && this.renderEmptyDashboard()}
-            {this.getDashboardVisibility() && (
+            {this.getDashboardVisibility() ? (
               <ScrollView
                 // onScroll={this.onScroll}
                 scrollEventThrottle={16}
@@ -1063,6 +1038,8 @@ class Home extends Component {
                   </View>
                 )}
               </ScrollView>
+            ) : (
+              this.renderEmptyDashboard()
             )}
           </View>
         )}
@@ -1135,5 +1112,30 @@ class Home extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      setUserData,
+      setUserIncome,
+      setUserExpenses,
+      setTotalIncome,
+      setTotalExpenses,
+      setTotalExpensesByCat,
+      setAllTransactions,
+      setCustomUserIncome,
+      setCustomUserExpenses,
+      setCustomTotalIncome,
+      setCustomTotalExpenses,
+      setCustomTotalExpensesByCat,
+      setCustomAllTransactions,
+    },
+    dispatch,
+  );
+};
 
+const mapStateToProps = state => {
+  return {
+    appReducer: state.appReducer,
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

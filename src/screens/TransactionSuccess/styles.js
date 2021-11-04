@@ -10,9 +10,8 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
   },
   successImage: {
-    height: '30%',
+    height: '50%',
     width: '90%',
-    marginTop: '30%',
   },
   successMessage: {
     color: colors.primaryLightColor,
