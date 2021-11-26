@@ -1,43 +1,57 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useRef, useEffect} from 'react';
-import {View, Text, StyleSheet, StatusBar, Image, Animated} from 'react-native';
+import {View, Text, StyleSheet, StatusBar, Image, Animated, Easing, TouchableOpacity} from 'react-native';
 import {images, perfectSize, colors, fonts, strings} from '../../theme';
-import {Button} from '../../components';
 export default function Launch({navigation}) {
-  const slideAnimation = useRef(new Animated.Value(perfectSize(150))).current;
-  const height = useRef(new Animated.Value(perfectSize(400))).current;
-  const width = useRef(new Animated.Value(perfectSize(400))).current;
+  const slideImage = useRef(new Animated.Value(perfectSize(-1000))).current;
+  const slideModal = useRef(new Animated.Value(perfectSize(-1000))).current;
+  const slideButton = useRef(new Animated.Value(perfectSize(200))).current;
+  // const height = useRef(new Animated.Value(perfectSize(400))).current;
+  // const width = useRef(new Animated.Value(perfectSize(400))).current;
   const opacity = useRef(new Animated.Value(0)).current;
 
   const slideUp = () => {
     Animated.parallel([
-      Animated.timing(slideAnimation, {
-        toValue: perfectSize(80),
+      Animated.timing(slideImage, {
+        toValue: perfectSize(30),
+        duration: 2000,
+        useNativeDriver: false,
+        easing: Easing.elastic(1)
+      }),
+      Animated.timing(slideModal, {
+        toValue: perfectSize(0),
         duration: 2000,
         useNativeDriver: false,
       }),
-      Animated.timing(height, {
-        toValue: perfectSize(200),
-        duration: 2000,
-        useNativeDriver: false,
-      }),
-      Animated.timing(width, {
-        toValue: perfectSize(200),
-        duration: 2000,
-        useNativeDriver: false,
-      }),
+      // Animated.timing(height, {
+      //   toValue: perfectSize(200),
+      //   duration: 2000,
+      //   useNativeDriver: false,
+      // }),
+      // Animated.timing(width, {
+      //   toValue: perfectSize(200),
+      //   duration: 2000,
+      //   useNativeDriver: false,
+      // }),
     ]).start();
   };
 
   useEffect(() => {
     slideUp();
     setTimeout(() => {
-      Animated.timing(opacity, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: false,
-      }).start();
+      Animated.parallel([
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+        Animated.timing(slideButton,{
+          toValue: perfectSize(0),
+          duration: 1000,
+          useNativeDriver: false,
+        })
+      ]).start()
     }, 2000);
   }, []);
 
@@ -45,49 +59,57 @@ export default function Launch({navigation}) {
     <View style={styles.container}>
       <StatusBar
         backgroundColor={colors.backgroundColor}
-        barStyle="dark-content"
+        barStyle="light-content"
       />
 
-      <Animated.View
-        style={{
-          height: height,
-          width: width,
-          marginTop: slideAnimation,
-        }}>
-        <Image
+        <Animated.Image
           source={images.launchScreenLogo}
-          style={styles.images}
-          resizeMode="contain"
-        />
-      </Animated.View>
-      <Animated.View style={{flex: 1, opacity: opacity}}>
-        <Text style={styles.title}>{strings.launchScreen.title}</Text>
-
-        <Text style={styles.subTitle}>{strings.launchScreen.subTitle}</Text>
-
-        <Image
-          source={images.goal}
           style={{
-            height: perfectSize(50),
-            width: perfectSize(50),
-            alignSelf: 'center',
+            height: '60%',
+            width: '100%',
+            marginTop: slideImage,
           }}
           resizeMode="contain"
         />
-      </Animated.View>
-
-      <Animated.View style={[styles.bottomView, {opacity: opacity}]}>
-        <Button
-          title={strings.launchScreen.signupTitle}
-          onPress={() => navigation.navigate('Signup')}
-        />
-
-        <Text
-          onPress={() => navigation.navigate('Login')}
-          style={styles.loginButton}>
-          {strings.launchScreen.loginTitle}
-        </Text>
-      </Animated.View>
+        <Animated.View style={{
+          position: 'absolute',
+          backgroundColor: colors.secondaryCardBackgroundColor,
+          height: '40%',
+          width: '100%',
+          borderTopLeftRadius: perfectSize(25),
+          borderTopRightRadius: perfectSize(25),
+          bottom: slideModal,
+          alignItems: 'center',
+          padding: perfectSize(20)
+        }}>
+          <Animated.Text style={[styles.title, {opacity: opacity}]}>{strings.launchScreen.title}</Animated.Text>
+          <Animated.Text style={[styles.subTitle, {opacity: opacity}]}>{strings.launchScreen.subTitle}</Animated.Text>
+          <TouchableOpacity onPress={()=>navigation.navigate('Signup')} style={{
+            height: perfectSize(70),
+            width: perfectSize(200),
+            borderRadius: perfectSize(15),
+            backgroundColor: colors.primary,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '10%'
+          }}>
+            <Animated.View style={{
+              position: 'absolute',
+              backgroundColor: colors.secondaryCardBackgroundColor,
+              height: perfectSize(71),
+              width: slideButton,
+              alignSelf: 'flex-start',
+              borderRadius: perfectSize(13),
+              zIndex: 1
+            }} />
+            <Text style={{
+              fontFamily: fonts.quicksandBold,
+              color: colors.primaryLightColor,
+              fontSize: perfectSize(20)
+            }}>{strings.launchScreen.signupTitle}</Text>
+          </TouchableOpacity>
+          <Text onPress={()=>navigation.navigate('Login')} style={styles.loginButton}>{strings.launchScreen.loginTitle}</Text>
+        </Animated.View>
     </View>
   );
 }
@@ -107,12 +129,11 @@ const styles = StyleSheet.create({
     fontSize: perfectSize(32),
     textAlign: 'center',
     fontFamily: fonts.quicksandBold,
-    marginTop: '5%',
   },
   subTitle: {
     marginTop: '5%',
-    color: colors.primaryLightColor,
-    fontSize: perfectSize(23),
+    color: colors.primaryTintColor,
+    fontSize: perfectSize(18),
     textAlign: 'center',
     fontFamily: fonts.quicksandBold,
     opacity: 0.6,

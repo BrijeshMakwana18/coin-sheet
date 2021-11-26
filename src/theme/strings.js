@@ -1,7 +1,7 @@
 const strings = {
   launchScreen: {
     title: "Hola,\nI'm CoinSheet",
-    subTitle: 'Track your money\nto achieve your financial',
+    subTitle: 'Track your money\nto achieve your financial goal',
     loginTitle: 'I ALREADY HAVE AN ACCOUNT',
     signupTitle: 'HI, COINSHEET!',
   },
