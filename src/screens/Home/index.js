@@ -557,7 +557,7 @@ class Home extends Component {
           <View style={styles.recentTransactionsDetailsContainer}>
             <Text style={styles.recentTransactionsTitle}>
               {item.type == 'debit'
-                ? item.payee
+                ? item.notes
                 : strings.home.dashboardIncomeTitle}
             </Text>
             <Text style={styles.recentTransactionsDate}>

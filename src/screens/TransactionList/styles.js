@@ -69,7 +69,7 @@ export default styles = StyleSheet.create({
   transactionDetailsContainer: {
     marginLeft: '5%',
   },
-  transactionPayee: {
+  transactionNotes: {
     color: colors.primaryLightColor,
     fontSize: perfectSize(18),
     fontFamily: fonts.quicksandBold,

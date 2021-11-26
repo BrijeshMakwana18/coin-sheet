@@ -24,6 +24,7 @@ import CalendarPicker from 'react-native-calendar-picker';
 import styles from './styles';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import {height} from '../../../theme';
 // rgb(233,91,146)
 // rgb(255,72,72)
 // rgb(163,112,92)
@@ -166,7 +167,7 @@ class AddExpense extends Component {
     super(props);
     this.state = {
       ammount: '',
-      payee: '',
+      // payee: '',
       notes: '',
       selectedCat: '',
       isKeyboard: false,
@@ -174,6 +175,7 @@ class AddExpense extends Component {
       modalDisplayDate: '',
       datePicker: false,
       modalDate: '',
+      selectedExpenseType: '',
     };
   }
 
@@ -295,6 +297,11 @@ class AddExpense extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
+          if (item.title == 'INVESTMENT') {
+            this.setState({
+              selectedExpenseType: 'investment',
+            });
+          }
           this.setState({
             selectedCat: item.title,
           });
@@ -330,9 +337,12 @@ class AddExpense extends Component {
   };
 
   isActive = () => {
-    const {ammount, selectedCat, payee} = this.state;
-    return ammount.trim() == '' ||
-      payee.trim() == '' ||
+    const {ammount, selectedCat, notes, selectedExpenseType} = this.state;
+    return (selectedExpenseType == 'investment' &&
+      selectedCat != 'investment') ||
+      selectedExpenseType.trim() == '' ||
+      ammount.trim() == '' ||
+      notes.trim() == '' ||
       Object.keys(selectedCat).length == 0
       ? false
       : true;
@@ -373,12 +383,11 @@ class AddExpense extends Component {
   };
 
   handleOnSubmit = async () => {
-    const {ammount, notes, displayDate, selectedCat, modalDate, payee} =
-      this.state;
+    const {ammount, notes, displayDate, selectedCat, modalDate} = this.state;
     const expense = {
       type: 'debit',
       amount: parseFloat(ammount),
-      payee: payee,
+      // payee: payee,
       transactionDate: modalDate,
       notes: notes,
       displayDate: displayDate,
@@ -399,7 +408,7 @@ class AddExpense extends Component {
           notes: notes,
           displayDate: displayDate,
           selectedCat: selectedCat,
-          payee: payee,
+          // payee: payee,
         });
       });
   };
@@ -410,8 +419,10 @@ class AddExpense extends Component {
       notesPlaceholder,
       selectCat,
       buttonTitle,
-      payeePlaceholder,
+      expenseType,
+      // payeePlaceholder,
     } = strings.addExpense;
+    const {selectedExpenseType, isKeyboard, selectedCat} = this.state;
     return (
       <>
         <StatusBar
@@ -464,14 +475,14 @@ class AddExpense extends Component {
                 onChangeText={amount => this.setState({ammount: amount})}
                 value={this.state.ammount}
                 returnKeyType="next"
-                onSubmitEditing={() => this.payeeInout.focus()}
+                onSubmitEditing={() => this.notesInput.focus()}
                 blurOnSubmit={false}
                 ref={input => {
                   this.ammountInput = input;
                 }}
               />
             </Animated.View>
-            <Animated.View style={styles.payeeInputContainer}>
+            {/* <Animated.View style={styles.payeeInputContainer}>
               <TextInput
                 contextMenuHidden={true}
                 style={[
@@ -490,7 +501,7 @@ class AddExpense extends Component {
                   this.payeeInout = input;
                 }}
               />
-            </Animated.View>
+            </Animated.View> */}
             <Animated.View
               style={[
                 styles.notesInputContainer,
@@ -543,6 +554,47 @@ class AddExpense extends Component {
                 keyExtractor={(item, index) => index.toString()}
               />
             </Animated.View>
+            {!isKeyboard && selectedCat != 'INVESTMENT' && (
+              <Animated.View style={styles.expenseTypeContainer}>
+                <Text style={styles.expenseTypeLabel}>{expenseType}</Text>
+                <View style={styles.expenseTypeButtonsContainer}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.setState({
+                        selectedExpenseType: 'need',
+                      })
+                    }
+                    style={[
+                      styles.expenseTypeButtonContainer,
+                      {
+                        backgroundColor:
+                          selectedExpenseType == 'need'
+                            ? colors.primary
+                            : colors.secondaryCardBackgroundColor,
+                      },
+                    ]}>
+                    <Text style={styles.expenseTypeButtonTitle}>Need</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.setState({
+                        selectedExpenseType: 'want',
+                      })
+                    }
+                    style={[
+                      styles.expenseTypeButtonContainer,
+                      {
+                        backgroundColor:
+                          selectedExpenseType == 'want'
+                            ? colors.primary
+                            : colors.secondaryCardBackgroundColor,
+                      },
+                    ]}>
+                    <Text style={styles.expenseTypeButtonTitle}>Want</Text>
+                  </TouchableOpacity>
+                </View>
+              </Animated.View>
+            )}
             <Button
               title={buttonTitle}
               position="absolute"
@@ -554,7 +606,7 @@ class AddExpense extends Component {
             <Animated.View
               style={{
                 position: 'absolute',
-                top: perfectSize(430),
+                top: perfectSize(350),
                 right: this.doneButtonRight,
               }}>
               <ButtonWithImage

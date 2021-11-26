@@ -41,9 +41,9 @@ class TransactionList extends Component {
   componentDidMount() {
     const {isFromExpenseCat} = this.props.route.params;
     let allTransactions = this.getListData();
-    console.log(allTransactions);
+    console.log(allTransactions.length);
     if (!isFromExpenseCat && allTransactions) {
-      for (let i = 0; i < allTransactions?.length - 1; i++) {
+      for (let i = 0; i < allTransactions?.length; i++) {
         if (allTransactions[i].type == 'debit') {
           this.setState({
             hasDebitTransactions: true,
@@ -65,7 +65,7 @@ class TransactionList extends Component {
   }
 
   renderAllTransactions = (item, index) => {
-    const {type, selectedCat, payee, displayDate, amount} = item;
+    const {type, selectedCat, displayDate, amount, notes} = item;
     const {selectedFilter} = this.state;
     if (type == selectedFilter) {
       return (
@@ -88,8 +88,8 @@ class TransactionList extends Component {
             />
           </View>
           <View style={styles.transactionDetailsContainer}>
-            <Text style={styles.transactionPayee}>
-              {type == 'debit' ? payee : strings.home.dashboardIncomeTitle}
+            <Text style={styles.transactionNotes}>
+              {type == 'debit' ? notes : strings.home.dashboardIncomeTitle}
             </Text>
             <Text style={styles.transactionDate}>{displayDate}</Text>
           </View>

@@ -32,6 +32,7 @@ const strings = {
     payeePlaceholder: 'Payee',
     notesPlaceholder: 'Notes ...',
     selectCat: 'SELECT CATEGORY',
+    expenseType: 'EXPENSE TYPE',
     buttonTitle: 'CONTINUE',
   },
   transactionSuccess: {

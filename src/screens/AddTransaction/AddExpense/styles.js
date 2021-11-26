@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors, fonts, perfectSize, width} from '../../../theme';
-
+import {height} from '../../../theme';
 // eslint-disable-next-line no-undef
 export default styles = StyleSheet.create({
   container: {
@@ -62,12 +62,12 @@ export default styles = StyleSheet.create({
     height: perfectSize(80),
     alignSelf: 'center',
   },
-  payeeInputContainer: {
-    width: '100%',
-    height: perfectSize(80),
-    marginTop: perfectSize(20),
-    alignSelf: 'center',
-  },
+  // payeeInputContainer: {
+  //   width: '100%',
+  //   height: perfectSize(80),
+  //   marginTop: perfectSize(20),
+  //   alignSelf: 'center',
+  // },
   notesInputContainer: {
     width: '100%',
     marginTop: perfectSize(20),
@@ -87,7 +87,9 @@ export default styles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   catContentContainer: {
-    padding: perfectSize(23),
+    paddingTop: perfectSize(23),
+    paddingLeft: perfectSize(23),
+    paddingRight: perfectSize(23),
   },
   //Category list styles
   catContainer: {
@@ -208,5 +210,39 @@ export default styles = StyleSheet.create({
     bottom: perfectSize(-30),
     width: '50%',
     justifyContent: 'space-between',
+  },
+  expenseTypeContainer: {
+    flexDirection: 'row',
+    height: '5%',
+    width: '100%',
+    marginTop: height > 700 ? '10%' : '5%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  expenseTypeButtonsContainer: {
+    width: '60%',
+    height: '100%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  expenseTypeLabel: {
+    textAlign: 'center',
+    color: 'rgba(255,255,255,0.5)',
+    fontFamily: fonts.quicksandBold,
+    fontSize: perfectSize(18),
+  },
+  expenseTypeButtonContainer: {
+    height: '100%',
+    width: '45%',
+    // backgroundColor: colors.primaryCardBackgroundColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: perfectSize(10),
+  },
+  expenseTypeButtonTitle: {
+    fontSize: perfectSize(15),
+    color: colors.primaryLightColor,
+    fontFamily: fonts.avenirHeavy,
+    fontWeight: 'bold',
   },
 });
