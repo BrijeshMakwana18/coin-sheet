@@ -169,6 +169,7 @@ function Signup(props) {
             </Animated.View>
 
             <TextInput
+              contextMenuHidden={true}
               style={[styles.textInput, {marginTop: '40%'}]}
               placeholderTextColor="rgba(66,76,89,0.5)"
               selectionColor="#8389E9"
@@ -199,6 +200,7 @@ function Signup(props) {
       </View>
       <View style={styles.bottomView}>
         <Button
+          active={true}
           title={strings.signupScreen.buttonTitle}
           onPress={() => handleSignupPress(email, password)}
         />
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
     borderRadius: perfectSize(12),
     fontSize: perfectSize(23),
     fontFamily: fonts.quicksandBold,
-    color: 'rgba(66,76,89,0.5)',
+    color: colors.primaryLightColor,
   },
   bottomView: {
     width: '100%',

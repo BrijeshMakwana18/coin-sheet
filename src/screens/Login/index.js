@@ -203,8 +203,9 @@ function Login(props) {
       </View>
       <View style={styles.bottomView}>
         <Button
+          active={true}
           title={strings.loginScreen.buttonTitle}
-          onPress={() => isPressable && handleLoginPress(email, password)}
+          onPress={() => handleLoginPress(email, password)}
         />
         <Text style={styles.bottomText}>
           By logging in, you are agreeing to our{'\n'}
@@ -283,7 +284,7 @@ const styles = StyleSheet.create({
     borderRadius: perfectSize(12),
     fontSize: perfectSize(23),
     fontFamily: fonts.quicksandBold,
-    color: 'rgba(66,76,89,0.5)',
+    color: colors.primaryLightColor,
   },
   bottomView: {
     width: '100%',
@@ -294,7 +295,7 @@ const styles = StyleSheet.create({
   bottomText: {
     textAlign: 'center',
     fontSize: perfectSize(14),
-    color: colors.white,
+    color: colors.primaryLightColor,
     fontFamily: fonts.avenirLight,
     marginTop: '5%',
   },
