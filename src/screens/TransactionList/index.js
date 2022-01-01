@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  DeviceEventEmitter,
+} from 'react-native';
 import {PrimaryHeader} from '../../components';
 import {strings, images, colors, perfectSize} from '../../theme';
 import styles from './styles';
@@ -39,6 +46,7 @@ class TransactionList extends Component {
   }
 
   componentDidMount() {
+    DeviceEventEmitter.emit('HideTabBar', true);
     const {isFromExpenseCat} = this.props.route.params;
     let allTransactions = this.getListData();
     console.log(allTransactions.length);
@@ -234,7 +242,10 @@ class TransactionList extends Component {
     return (
       <View style={styles.container}>
         <PrimaryHeader
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => {
+            this.props.navigation.goBack();
+            DeviceEventEmitter.emit('HideTabBar', false);
+          }}
           title={headerTitle}
           leftImage={images.backArrow}
           rightImage={
