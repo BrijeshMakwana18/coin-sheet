@@ -555,7 +555,10 @@ class Home extends Component {
             />
           </View>
           <View style={styles.recentTransactionsDetailsContainer}>
-            <Text style={styles.recentTransactionsTitle}>
+            <Text
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={styles.recentTransactionsTitle}>
               {item.type == 'debit'
                 ? item.notes
                 : strings.home.dashboardIncomeTitle}

@@ -240,6 +240,7 @@ export default styles = StyleSheet.create({
     color: colors.primaryLightColor,
     fontSize: perfectSize(18),
     fontFamily: fonts.quicksandBold,
+    width: '80%',
   },
   recentTransactionsDate: {
     color: colors.primaryLightColor,
