@@ -936,8 +936,8 @@ class Home extends Component {
                   <Text style={styles.myBalanceTitle}>{myBalanceTitle}</Text>
                   <Text style={styles.myBalanceStyle}>
                     {selectedFilter == 'all'
-                      ? totalIncome - totalExpenses
-                      : customTotalIncome - customTotalExpenses}
+                      ? (totalIncome - totalExpenses).toFixed(2)
+                      : (customTotalIncome - customTotalExpenses).toFixed(2)}
                   </Text>
                   <View style={styles.dashboardInnerContainer}>
                     <View style={styles.incomeContainer}>
@@ -947,8 +947,8 @@ class Home extends Component {
                         </Text>
                         <Text style={styles.dashboardIncomeStyle}>
                           {selectedFilter == 'all'
-                            ? totalIncome
-                            : customTotalIncome}
+                            ? totalIncome.toFixed(2)
+                            : customTotalIncome.toFixed(2)}
                         </Text>
                       </View>
                     </View>
@@ -959,8 +959,8 @@ class Home extends Component {
                         </Text>
                         <Text style={styles.dashboardExpenseStyle}>
                           {selectedFilter == 'all'
-                            ? totalExpenses
-                            : customTotalExpenses}
+                            ? totalExpenses.toFixed(2)
+                            : customTotalExpenses.toFixed(2)}
                         </Text>
                       </View>
                     </View>
