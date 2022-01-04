@@ -338,8 +338,7 @@ class AddExpense extends Component {
 
   isActive = () => {
     const {ammount, selectedCat, notes, selectedExpenseType} = this.state;
-    return (selectedExpenseType == 'investment' &&
-      selectedCat != 'investment') ||
+    return selectedExpenseType.trim() == '' ||
       selectedExpenseType.trim() == '' ||
       ammount.trim() == '' ||
       notes.trim() == '' ||
