@@ -419,7 +419,9 @@ class AddExpense extends Component {
       selectCat,
       buttonTitle,
       expenseType,
-      // payeePlaceholder,
+      need,
+      want,
+      investment,
     } = strings.addExpense;
     const {selectedExpenseType, isKeyboard, selectedCat} = this.state;
     return (
@@ -572,7 +574,7 @@ class AddExpense extends Component {
                             : colors.secondaryCardBackgroundColor,
                       },
                     ]}>
-                    <Text style={styles.expenseTypeButtonTitle}>Need</Text>
+                    <Text style={styles.expenseTypeButtonTitle}>{need}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>
@@ -589,7 +591,7 @@ class AddExpense extends Component {
                             : colors.secondaryCardBackgroundColor,
                       },
                     ]}>
-                    <Text style={styles.expenseTypeButtonTitle}>Want</Text>
+                    <Text style={styles.expenseTypeButtonTitle}>{want}</Text>
                   </TouchableOpacity>
                 </View>
               </Animated.View>

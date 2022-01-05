@@ -34,6 +34,9 @@ const strings = {
     selectCat: 'SELECT CATEGORY',
     expenseType: 'EXPENSE TYPE',
     buttonTitle: 'CONTINUE',
+    need: 'Need',
+    want: 'Want',
+    investment: 'Investment',
   },
   transactionSuccess: {
     successMessage: 'Your transaction is successfully \nadded to your account',
