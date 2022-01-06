@@ -555,47 +555,69 @@ class AddExpense extends Component {
                 keyExtractor={(item, index) => index.toString()}
               />
             </Animated.View>
-            {!isKeyboard && selectedCat != 'INVESTMENT' && (
-              <Animated.View style={styles.expenseTypeContainer}>
-                <Text style={styles.expenseTypeLabel}>{expenseType}</Text>
-                <View style={styles.expenseTypeButtonsContainer}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.setState({
-                        selectedExpenseType: 'need',
-                      })
-                    }
+            <Animated.View style={styles.expenseTypeContainer}>
+              <Text style={styles.expenseTypeLabel}>{expenseType}</Text>
+              <View
+                style={[
+                  styles.expenseTypeButtonsContainer,
+                  {
+                    justifyContent:
+                      selectedCat == 'INVESTMENT' ? 'center' : 'space-between',
+                  },
+                ]}>
+                {selectedCat != 'INVESTMENT' ? (
+                  <>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.setState({
+                          selectedExpenseType: 'need',
+                        })
+                      }
+                      style={[
+                        styles.expenseTypeButtonContainer,
+                        {
+                          backgroundColor:
+                            selectedExpenseType == 'need'
+                              ? colors.primary
+                              : colors.secondaryCardBackgroundColor,
+                        },
+                      ]}>
+                      <Text style={styles.expenseTypeButtonTitle}>{need}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.setState({
+                          selectedExpenseType: 'want',
+                        })
+                      }
+                      style={[
+                        styles.expenseTypeButtonContainer,
+                        {
+                          backgroundColor:
+                            selectedExpenseType == 'want'
+                              ? colors.primary
+                              : colors.secondaryCardBackgroundColor,
+                        },
+                      ]}>
+                      <Text style={styles.expenseTypeButtonTitle}>{want}</Text>
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <View
                     style={[
                       styles.expenseTypeButtonContainer,
                       {
-                        backgroundColor:
-                          selectedExpenseType == 'need'
-                            ? colors.primary
-                            : colors.secondaryCardBackgroundColor,
+                        backgroundColor: colors.primary,
                       },
                     ]}>
-                    <Text style={styles.expenseTypeButtonTitle}>{need}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.setState({
-                        selectedExpenseType: 'want',
-                      })
-                    }
-                    style={[
-                      styles.expenseTypeButtonContainer,
-                      {
-                        backgroundColor:
-                          selectedExpenseType == 'want'
-                            ? colors.primary
-                            : colors.secondaryCardBackgroundColor,
-                      },
-                    ]}>
-                    <Text style={styles.expenseTypeButtonTitle}>{want}</Text>
-                  </TouchableOpacity>
-                </View>
-              </Animated.View>
-            )}
+                    <Text style={styles.expenseTypeButtonTitle}>
+                      {investment}
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </Animated.View>
+
             <Button
               title={buttonTitle}
               position="absolute"

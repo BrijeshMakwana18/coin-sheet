@@ -222,7 +222,6 @@ export default styles = StyleSheet.create({
   expenseTypeButtonsContainer: {
     width: '60%',
     height: '100%',
-    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   expenseTypeLabel: {
