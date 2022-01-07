@@ -932,7 +932,9 @@ class Home extends Component {
                 scrollEventThrottle={16}
                 showsVerticalScrollIndicator={false}
                 style={styles.scrollContainer}>
-                <View style={styles.dashboardContainer}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('MyFinance')}
+                  style={styles.dashboardContainer}>
                   <Text style={styles.myBalanceTitle}>{myBalanceTitle}</Text>
                   <Text style={styles.myBalanceStyle}>
                     {selectedFilter == 'all'
@@ -969,7 +971,7 @@ class Home extends Component {
                     source={images.dashboardImage}
                     style={styles.dashboardImage}
                   />
-                </View>
+                </TouchableOpacity>
                 {this.checkTotalExpensesByCat() && (
                   <View style={styles.topCatContainer}>
                     <View style={styles.catHeaderContainer}>
