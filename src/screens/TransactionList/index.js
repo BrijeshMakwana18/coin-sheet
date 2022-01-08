@@ -159,19 +159,19 @@ class TransactionList extends Component {
     const {customAllTransactions, allTransactions} = this.props.appReducer;
     if (isFromExpenseCat) {
       if (selectedFilter == 'all') {
-        return totalExpensesByCategoty.find(
-          element => element.category == selectedExpenseCat,
-        ).data;
+        return totalExpensesByCategoty
+          .find(element => element.category == selectedExpenseCat)
+          .data.reverse();
       } else {
-        return customTotalExpensesByCategoty.find(
-          element => element.category == selectedExpenseCat,
-        ).data;
+        return customTotalExpensesByCategoty
+          .find(element => element.category == selectedExpenseCat)
+          .data.reverse();
       }
     } else {
       if (selectedFilter == 'all') {
-        return allTransactions;
+        return allTransactions.reverse();
       } else {
-        return customAllTransactions;
+        return customAllTransactions.reverse();
       }
     }
   };
