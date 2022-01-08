@@ -96,7 +96,7 @@ class TransactionList extends Component {
             />
           </View>
           <View style={styles.transactionDetailsContainer}>
-            <Text style={styles.transactionNotes}>
+            <Text numberOfLines={1} style={styles.transactionNotes}>
               {type == 'debit' ? notes : strings.home.dashboardIncomeTitle}
             </Text>
             <Text style={styles.transactionDate}>{displayDate}</Text>
