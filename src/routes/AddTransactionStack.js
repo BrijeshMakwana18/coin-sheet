@@ -8,7 +8,6 @@ import {
   AddTransaction,
   AddExpense,
   AddIncome,
-  AddGoal,
   TransactionSuccess,
 } from '../screens';
 import {removeListeners} from '../util/globalMethods';
@@ -59,11 +58,6 @@ export default class AddTransactionStack extends Component {
         <Stack.Screen
           name="AddExpense"
           component={AddExpense}
-          options={{header: () => null}}
-        />
-        <Stack.Screen
-          name="AddGoal"
-          component={AddGoal}
           options={{header: () => null}}
         />
         <Stack.Screen

@@ -2,7 +2,7 @@
 import React from 'react';
 import {DeviceEventEmitter} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Statistics, Goal, Account} from '../screens';
+import {Statistics, Account} from '../screens';
 import {TabIcon, Add} from '../components';
 import {colors, strings, images, perfectSize} from '../theme';
 import {hidden_bottom} from './config';
@@ -77,34 +77,6 @@ export default function AppStack() {
           ),
         }}
       />
-
-      {/* <Tab.Screen
-        name="Goal"
-        component={Goal}
-        options={{
-          tabBarIcon: props => (
-            <TabIcon
-              source={images.goalTab}
-              name={strings.tabBarLabels.goal}
-              {...props}
-            />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="Account"
-        component={Account}
-        options={{
-          tabBarIcon: props => (
-            <TabIcon
-              source={images.accountTab}
-              name={strings.tabBarLabels.account}
-              {...props}
-            />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 }
