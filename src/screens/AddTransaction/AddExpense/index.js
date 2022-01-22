@@ -382,7 +382,14 @@ class AddExpense extends Component {
   };
 
   handleOnSubmit = async () => {
-    const {ammount, notes, displayDate, selectedCat, modalDate} = this.state;
+    const {
+      ammount,
+      notes,
+      displayDate,
+      selectedCat,
+      modalDate,
+      selectedExpenseType,
+    } = this.state;
     const expense = {
       type: 'debit',
       amount: parseFloat(ammount),
@@ -407,6 +414,7 @@ class AddExpense extends Component {
           notes: notes,
           displayDate: displayDate,
           selectedCat: selectedCat,
+          expenseType: selectedExpenseType,
           // payee: payee,
         });
       });
