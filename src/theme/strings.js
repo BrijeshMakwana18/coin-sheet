@@ -16,8 +16,6 @@ const strings = {
   tabBarLabels: {
     home: 'Dashboard',
     stat: 'Statistics',
-    goal: 'Goal',
-    account: 'Account',
   },
   addTransaction: {},
   addIncome: {

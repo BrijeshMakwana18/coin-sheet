@@ -43,14 +43,6 @@ const data = [
     screenName: 'AddExpense',
     backgroundColor: colors.primary,
   },
-  // {
-  //   label: 'Goal',
-  //   image: images.addGoal,
-  //   description:
-  //     'You should always have a goal in a life CoinSheet will help you keep track of your goals on your fingertips.',
-  //   screenName: 'AddGoal',
-  //   backgroundColor: colors.primary,
-  // },
 ];
 class AddTransaction extends Component {
   constructor(props) {

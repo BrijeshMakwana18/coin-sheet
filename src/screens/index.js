@@ -6,12 +6,10 @@ import Launch from './Launch';
 import Login from './Login';
 import Signup from './Signup';
 import Statistics from './Statistics';
-import Goal from './Goal';
 import Account from './Account';
 import AddTransaction from './AddTransaction';
 import AddExpense from './AddTransaction/AddExpense';
 import AddIncome from './AddTransaction/AddIncome';
-import AddGoal from './AddTransaction/AddGoal';
 import TransactionSuccess from './TransactionSuccess';
 import AllExpenseCat from './AllExpenseCat';
 import TransactionList from './TransactionList';
@@ -26,16 +24,14 @@ export {
   Launch,
   Login,
   Signup,
-  Goal,
   Account,
   AddTransaction,
   AddExpense,
   AddIncome,
-  AddGoal,
   TransactionSuccess,
   AllExpenseCat,
   TransactionList,
-  MyFinance
+  MyFinance,
 };
 
 export const rootReducer = combineReducers({
