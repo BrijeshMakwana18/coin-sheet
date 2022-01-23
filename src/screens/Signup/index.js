@@ -147,7 +147,6 @@ function Signup(props) {
   return (
     <>
       <View style={styles.container}>
-        {/* <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}> */}
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View>
             <Animated.View
@@ -196,7 +195,6 @@ function Signup(props) {
             />
           </View>
         </TouchableWithoutFeedback>
-        {/* </KeyboardAvoidingView> */}
       </View>
       <View style={styles.bottomView}>
         <Button

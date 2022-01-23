@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    state: state.signupReducer,
+    state: state,
   };
 };
 class Statistics extends Component {
@@ -20,7 +20,9 @@ class Statistics extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   render() {
     return (
