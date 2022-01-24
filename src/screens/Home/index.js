@@ -777,17 +777,8 @@ class Home extends Component {
     );
   };
   render() {
-    const {
-      user,
-      totalExpenses,
-      totalIncome,
-      totalExpensesByCategoty,
-      allTransactions,
-      customTotalIncome,
-      customTotalExpenses,
-      customTotalExpensesByCategoty,
-      customAllTransactions,
-    } = this.props.appReducer;
+    const {totalExpenses, totalIncome, customTotalIncome, customTotalExpenses} =
+      this.props.appReducer;
     const {
       headerTitle,
       dashboardIncomeTitle,
@@ -798,7 +789,6 @@ class Home extends Component {
       filterOne,
       filterTwo,
       filterThree,
-      seeAllTransactions,
       selectDateError,
     } = strings.home;
     const {selectedFilter} = this.state;

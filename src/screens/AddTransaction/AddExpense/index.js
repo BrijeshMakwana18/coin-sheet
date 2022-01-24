@@ -170,7 +170,6 @@ class AddExpense extends Component {
       // payee: '',
       notes: '',
       selectedCat: '',
-      isKeyboard: false,
       displayDate: '',
       modalDisplayDate: '',
       datePicker: false,
@@ -216,9 +215,6 @@ class AddExpense extends Component {
   }
 
   keyboardDidShow = () => {
-    this.setState({
-      isKeyboard: true,
-    });
     Animated.parallel([
       Animated.timing(this.headerMarginTop, {
         toValue: perfectSize(-250),
@@ -254,11 +250,6 @@ class AddExpense extends Component {
   };
 
   keyboardDidHide = () => {
-    setTimeout(() => {
-      this.setState({
-        isKeyboard: false,
-      });
-    }, 300);
     Animated.parallel([
       Animated.timing(this.headerMarginTop, {
         toValue: perfectSize(0),
@@ -420,6 +411,7 @@ class AddExpense extends Component {
       });
   };
   render() {
+    console.log('Add expense render');
     const {
       headerTitle,
       ammountPlaceholder,
@@ -431,7 +423,7 @@ class AddExpense extends Component {
       want,
       investment,
     } = strings.addExpense;
-    const {selectedExpenseType, isKeyboard, selectedCat} = this.state;
+    const {selectedExpenseType, selectedCat} = this.state;
     return (
       <>
         <StatusBar
