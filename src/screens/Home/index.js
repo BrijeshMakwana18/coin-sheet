@@ -510,13 +510,7 @@ class Home extends Component {
                 marginTop: index <= 1 ? '5%' : 0,
               },
             ]}>
-            <View
-              style={[
-                styles.catImageContainer,
-                {
-                  // backgroundColor: colors.topCatIndexColors[index].tintColor,
-                },
-              ]}>
+            <View style={styles.catImageContainer}>
               <Image source={images[item.category]} style={styles.catImage} />
             </View>
             <Text numberOfLines={1} style={styles.catTitle}>
