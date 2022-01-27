@@ -166,11 +166,12 @@ class AddExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ammount: '',
+      ammount: `${this.props.route?.params?.item?.amount}` || '',
       // payee: '',
-      notes: '',
-      selectedCat: '',
-      displayDate: '',
+      notes: this.props.route?.params?.item?.notes || '',
+      selectedCat:
+        this.props.route?.params?.item?.selectedCat.toUpperCase() || '',
+      displayDate: this.props.route?.params?.item?.displayDate || '',
       modalDisplayDate: '',
       datePicker: false,
       modalDate: '',
@@ -196,17 +197,18 @@ class AddExpense extends Component {
       'keyboardDidHide',
       this.keyboardDidHide,
     );
+    if (!this.props.route?.params?.isEdit) {
+      let today = new Date();
+      let date = `${today.getDate()} ${months[
+        today.getMonth()
+      ].toUpperCase()}, ${today.getFullYear()}`;
 
-    let today = new Date();
-    let date = `${today.getDate()} ${months[
-      today.getMonth()
-    ].toUpperCase()}, ${today.getFullYear()}`;
-
-    this.setState({
-      displayDate: date,
-      modalDisplayDate: date,
-      modalDate: today,
-    });
+      this.setState({
+        displayDate: date,
+        modalDisplayDate: date,
+        modalDate: today,
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -422,6 +424,8 @@ class AddExpense extends Component {
       need,
       want,
       investment,
+      headerTitleForEdit,
+      buttonTitleSave,
     } = strings.addExpense;
     const {selectedExpenseType, selectedCat} = this.state;
     return (
@@ -444,7 +448,11 @@ class AddExpense extends Component {
               }}>
               <PrimaryHeader
                 onPress={() => this.props.navigation.goBack()}
-                title={headerTitle}
+                title={
+                  this.props?.route?.params?.isEdit
+                    ? headerTitleForEdit
+                    : headerTitle
+                }
                 leftImage={images.backArrow}
                 rightImage={images.expense}
                 rightTintColorDisabled
@@ -619,7 +627,11 @@ class AddExpense extends Component {
             </Animated.View>
 
             <Button
-              title={buttonTitle}
+              title={
+                this.props?.route?.params?.isEdit
+                  ? buttonTitleSave
+                  : buttonTitle
+              }
               position="absolute"
               bottom={perfectSize(30)}
               active={this.isActive()}

@@ -529,6 +529,12 @@ class Home extends Component {
     if (item && item.type && index < 4) {
       return (
         <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate('AddExpense', {
+              isEdit: true,
+              item: item,
+            })
+          }
           style={[
             styles.recentTransactionsContainer,
             {
