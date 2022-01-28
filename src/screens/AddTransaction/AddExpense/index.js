@@ -189,6 +189,14 @@ class AddExpense extends Component {
   datePickerMarginTop = new Animated.Value(perfectSize(950));
 
   componentDidMount() {
+    // if (this.props.route.params?.isEdit) {
+    //   let index = item =>
+    //     item.title.toLowerCase() == this.props.route.params?.item.selectedCat;
+    //   console.log(data.findIndex(index));
+    // this.flatListRef.scrollToIndex({
+    //   index: 4,
+    // });
+    // }
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       this.keyboardDidShow,
@@ -427,6 +435,8 @@ class AddExpense extends Component {
       headerTitleForEdit,
       buttonTitleSave,
     } = strings.addExpense;
+    let initialScrollToIndex = item =>
+      item.title.toLowerCase() == this.props.route.params?.item.selectedCat;
     const {selectedExpenseType, selectedCat} = this.state;
     return (
       <>
@@ -553,7 +563,22 @@ class AddExpense extends Component {
                 },
               ]}>
               <FlatList
+                ref={ref => (this.flatListRef = ref)}
                 data={data}
+                initialScrollIndex={
+                  this.props.route.params?.item.selectedCat
+                    ? data.findIndex(initialScrollToIndex)
+                    : 0
+                }
+                // onScrollToIndexFailed={info => {
+                //   const wait = new Promise(resolve => setTimeout(resolve, 500));
+                //   wait.then(() => {
+                //     this.flatListRef.current?.scrollToIndex({
+                //       index: data.findIndex(index),
+                //       animated: true,
+                //     });
+                //   });
+                // }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.catContentContainer}
