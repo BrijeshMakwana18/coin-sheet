@@ -166,7 +166,7 @@ class AddExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ammount: `${this.props.route?.params?.item?.amount}` || '',
+      ammount: this.props.route?.params?.item?.amount || '',
       // payee: '',
       notes: this.props.route?.params?.item?.notes || '',
       selectedCat:
