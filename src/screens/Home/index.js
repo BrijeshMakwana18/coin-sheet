@@ -530,6 +530,7 @@ class Home extends Component {
       return (
         <TouchableOpacity
           onPress={() =>
+            item.type == 'debit' &&
             this.props.navigation.navigate('AddExpense', {
               isEdit: true,
               item: item,
