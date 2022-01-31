@@ -570,15 +570,15 @@ class AddExpense extends Component {
                     ? data.findIndex(initialScrollToIndex)
                     : 0
                 }
-                // onScrollToIndexFailed={info => {
-                //   const wait = new Promise(resolve => setTimeout(resolve, 500));
-                //   wait.then(() => {
-                //     this.flatListRef.current?.scrollToIndex({
-                //       index: data.findIndex(index),
-                //       animated: true,
-                //     });
-                //   });
-                // }}
+                onScrollToIndexFailed={info => {
+                  const wait = new Promise(resolve => setTimeout(resolve, 500));
+                  wait.then(() => {
+                    this.flatListRef.current?.scrollToIndex({
+                      index: data.findIndex(initialScrollToIndex),
+                      animated: true,
+                    });
+                  });
+                }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.catContentContainer}
