@@ -93,7 +93,7 @@ class Home extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      selectedFilter: 'month',
+      selectedFilter: 'all',
       datePicker: false,
       modalDisplayDate: '',
       modalDate: '',
@@ -699,7 +699,7 @@ class Home extends Component {
       });
     } else {
       this.setState({
-        selectedFilter: 'month',
+        selectedFilter: 'all',
         datePicker: false,
       });
     }
@@ -862,7 +862,7 @@ class Home extends Component {
                   ]}>
                   <Text style={styles.filterButtonTitle}>{filterOne}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() => {
                     let date = new Date();
                     let firstDay = new Date(
@@ -892,7 +892,7 @@ class Home extends Component {
                     },
                   ]}>
                   <Text style={styles.filterButtonTitle}>{filterTwo}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   onPress={() => {
                     this.setState({selectedFilter: 'custom', datePicker: true});

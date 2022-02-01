@@ -41,7 +41,7 @@ export default styles = StyleSheet.create({
   },
   filterInnerContainer: {
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     // marginBottom: '5%',
     flexDirection: 'row',
   },
