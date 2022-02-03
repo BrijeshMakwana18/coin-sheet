@@ -169,9 +169,9 @@ class TransactionList extends Component {
       }
     } else {
       if (selectedFilter == 'all') {
-        return allTransactions.reverse();
+        return allTransactions;
       } else {
-        return customAllTransactions.reverse();
+        return customAllTransactions;
       }
     }
   };
