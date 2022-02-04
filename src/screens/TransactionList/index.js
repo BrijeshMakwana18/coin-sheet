@@ -78,6 +78,12 @@ class TransactionList extends Component {
     if (type == selectedFilter) {
       return (
         <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('AddExpense', {
+              isEdit: true,
+              item: item,
+            });
+          }}
           style={[
             styles.transactionContainer,
             {
