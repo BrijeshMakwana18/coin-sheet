@@ -174,7 +174,7 @@ class AddExpense extends Component {
       displayDate: this.props.route?.params?.item?.displayDate || '',
       modalDisplayDate: '',
       datePicker: false,
-      modalDate: '',
+      modalDate: this.props.route?.params?.item?.transactionDate || '',
       selectedExpenseType: '',
     };
   }
@@ -380,6 +380,34 @@ class AddExpense extends Component {
     this.setState({
       datePicker: type,
     });
+  };
+
+  handleUpdate = async () => {
+    const {
+      ammount,
+      notes,
+      displayDate,
+      selectedCat,
+      modalDate,
+      selectedExpenseType,
+    } = this.state;
+    const {item} = this.props?.route?.params;
+    const previousRecord = {
+      type: 'debit',
+      amount: item.amount,
+      transactionDate: item.transactionDate,
+      notes: item?.notes,
+      displayDate: item?.displayDate,
+      selectedCat: item.selectedCat?.toLowerCase(),
+    };
+    let updatedRedord = {
+      type: 'debit',
+      amount: parseFloat(ammount),
+      transactionDate: modalDate,
+      notes: notes,
+      displayDate: displayDate,
+      selectedCat: selectedCat.toLowerCase(),
+    };
   };
 
   handleOnSubmit = async () => {
@@ -660,7 +688,11 @@ class AddExpense extends Component {
               position="absolute"
               bottom={perfectSize(30)}
               active={this.isActive()}
-              onPress={() => this.handleOnSubmit()}
+              onPress={() =>
+                this.props?.route?.params?.isEdit
+                  ? this.handleUpdate()
+                  : this.handleOnSubmit()
+              }
               disabled={!this.isActive()}
             />
             <Animated.View
