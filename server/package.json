@@ -1,0 +1,22 @@
+{
+  "name": "coinsheet-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/BrijeshMakwana18/coin-sheet.git"
+  },
+  "author": "BrijeshMakwana18",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrijeshMakwana18/coin-sheet/issues"
+  },
+  "homepage": "https://github.com/BrijeshMakwana18/coin-sheet#readme",
+  "dependencies": {
+    "graphql": "^16.3.0"
+  }
+}
