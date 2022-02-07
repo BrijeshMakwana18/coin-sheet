@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/BrijeshMakwana18/coin-sheet#readme",
   "dependencies": {
+    "apollo-server": "^3.6.2",
     "graphql": "^16.3.0"
   }
 }
