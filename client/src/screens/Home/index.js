@@ -42,7 +42,7 @@ import {
   ErrorSlider,
   DashboardSkeleton,
 } from '../../components';
-
+const GRAPHQL_URL = 'http://localhost:9000/';
 let months = [
   'Jan',
   'Feb',
@@ -102,7 +102,24 @@ class Home extends Component {
     };
     this.errorModalTop = new Animated.Value(perfectSize(-500));
   }
+  async fetchGreeting() {
+    const response = await fetch(GRAPHQL_URL, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            greeting
+          }
+        `,
+      }),
+    });
 
+    const responseBody = await response.json();
+    console.log(responseBody);
+  }
   //Fetching current user and storing it into store
   getCurrentUserData = async () => {
     this.setState({
@@ -450,6 +467,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
+    this.fetchGreeting();
     this.getCurrentUserData();
   }
 
